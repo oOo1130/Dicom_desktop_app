@@ -1,0 +1,90 @@
+﻿<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>Untitled</title>
+</head>
+
+<body style="margin:0pt 20pt 0px 25pt; width:650pt !important;">
+    <div>
+        <!--============ Header Text ==============-->
+        <div style="box-shadow: 5px 10px #000000; height:30px; margin-bottom:15px;">
+            <h1 style="font-family: Arial, Helvetica, sans-serif; font-size: 20pt; color: darkgreen; text-align:center; padding:15px 0px 0px 0px;">DEPARTMENT OF RADIOLOGY & IMAGING</h1>
+
+        </div>
+
+        <!-- ============ Table  Of Header ================== -->
+        <table style="font-family: Times New Roman, Times, serif; margin:0px 0px 15px 0px !important; font-size: medium; border: 1px #000000 solid; border-radius:5px !important; width: 100%; padding:20pt;">
+            <tr>
+                <th style="width: 100px !important; font-size: 14pt !important; text-align:left;">Id No.</th>
+                <td>:</td>
+                <td style="width: 150px; font-size: 14pt !important; text-align: left;">%PATIENT_IDNO%</td>
+                <th style="width: 90px !important; font-size: 16pt !important; text-align: right;">Receive:</th>
+                <td style="width: 170px; font-size: 9pt !important;">%RECEIVE_DATE%</td>
+                <th style="width: 80px; font-size: 14pt !important; text-align: right;">Print:</th>
+                <td style="width: 170px; font-size: 9pt !important; text-align: left;">&nbsp;%REPORT_PRINT_DATE%</td>
+            </tr>
+            <tr>
+                <th style="width: 170px; font-size: 14pt !important; text-align: left;">Patient’s Name</th>
+                <td>:</td>
+                <td colspan="4" style="font-size:14pt !important;">%PATIENT_NAME%</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th style="width: 170px; font-size: 14pt !important; text-align: left;">Age:</th>
+                <td>:</td>
+                <td colspan="2" style=" font-size:14pt;">%PATIENT_AGE%</td>
+                <th style="width: 100px; font-size: 16pt !important; text-align: right;">Sex:</th>
+                <td style="font-size: 14pt !important; text-align: left;">%PATIENT_SEX%</td>
+               
+                <td></td>
+            </tr>
+            <tr>
+                <th style="width: 170px; text-align: left; font-size: 14pt !important;">Refd. by</th>
+                <td>:</td>
+                <td colspan="4" style="font-size: 14pt !important;">%REFERED_BY%</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+
+        <!--============ Doctor prescribe Option ============-->
+        <div id="Prescription" style="padding: 2px; font-size: 18pt !important;">
+            <br /> <br /><br />
+            <!-- Enter your Prescribe -->
+            %REPORT_TEXT%
+
+            <!--<p style="font-size:20pt !important;">  %REPORT_TEXT%</p>-->
+        </div>
+
+
+
+
+        <!----- ================= Footer Option ============= -->
+        <div style="height: 140px; padding: 30px; margin-top: 30pt; position: absolute; bottom: 0px;">
+            <p style="margin: 0; padding: 0; font-size: 18pt !important;">%SIGNATURE%</p>
+            <h3 style="font-weight: bold; margin: 0; padding: 0; font-size: 25px !important;">%DOCTOR_NAME%</h3>
+            <p style="margin: 0; padding: 0; font-size: 14pt !important;">%IDENTITY_LINE1%</p>
+            <p style="margin: 0; padding: 0; font-size: 14pt !important;">%IDENTITY_LINE2%</p>
+            <p style="margin: 0; padding: 0; font-size: 14pt !important;">%IDENTITY_LINE3%</p>
+            <p style="margin: 0; padding: 0; font-size: 14pt !important;">%IDENTITY_LINE4%</p>
+            <p style="margin: 0; padding: 0; font-size: 14pt !important;">%IDENTITY_LINE5%</p>
+
+        </div>
+
+    </div>
+
+
+
+
+
+</body>
+
+</html>
