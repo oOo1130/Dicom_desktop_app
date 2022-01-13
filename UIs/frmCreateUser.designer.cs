@@ -38,6 +38,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgUsers = new System.Windows.Forms.DataGridView();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtMobileNo = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtFullName = new System.Windows.Forms.TextBox();
@@ -56,17 +60,19 @@
             this.chkWriteEdit = new System.Windows.Forms.CheckBox();
             this.chkAccessToMainViewer = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtCloudAccessLink = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtCloudUserName = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtCloudPassword = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgUsers)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(167, 286);
+            this.btnSave.Location = new System.Drawing.Point(166, 384);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(86, 37);
             this.btnSave.TabIndex = 31;
@@ -149,11 +155,34 @@
             this.Column4,
             this.Column3,
             this.Column6});
-            this.dgUsers.Location = new System.Drawing.Point(845, 45);
+            this.dgUsers.Location = new System.Drawing.Point(851, 36);
             this.dgUsers.Name = "dgUsers";
             this.dgUsers.Size = new System.Drawing.Size(467, 557);
             this.dgUsers.TabIndex = 34;
             this.dgUsers.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgUsers_RowHeaderMouseClick);
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Login Name";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 110;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Full Name";
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 180;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Role";
+            this.Column3.Name = "Column3";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Status";
+            this.Column6.Name = "Column6";
+            this.Column6.Width = 80;
             // 
             // txtMobileNo
             // 
@@ -194,7 +223,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(261, 286);
+            this.btnCancel.Location = new System.Drawing.Point(260, 384);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(86, 37);
             this.btnCancel.TabIndex = 44;
@@ -205,7 +234,7 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(355, 286);
+            this.btnDelete.Location = new System.Drawing.Point(354, 384);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(86, 37);
             this.btnDelete.TabIndex = 45;
@@ -262,7 +291,7 @@
             // 
             // ctrlHospitalSearch
             // 
-            this.ctrlHospitalSearch.Location = new System.Drawing.Point(212, 329);
+            this.ctrlHospitalSearch.Location = new System.Drawing.Point(150, 449);
             this.ctrlHospitalSearch.Name = "ctrlHospitalSearch";
             this.ctrlHospitalSearch.Size = new System.Drawing.Size(603, 515);
             this.ctrlHospitalSearch.TabIndex = 50;
@@ -329,42 +358,79 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Green;
-            this.label9.Location = new System.Drawing.Point(841, 20);
+            this.label9.Location = new System.Drawing.Point(847, 11);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(79, 19);
             this.label9.TabIndex = 62;
             this.label9.Text = "User List :";
             // 
-            // Column2
+            // txtCloudAccessLink
             // 
-            this.Column2.HeaderText = "Login Name";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 110;
+            this.txtCloudAccessLink.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCloudAccessLink.Location = new System.Drawing.Point(167, 274);
+            this.txtCloudAccessLink.Name = "txtCloudAccessLink";
+            this.txtCloudAccessLink.Size = new System.Drawing.Size(648, 27);
+            this.txtCloudAccessLink.TabIndex = 63;
             // 
-            // Column4
+            // label10
             // 
-            this.Column4.HeaderText = "Full Name";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 180;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(35, 277);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(126, 20);
+            this.label10.TabIndex = 64;
+            this.label10.Text = "Cloud Access Link";
             // 
-            // Column3
+            // txtCloudUserName
             // 
-            this.Column3.HeaderText = "Role";
-            this.Column3.Name = "Column3";
+            this.txtCloudUserName.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCloudUserName.Location = new System.Drawing.Point(167, 307);
+            this.txtCloudUserName.Name = "txtCloudUserName";
+            this.txtCloudUserName.Size = new System.Drawing.Size(196, 27);
+            this.txtCloudUserName.TabIndex = 65;
             // 
-            // Column6
+            // label12
             // 
-            this.Column6.HeaderText = "Status";
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 80;
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(35, 307);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(125, 20);
+            this.label12.TabIndex = 66;
+            this.label12.Text = "Cloud User Name";
+            // 
+            // txtCloudPassword
+            // 
+            this.txtCloudPassword.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCloudPassword.Location = new System.Drawing.Point(166, 340);
+            this.txtCloudPassword.Name = "txtCloudPassword";
+            this.txtCloudPassword.Size = new System.Drawing.Size(196, 27);
+            this.txtCloudPassword.TabIndex = 67;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(47, 340);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(113, 20);
+            this.label13.TabIndex = 68;
+            this.label13.Text = "Cloud Password";
             // 
             // frmCreateUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1351, 614);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.ctrlHospitalSearch);
+            this.Controls.Add(this.txtCloudPassword);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.txtCloudUserName);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtCloudAccessLink);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.chkAccessToMainViewer);
             this.Controls.Add(this.chkWriteEdit);
             this.Controls.Add(this.chkViewDownload);
@@ -435,6 +501,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.TextBox txtCloudAccessLink;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtCloudUserName;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtCloudPassword;
+        private System.Windows.Forms.Label label13;
         // private Controls.EmployeeSearchControl ctlEmployeeSearchControl;
     }
 }

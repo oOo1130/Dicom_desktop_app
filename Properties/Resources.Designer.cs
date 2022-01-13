@@ -113,6 +113,16 @@ namespace RIS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap btnClose1 {
+            get {
+                object obj = ResourceManager.GetObject("btnClose1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap btnOk {
             get {
                 object obj = ResourceManager.GetObject("btnOk", resourceCulture);
@@ -126,6 +136,16 @@ namespace RIS.Properties {
         internal static System.Drawing.Bitmap btnReportDone {
             get {
                 object obj = ResourceManager.GetObject("btnReportDone", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CleanContent_2 {
+            get {
+                object obj = ResourceManager.GetObject("CleanContent-2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -263,6 +283,16 @@ namespace RIS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Logo_transparent {
+            get {
+                object obj = ResourceManager.GetObject("Logo_transparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap logo_vertical_size1 {
             get {
                 object obj = ResourceManager.GetObject("logo_vertical_size1", resourceCulture);
@@ -313,6 +343,16 @@ namespace RIS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pagesetup {
+            get {
+                object obj = ResourceManager.GetObject("pagesetup", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pdf_1 {
             get {
                 object obj = ResourceManager.GetObject("pdf_1", resourceCulture);
@@ -323,9 +363,49 @@ namespace RIS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pdf_icon3 {
+            get {
+                object obj = ResourceManager.GetObject("pdf_icon3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pdf_icon31 {
+            get {
+                object obj = ResourceManager.GetObject("pdf_icon31", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pdf_icon32 {
+            get {
+                object obj = ResourceManager.GetObject("pdf_icon32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Preview {
             get {
                 object obj = ResourceManager.GetObject("Preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Preview1 {
+            get {
+                object obj = ResourceManager.GetObject("Preview1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -393,6 +473,16 @@ namespace RIS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Software_Back1 {
+            get {
+                object obj = ResourceManager.GetObject("Software Back1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tea_leaf {
             get {
                 object obj = ResourceManager.GetObject("tea_leaf", resourceCulture);
@@ -406,6 +496,26 @@ namespace RIS.Properties {
         internal static System.Drawing.Bitmap Viewer {
             get {
                 object obj = ResourceManager.GetObject("Viewer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap w2_icon {
+            get {
+                object obj = ResourceManager.GetObject("w2_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap w2_icon_2 {
+            get {
+                object obj = ResourceManager.GetObject("w2_icon_2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

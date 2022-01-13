@@ -12,7 +12,7 @@ namespace RIS.Models.VWModels
         public VMRISWorklistSubSetForLV(int _ProcId, string _PatientId, string _StatusString, string _PatientName, 
             string _ProcedureHISName, string _ProcedureName, string _ClinicalHistory, int? _NoOfImages, DateTime _ArrivalDateTime, 
             string _HospitalName,  string _Modality, string _ConsultantName, string _ReferralPhysician, DateTime? _OrderDateTime,
-            string _StudyInstanceUid, int _tenantId,int _consultantId, int _status,DateTime? _PatientBirthdate, string _PatientSex) 
+            string _StudyInstanceUid, int _tenantId,int _consultantId, int _status,DateTime? _PatientBirthdate, string _PatientSex, int? ShareId) 
         {
             ProcId = _ProcId;
             PatientId = _PatientId;
@@ -34,6 +34,7 @@ namespace RIS.Models.VWModels
             Status = _status;
             PatientBirthdate = _PatientBirthdate;
             PatientSex = _PatientSex;
+            Share_Id = ShareId;
 
         }
 
@@ -59,6 +60,8 @@ namespace RIS.Models.VWModels
         public DateTime? PatientBirthdate { get; set; }
         public string PatientSex { get; set; }
         public int Status { get; set; }
+
+        public int? Share_Id { get; set; }
 
     }
 }

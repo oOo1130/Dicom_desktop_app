@@ -122,6 +122,9 @@ namespace RIS.Repositories
                 _user.RoleId = ((Role)cmbRole.SelectedItem).RoleId;
                 _user.TenantId = _tenantId;
                 _user.RCId = _consultantId;
+                _user.CloudAccessLink = txtCloudAccessLink.Text;
+                _user.CloudUserName = txtCloudUserName.Text;
+                _user.CloudPassword = txtCloudPassword.Text;
                 _user.IsAssignToRadAllow = _IsAssignToRadAllow;
                 _user.IsReportViewAllow = _IsViewDownloadAllow;
                 _user.IsReportWriteAllow = _IsReportWriteEditAllow;
@@ -167,6 +170,9 @@ namespace RIS.Repositories
                     _user.MobileNo = txtMobileNo.Text;
                     _user.Password = _arr[0];
                     _user.RoleId = Convert.ToInt32(cmbRole.SelectedValue);
+                    _user.CloudAccessLink = txtCloudAccessLink.Text;
+                    _user.CloudUserName = txtCloudUserName.Text;
+                    _user.CloudPassword = txtCloudPassword.Text;
                     _user.IsAssignToRadAllow = _IsAssignToRadAllow;
                     _user.IsReportViewAllow = _IsViewDownloadAllow;
                     _user.IsReportWriteAllow = _IsReportWriteEditAllow;
@@ -288,10 +294,10 @@ namespace RIS.Repositories
             sender.Visible = false;
         }
 
-        private void LoadConsultants(int rcId)
+        private async void LoadConsultants(int rcId)
         {
-            List<ReportConsultant> _consultant = new RISService().GetReportConsultants();
-            _consultant.Insert(0, new ReportConsultant() { RCId = 0, Name = "Select Consultant" });
+            List<VMReportConsultant> _consultant = await new RISAPIConsumerService().GetReportConsultants();
+            _consultant.Insert(0, new VMReportConsultant() { RCId = 0, Name = "Select Consultant" });
 
             cmbConsultant.DataSource = _consultant;
             cmbConsultant.DisplayMember = "Name";
@@ -341,9 +347,9 @@ namespace RIS.Repositories
 
        
 
-        private void LoadActiveUsers()
+        private async void LoadActiveUsers()
         {
-            List<VMUserDetail> _userDetail = new RISService().GetUserDetails().ToList();
+            List<VMUserDetail> _userDetail = await new RISAPIConsumerService().GetUserDetails();
 
             dgUsers.SuspendLayout();
             dgUsers.Rows.Clear();
@@ -384,6 +390,10 @@ namespace RIS.Repositories
             {
                 LoadHospital(_udetail.TenantId);
             }
+
+            txtCloudAccessLink.Text = _udetail.CloudAccessLink;
+            txtCloudUserName.Text = _udetail.CloudUserName;
+            txtCloudPassword.Text = _udetail.CloudPassword;
 
             chkAssigToRad.Checked = _udetail.IsAssignToRadAllow;
             chkViewDownload.Checked = _udetail.IsReportViewAllow;

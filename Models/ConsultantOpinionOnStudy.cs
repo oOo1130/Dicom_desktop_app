@@ -22,6 +22,8 @@ namespace RIS.Models
   
         public bool isReportComplete { get; set; }
 
+        public int TemplateId { get; set; }
+
         public RISWorkList RISWorkList { get; set; }
 
         public ReportConsultant ReportConsultant { get; set; }

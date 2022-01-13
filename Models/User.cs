@@ -19,7 +19,9 @@ public int RoleId { get; set; }
 public int RCId { get; set; }  // If radiologist then his Id
 public int TenantId { get; set; }
 public string Status { get; set; }
-
+public string CloudAccessLink { get; set; }
+public string CloudUserName { get; set; }
+public string CloudPassword { get; set; }
 public string Comments { get; set; }
 public string ReportCreateLocation { get; set; }
 public bool IsAssignToRadAllow { get; set; }

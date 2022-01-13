@@ -76,5 +76,7 @@ namespace RIS.Models.VWModels
         [JsonProperty("DatasetPath")]
         public string DatasetPath { get; set; }
 
+        public int? Share_Id { get; set; }
+
     }
 }

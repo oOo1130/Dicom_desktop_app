@@ -182,7 +182,7 @@ namespace RIS.UIs
             this.tbNodeHost.Name = "tbNodeHost";
             this.tbNodeHost.Size = new System.Drawing.Size(310, 25);
             this.tbNodeHost.TabIndex = 133;
-            this.tbNodeHost.Text = "127.0.0.1";
+            this.tbNodeHost.Text = "192.168.101.1";
             // 
             // lbNodeHost
             // 

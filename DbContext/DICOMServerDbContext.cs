@@ -48,7 +48,9 @@ namespace RIS.Models
 
         public virtual DbSet<ProcedureStatus> ProcedureStatus { get; set; }
 
-
+        public virtual DbSet<PrintPageSetup> PrintPageSetups { get; set; }
+        
+        public virtual DbSet<ReferralPhysician> ReferralPhysicians { get; set; }
 
         //For HTML Editor
 

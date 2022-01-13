@@ -11,6 +11,7 @@ using System.Data.OleDb;
 using RIS.Models;
 using RIS.Services;
 using RIS.UI;
+using RIS.Models.VWModels;
 
 namespace htmledit
 {
@@ -23,20 +24,18 @@ namespace htmledit
             InitializeComponent();
         }
 
-        private void TextMacroForm_Load(object sender, EventArgs e)
+        private async void TextMacroForm_Load(object sender, EventArgs e)
         {
-            User _user = new RISService().GetUserById(MainForm.LoggedinUser.UserId);
+            User _user = await new RISAPIConsumerService().GetUserById(MainForm.LoggedinUser.UserId);
             
             LoadConsultants(_user.RCId);
             
-
-            GetTextMacrosList();
         }
 
-        private void LoadConsultants(int rcId)
+        private async void LoadConsultants(int rcId)
         {
-            List<ReportConsultant> _consultant = new RISService().GetReportConsultants();
-            _consultant.Insert(0, new ReportConsultant() { RCId = 0, Name = "Select Consultant" });
+            List<VMReportConsultant> _consultant = await new RISAPIConsumerService().GetReportConsultants();
+            _consultant.Insert(0, new VMReportConsultant() { RCId = 0, Name = "Select Consultant" });
 
             cmbConsultant.DataSource = _consultant;
             cmbConsultant.DisplayMember = "Name";
@@ -47,20 +46,26 @@ namespace htmledit
                 cmbConsultant.SelectedItem = _consultant.Find(x => x.RCId == rcId);
                 cmbConsultant.Enabled = false;
             }
+
+            GetTextMacrosList();
         }
 
        
-        private void GetTextMacrosList()
+        private async void GetTextMacrosList()
         {
 
-            ReportConsultant _consultant = cmbConsultant.SelectedItem as ReportConsultant;
+            VMReportConsultant _consultant = cmbConsultant.SelectedItem as VMReportConsultant;
 
             if (_consultant.RCId == 0)
             {
                 MessageBox.Show("Plz. select consultant and try again."); return;
             }
 
-            List<ShortCutKey> _KeysList = new ReportService().GetShortCutKeys(_consultant.RCId);
+
+            dgShorcutKeys.Rows.Clear();
+            dgShorcutKeys.SuspendLayout();
+
+            List<ShortCutKey> _KeysList =await new RISAPIConsumerService().GetShortCutKeys(_consultant.RCId);
 
             foreach (var item in _KeysList)
             {
@@ -90,7 +95,7 @@ namespace htmledit
                 return;
             }
 
-            ReportConsultant _consultant = cmbConsultant.SelectedItem as ReportConsultant;
+            VMReportConsultant _consultant = cmbConsultant.SelectedItem as VMReportConsultant;
 
             if (_consultant.RCId == 0)
             {
@@ -115,12 +120,12 @@ namespace htmledit
             r = dgShorcutKeys.CurrentRow.Index;
             n = dgShorcutKeys.Rows[r].Cells[0].Value.ToString();
 
-            OleDbCommand cmd = new OleDbCommand("DELETE * FROM tblTextMacro WHERE textmacro = @textmacro", frmHtmlReport.dbconn);
-            cmd.Prepare();
-            cmd.Parameters.AddWithValue("textmacro", n);
+            //OleDbCommand cmd = new OleDbCommand("DELETE * FROM tblTextMacro WHERE textmacro = @textmacro", frmHtmlReport.dbconn);
+            //cmd.Prepare();
+            //cmd.Parameters.AddWithValue("textmacro", n);
 
-            cmd.ExecuteNonQuery();
-            GetTextMacrosList();
+            //cmd.ExecuteNonQuery();
+            //GetTextMacrosList();
         }
 
         private void btnClose_Click(object sender, EventArgs e)

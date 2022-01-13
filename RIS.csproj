@@ -15,7 +15,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>E:\_published\RIS_Dec11_2021_10\</PublishUrl>
+    <PublishUrl>E:\_published\RIS_Jan_08_2021_32bit_02_Viewer32bit_05\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,9 +25,12 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>29</ApplicationRevision>
+    <ProductName>RIS-EMSL</ProductName>
+    <PublisherName>E-Medical Solution Ltd.</PublisherName>
+    <ApplicationRevision>75</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -38,15 +41,6 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -65,9 +59,33 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DocX">
       <HintPath>packages\DocX.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>packages\Microsoft.mshtml.dll</HintPath>
     </Reference>
     <Reference Include="SpellNumber">
       <HintPath>packages\SpellNumber.dll</HintPath>
@@ -93,9 +111,17 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WinFormHtmlEditor, Version=7.4.32.0, Culture=neutral, PublicKeyToken=8cd3285c24067f7f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\WinFormHtmlEditor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConfig.cs" />
     <Compile Include="Controls\ConsultantSearchControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ConsultantTemplateSearchControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\HISProcedureSearchControl.cs">
@@ -145,29 +171,29 @@
     <Compile Include="Helpers\ListViewSortManager.cs" />
     <Compile Include="Helpers\NaturalSortComparer.cs" />
     <Compile Include="Helpers\SignleInstanceHelper.cs" />
-    <Compile Include="HtmlEditor\DoctorListForm.cs">
+    <Compile Include="HtmlEditor\frmAddEditDeleteTemplate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HtmlEditor\DoctorListForm.designer.cs">
-      <DependentUpon>DoctorListForm.cs</DependentUpon>
+    <Compile Include="HtmlEditor\frmAddEditDeleteTemplate.Designer.cs">
+      <DependentUpon>frmAddEditDeleteTemplate.cs</DependentUpon>
     </Compile>
-    <Compile Include="HtmlEditor\frmHtmlReport.cs">
+    <Compile Include="HtmlEditor\frmHtmlReportV2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HtmlEditor\frmHtmlReport.designer.cs">
-      <DependentUpon>frmHtmlReport.cs</DependentUpon>
+    <Compile Include="HtmlEditor\frmHtmlReportV2.designer.cs">
+      <DependentUpon>frmHtmlReportV2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HtmlEditor\frmNewTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HtmlEditor\frmNewTemplate.Designer.cs">
+      <DependentUpon>frmNewTemplate.cs</DependentUpon>
     </Compile>
     <Compile Include="HtmlEditor\TextMacroForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HtmlEditor\TextMacroForm.designer.cs">
       <DependentUpon>TextMacroForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="HtmlEditor\TextSnippetForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HtmlEditor\TextSnippetForm.designer.cs">
-      <DependentUpon>TextSnippetForm.cs</DependentUpon>
     </Compile>
     <Compile Include="HtmlEditor\WordHelper.cs" />
     <Compile Include="Logging\Log.cs" />
@@ -190,11 +216,13 @@
     <Compile Include="Models\MasterTemplate.cs" />
     <Compile Include="Models\Modality.cs" />
     <Compile Include="Models\HISModalityProcedureMapping.cs" />
+    <Compile Include="Models\PrintPageSetup.cs" />
     <Compile Include="Models\ProcedureLog.cs" />
     <Compile Include="Models\ProcedureRadiologistTemplate.cs" />
     <Compile Include="Models\ProcedureStatus.cs" />
     <Compile Include="Models\RadiologistOpinionTwo.cs" />
     <Compile Include="Models\RadiologistOpinionOne.cs" />
+    <Compile Include="Models\ReferralPhysician.cs" />
     <Compile Include="Models\RemoteDicomNode.cs" />
     <Compile Include="Models\ReportMasterTemplate.cs" />
     <Compile Include="Models\RISWorklist.cs" />
@@ -204,6 +232,7 @@
     <Compile Include="Models\TenantDefaultConsultantMapping.cs" />
     <Compile Include="Models\VWModels\SelectedProcedureForAssign.cs" />
     <Compile Include="Models\VWModels\VMHISModalityProcedureMapping.cs" />
+    <Compile Include="Models\VWModels\VMProcIdAndStatus.cs" />
     <Compile Include="Models\VWModels\VMReportConsultant.cs" />
     <Compile Include="Models\VWModels\VMRISWorklistSubSetForLV.cs" />
     <Compile Include="Models\VWModels\VMRadProcTemplate.cs" />
@@ -211,6 +240,7 @@
     <Compile Include="Models\VWModels\VMReportObj.cs" />
     <Compile Include="Models\VWModels\VMRISWorklist.cs" />
     <Compile Include="Models\VWModels\VMTenantRadiologistMapping.cs" />
+    <Compile Include="Models\VWModels\VMUpdateTemplate.cs" />
     <Compile Include="Models\VWModels\VMUserDetail.cs" />
     <Compile Include="Models\WorkLIstStatusEnum.cs" />
     <Compile Include="Repositories\DicomRepository.cs" />
@@ -256,6 +286,12 @@
     </Compile>
     <Compile Include="UIs\frmAddMasterTemplate.designer.cs">
       <DependentUpon>frmAddMasterTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIs\frmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIs\frmChangePassword.designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
     </Compile>
     <Compile Include="UIs\frmCreateRole.cs">
       <SubType>Form</SubType>
@@ -323,6 +359,7 @@
     <Compile Include="UIs\PreviewForm.designer.cs">
       <DependentUpon>PreviewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utility\DocumentHelper.cs" />
     <Compile Include="Utility\Result.cs" />
     <Compile Include="Utility\ProcessAsyncHelper.cs" />
     <Compile Include="Utility\Constants.cs" />
@@ -339,20 +376,22 @@
     <Compile Include="WaitingForm.designer.cs">
       <DependentUpon>WaitingForm.cs</DependentUpon>
     </Compile>
+    <None Include="Resources\CleanContent-2.png" />
+    <None Include="Resources\Software Back1.JPG" />
     <EmbeddedResource Include="Controls\SearchResultListControl.resx">
       <DependentUpon>SearchResultListControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HtmlEditor\DoctorListForm.resx">
-      <DependentUpon>DoctorListForm.cs</DependentUpon>
+    <EmbeddedResource Include="HtmlEditor\frmAddEditDeleteTemplate.resx">
+      <DependentUpon>frmAddEditDeleteTemplate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HtmlEditor\frmHtmlReport.resx">
-      <DependentUpon>frmHtmlReport.cs</DependentUpon>
+    <EmbeddedResource Include="HtmlEditor\frmHtmlReportV2.resx">
+      <DependentUpon>frmHtmlReportV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HtmlEditor\frmNewTemplate.resx">
+      <DependentUpon>frmNewTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HtmlEditor\TextMacroForm.resx">
       <DependentUpon>TextMacroForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HtmlEditor\TextSnippetForm.resx">
-      <DependentUpon>TextSnippetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -374,6 +413,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIs\frmAddMasterTemplate.resx">
       <DependentUpon>frmAddMasterTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIs\frmCreateRole.resx">
       <DependentUpon>frmCreateRole.cs</DependentUpon>
@@ -418,6 +460,9 @@
     <EmbeddedResource Include="WaitingForm.resx">
       <DependentUpon>WaitingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="HtmlEditor\RIS_Master_Template.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -444,13 +489,13 @@
     <None Include="Resources\folderImage2.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocumentLib\DocumentLib\DocumentLib.csproj">
+      <Project>{64333a4d-61e3-4097-9d38-92337577b0bf}</Project>
+      <Name>DocumentLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LvObjectLibrary\LvObjectLibrary.csproj">
       <Project>{fe72e799-ee27-4964-8666-8265192969c8}</Project>
       <Name>LvObjectLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WinHtmlEditor\WinHtmlEditor.csproj">
-      <Project>{1d1ef0a4-1d49-4d42-9295-e3b28359389a}</Project>
-      <Name>WinHtmlEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -472,6 +517,11 @@
     <None Include="Resources\logo_1.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\pdf_icon32.png" />
+    <None Include="Resources\pdf_icon31.png" />
+    <None Include="Resources\pdf_icon3.png" />
+    <None Include="Resources\w2_icon_2.png" />
+    <None Include="Resources\w2_icon.png" />
     <None Include="Resources\EMSLViewer2.png" />
     <None Include="Resources\RVIcon.png" />
     <None Include="Resources\navigate_right2.png" />
@@ -484,8 +534,17 @@
     <None Include="Icons\pdf_1.png" />
     <None Include="Icons\btnOk.png" />
     <None Include="Icons\btnClose.png" />
-    <Content Include="HtmlEditor\template_001.html" />
+    <Content Include="HtmlEditor\template_001.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\About.png" />
     <Content Include="Icons\groom.png" />
+    <Content Include="Icons\Logo_transparent.png" />
+    <Content Include="Icons\pagesetup.png" />
+    <Content Include="Icons\Preview.png" />
+    <Content Include="Icons\Print.png" />
+    <Content Include="Icons\Redo.png" />
+    <Content Include="Icons\Save.png" />
     <Content Include="Icons\Viewer.png" />
     <Content Include="Icons\Refresh.png" />
     <None Include="Icons\Word_2.png" />
@@ -571,5 +630,9 @@
       <Version>3.3.14</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

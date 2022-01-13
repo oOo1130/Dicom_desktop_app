@@ -1,4 +1,5 @@
 ﻿using DicomServer;
+using RIS.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,8 +29,8 @@ namespace RIS.Settings
         /// </summary>	
         public Configuration()
         {
-           
-            LocalStorageDirectory = Path.Combine(DirectoryHelpers.GetStartDirectory(), "Incoming");
+
+            LocalStorageDirectory = Constants._DicomFilePath;  //Path.Combine(DirectoryHelpers.GetStartDirectory(), "Incoming");
           
         }
 

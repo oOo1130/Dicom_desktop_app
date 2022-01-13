@@ -87,6 +87,7 @@ namespace HDMS.Windows.Forms.UI.Diagonstics
                 _consultant.IsViewerWithDefaultTemplate = _isViewerWithDefaultTemplate;
 
                 _consultant.DicomImagePath = txtDicomPath.Text;
+                _consultant.RadNextCloudID = txtNextCloudId.Text;
 
                 var result = Task.Run(async () => await new RISAPIConsumerService().AddEditRadiologistAPICall(_consultant)).GetAwaiter().GetResult();
 
@@ -129,7 +130,7 @@ namespace HDMS.Windows.Forms.UI.Diagonstics
                 _consultant.IsESignatureAllow = true;
                 _consultant.IsViewerWithDefaultTemplate = _isViewerWithDefaultTemplate;
                 _consultant.DicomImagePath = txtDicomPath.Text;
-
+                _consultant.RadNextCloudID = txtNextCloudId.Text;
 
                 var result = Task.Run(async () => await new RISAPIConsumerService().AddEditRadiologistAPICall(_consultant)).GetAwaiter().GetResult();
 
@@ -246,6 +247,7 @@ namespace HDMS.Windows.Forms.UI.Diagonstics
                 txtIdentityLine5.Text = _consultant.IdentityLine5;
                 txtIdentityLine6.Text = _consultant.IdentityLine6;
                 txtDicomPath.Text = _consultant.DicomImagePath;
+                txtNextCloudId.Text = _consultant.RadNextCloudID;
 
                 if (_consultant.ESignature != null)
                 {

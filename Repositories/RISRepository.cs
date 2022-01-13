@@ -71,6 +71,23 @@ namespace RIS.Repositories
 
         }
 
+        public bool ChangePassword(User _user)
+        {
+            using (DICOMServerDbContext entities = new DICOMServerDbContext())
+            {
+                try
+                {
+                    entities.Entry(_user).State = EntityState.Modified;
+                    entities.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+
+            }
+        }
 
         internal async Task<int> GetCompletedItemCount(DateTime datefrm, DateTime dateto, int roleId, int TenantId, int ConsultantId, string status, string SearchFilter)
         {
@@ -809,7 +826,6 @@ FROM            dbo.HISModalityProcedureMappings INNER JOIN
             {
                 try
                 {
-
                     var anom = context.Users.Select(s => new
                     {
                         s.UserId,

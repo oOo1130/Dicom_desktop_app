@@ -27,5 +27,7 @@ namespace RIS.Models
         public int TenantId { get; set; }
         public int ConsultantId { get; set; }
         public int Status { get; set; }
+
+        public int? Share_Id { get; set; }
     }
 }

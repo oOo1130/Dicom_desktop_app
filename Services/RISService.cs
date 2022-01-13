@@ -33,6 +33,22 @@ namespace RIS.Services
             return await new RISRepository().GetCompletedItemCount(datefrm, dateto, roleId, TenantId, ConsultantId, status, SearchFilter);
         }
 
+        public bool CheckOldPassword(string userName, string password)
+        {
+            RISRepository repository = new RISRepository();
+            LoginUser user = repository.GetUserByName(userName);
+            if (user == null) return false;
+            string passwordToCheck = HashGenerator.GenerateSlatedHash(password, user.Salt);
+            bool isLoginOk = string.Compare(user.Password, passwordToCheck) == 0;
+            if (!isLoginOk) return isLoginOk;
+
+            return isLoginOk;
+        }
+
+        public bool ChangePassword(User _user)
+        {
+            return new RISRepository().ChangePassword(_user);
+        }
 
         internal async Task<List<VMRISWorklist>> GetOnePagedWorklists(DateTime datefrm, DateTime dateto, int roleId, int TenantId, int ConsultantId, string status, int PageNo, int RecsPerPage)
         {

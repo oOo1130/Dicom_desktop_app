@@ -136,28 +136,28 @@ namespace htmledit
             // 
             // htmlEditorForTemplate
             // 
-            this.htmlEditorForTemplate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.htmlEditorForTemplate.BodyInnerHTML = null;
-            this.htmlEditorForTemplate.BodyInnerText = null;
-            this.htmlEditorForTemplate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.htmlEditorForTemplate.EnterToBR = false;
-            this.htmlEditorForTemplate.FontSize = WinHtmlEditor.FontSize.Three;
-            this.htmlEditorForTemplate.Location = new System.Drawing.Point(0, 52);
-            this.htmlEditorForTemplate.MacroListDictionary = null;
-            this.htmlEditorForTemplate.Name = "htmlEditorForTemplate";
-            this.htmlEditorForTemplate.ShowStatusBar = false;
-            this.htmlEditorForTemplate.ShowToolBar = false;
-            this.htmlEditorForTemplate.ShowWb = true;
-            this.htmlEditorForTemplate.Size = new System.Drawing.Size(520, 266);
-            this.htmlEditorForTemplate.TabIndex = 2;
-            this.htmlEditorForTemplate.WebBrowserShortcutsEnabled = true;
+            //this.htmlEditorForTemplate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            //this.htmlEditorForTemplate.BodyInnerHTML = null;
+            //this.htmlEditorForTemplate.BodyInnerText = null;
+            //this.htmlEditorForTemplate.Dock = System.Windows.Forms.DockStyle.Fill;
+            //this.htmlEditorForTemplate.EnterToBR = false;
+            //this.htmlEditorForTemplate.FontSize = WinHtmlEditor.FontSize.Three;
+            //this.htmlEditorForTemplate.Location = new System.Drawing.Point(0, 52);
+            //this.htmlEditorForTemplate.MacroListDictionary = null;
+            //this.htmlEditorForTemplate.Name = "htmlEditorForTemplate";
+            //this.htmlEditorForTemplate.ShowStatusBar = false;
+            //this.htmlEditorForTemplate.ShowToolBar = false;
+            //this.htmlEditorForTemplate.ShowWb = true;
+            //this.htmlEditorForTemplate.Size = new System.Drawing.Size(520, 266);
+            //this.htmlEditorForTemplate.TabIndex = 2;
+            //this.htmlEditorForTemplate.WebBrowserShortcutsEnabled = true;
             // 
             // TextSnippetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(520, 364);
-            this.Controls.Add(this.htmlEditorForTemplate);
+         //   this.Controls.Add(this.htmlEditorForTemplate);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.MaximizeBox = false;
@@ -176,7 +176,7 @@ namespace htmledit
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private WinHtmlEditor.HtmlEditor htmlEditorForTemplate;
+        //private WinHtmlEditor.HtmlEditor htmlEditorForTemplate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbSnippet;
         private System.Windows.Forms.Button btnDelete;

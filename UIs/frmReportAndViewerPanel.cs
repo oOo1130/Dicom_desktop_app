@@ -501,7 +501,7 @@ namespace RIS.UIs
             }
         }
 
-        private void ShowTemplate(int templateId)
+        private async void ShowTemplate(int templateId)
         {
 
           
@@ -511,7 +511,7 @@ namespace RIS.UIs
             //TempMasterReoprtNameWithPath = ReportFilePath + @"\" + txtBillNo.Text + "-" + ((ViewModelReportTests)txtCurrentTestName.Tag).Id.ToString() + ".docx";
             //TempChildReoprtNameWithPath = ReportFilePath + @"\" + txtBillNo.Text + "-" + ((ViewModelReportTests)txtCurrentTestName.Tag).Id.ToString() + ".docx";
 
-            //byte[] _masteremplatecontent = new TemplateService().GetWordMasterTemplateContent(2);
+            MasterTemplate _masterTemplate  = await new RISAPIConsumerService().GetWordMasterTemplateContent();
 
             ProcedureRadiologistTemplate _templateObj = new RISService().GetWordTemplateContent(templateId);
             byte[] _childtemplatecontent = _templateObj.TemplateContent;
@@ -533,7 +533,7 @@ namespace RIS.UIs
             List<byte[]> docs = new List<byte[]>();
             docs.Add(_masteremplatecontent);
             docs.Add(_childtemplatecontent);
-            byte[] reportcontent = this.OpenAndCombine(docs);
+            byte[] reportcontent = _masteremplatecontent;
 
             FileStream fsmaster = new FileStream(ReportFileNameWithPath, FileMode.OpenOrCreate);
             BinaryWriter br = new BinaryWriter(fsmaster);
@@ -544,7 +544,7 @@ namespace RIS.UIs
             VMReportObj rObj = new VMReportObj();
             rObj.WordfilePath = ReportFileNameWithPath;
 
-            using (g_document = CreateReportFromTemplate(DocX.Load(@ReportFileNameWithPath), _reportObj.vmRISWorkList))
+            using (g_document = CreateReportFromTemplate(DocX.Load(@ReportFileNameWithPath)))
             {
 
                 g_document.SaveAs(ReportFileNameWithPath);
@@ -561,26 +561,26 @@ namespace RIS.UIs
 
         }
 
-        private DocX CreateReportFromTemplate(DocX template, VMRISWorklistSubSetForLV wListItem)
+        private DocX CreateReportFromTemplate(DocX template)
         {
 
-            DateTime _serverDateTime = Utils.GetServerDateAndTime();
+           
 
 
             template.ReplaceText("Report_Type", "DEPARTMENT OF RADIOLOGY & IMAGING");
 
 
 
-            template.ReplaceText("Id_No", wListItem.PatientId.ToString());
+            //template.ReplaceText("Id_No", wListItem.PatientId.ToString());
 
-            template.ReplaceText("Received_date", wListItem.OrderDateTime.ToString());
-            template.ReplaceText("Report_Date", _serverDateTime.ToString());
-            //template.ReplaceText("daily_id", txtDID.Text);
-            template.ReplaceText("Report_Date", DateTime.Now.ToString("dd/MM/yyyy"));
-            template.ReplaceText("Patient_Name", wListItem.PatientName);
-            template.ReplaceText("Patient_Age", "");
-            template.ReplaceText("Patient_Sex", wListItem.PatientSex);
-            template.ReplaceText("Refd_By", wListItem.ReferralPhysician);
+            //template.ReplaceText("Received_date", wListItem.OrderDateTime.ToString());
+            //template.ReplaceText("Report_Date", _serverDateTime.ToString());
+            ////template.ReplaceText("daily_id", txtDID.Text);
+            //template.ReplaceText("Report_Date", DateTime.Now.ToString("dd/MM/yyyy"));
+            //template.ReplaceText("Patient_Name", wListItem.PatientName);
+            //template.ReplaceText("Patient_Age", "");
+            //template.ReplaceText("Patient_Sex", wListItem.PatientSex);
+            //template.ReplaceText("Refd_By", wListItem.ReferralPhysician);
 
 
             template.AddFooters();

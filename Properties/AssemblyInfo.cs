@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Radiology Information System")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("RIS")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("E-Medical Solution Ltd.")]
 [assembly: AssemblyProduct("RIS")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("EMSL")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

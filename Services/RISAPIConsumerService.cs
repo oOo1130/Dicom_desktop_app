@@ -1,5 +1,6 @@
 ﻿using RIS.Models;
 using RIS.Models.VWModels;
+using RIS.Repository.ServiceObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace RIS.Services
 {
     public class RISAPIConsumerService
     {
-        private string _baseUrl = "http://localhost:5100/api/Riswork/";
-        //private string _baseUrl = "http://115.69.214.82/api/Riswork/";
+        //private string _baseUrl = "http://localhost:5100/api/Riswork/";
+        private string _baseUrl = "http://115.69.214.82/api/Riswork/";
 
         private HttpClient client;
 
@@ -51,6 +52,90 @@ namespace RIS.Services
 
         }
 
+        internal async Task<bool> UpdateHtmlTempalate(HtmlTempleForReport template)
+        {
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PostAsJsonAsync<HtmlTempleForReport>("UpdateHtmlTempalate", template);
+                if (response.IsSuccessStatusCode)
+                {
+                  
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        internal async Task<List<ReferralPhysician>> GetTenantPhysicianList(int tenantId)
+        {
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("GetTenantPhysicianList?TenantId=" + tenantId);
+                if (response.IsSuccessStatusCode)
+                {
+                    List<ReferralPhysician> _phylist = await response.Content.ReadAsAsync<List<ReferralPhysician>>();
+                    return _phylist;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        internal async Task<bool> SaveNewHtmlTempalate(HtmlTempleForReport templateObj)
+        {
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PostAsJsonAsync<HtmlTempleForReport>("SaveNewHtmlTempalate", templateObj);
+                if (response.IsSuccessStatusCode)
+                {
+                    //DateTime resultDate = await response.Content.ReadAsAsync<DateTime>();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        internal async Task<List<ShortCutKey>> GetShortCutKeys(int rCId)
+        {
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("GetShortcutKeyList?ConsultantId=" + rCId);
+                if (response.IsSuccessStatusCode)
+                {
+                    List<ShortCutKey> _shortcutkeyList = await response.Content.ReadAsAsync<List<ShortCutKey>>();
+                    return _shortcutkeyList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         internal async Task<RISWorkList> GetWorkList(int procId)
         {
             HttpClient client;
@@ -76,6 +161,29 @@ namespace RIS.Services
         public int GetPageCount(int totalItemCount, int pagePerItemCount)
         {
             return (totalItemCount % pagePerItemCount == 0) ? totalItemCount / pagePerItemCount : totalItemCount / pagePerItemCount + 1;
+        }
+
+        internal async Task<bool> DeleteHtmlTemplate(HtmlTempleForReport template)
+        {
+          
+                using (client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUrl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    HttpResponseMessage response = await client.PostAsJsonAsync<HtmlTempleForReport>("DeleteHtmlTemplate", template);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+            
         }
 
         public async Task<List<VMRISWorklist>> GetOnePageItems(DateTime dateFrom, DateTime dateTo, int roleId, int tenantId, int consultantId, string _status, int PageNo, int RecsPerPage)
@@ -104,6 +212,50 @@ namespace RIS.Services
                 }
             }
 
+        }
+
+        internal async Task<LoginUser> CheckLoginAsync(string userName, string password)
+        {
+            HttpClient client;
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("CheckLogin?userName=" + userName + "&password="+ password);
+                if (response.IsSuccessStatusCode)
+                {
+                    LoginUser _loggeduser = await response.Content.ReadAsAsync<LoginUser>();
+                    return _loggeduser;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        internal async Task<bool> AddToReferral(ReferralPhysician physician)
+        {
+
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PostAsJsonAsync<ReferralPhysician>("AddToReferral", physician);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         internal async Task<User> GetUserById(int userId)
@@ -207,6 +359,7 @@ namespace RIS.Services
             }
 
         }
+
         internal async Task<bool> CancelAssignedToRadiologistAPICall(List<SelectedProcedureForAssign> selectedWorklists)
         {
 
@@ -228,6 +381,27 @@ namespace RIS.Services
                 }
             }
 
+        }
+
+        internal async Task<List<VMUserDetail>> GetUserDetails()
+        {
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("GetUserDetails");
+                if (response.IsSuccessStatusCode)
+                {
+                    List<VMUserDetail> _userList = await response.Content.ReadAsAsync<List<VMUserDetail>>();
+                    return _userList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         internal async Task<List<HtmlTempleForReport>> GetHtmlTemplateForReport(int rCId)
@@ -528,5 +702,46 @@ namespace RIS.Services
 
         }
 
+        internal async Task<bool> UpdateTemplate(VMUpdateTemplate template)
+        {
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PostAsJsonAsync<VMUpdateTemplate>("UpdateHtmlTemplate", template);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        internal async Task<bool> UpdateProcedureStatus(VMProcIdAndStatus Procstatus)
+        {
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PostAsJsonAsync<VMProcIdAndStatus>("UpdateProcedureStatus", Procstatus);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

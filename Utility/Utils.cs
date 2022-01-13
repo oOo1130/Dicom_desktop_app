@@ -14,7 +14,7 @@ namespace RIS.Utility
         static SqlConnection con;
         static SqlCommand cmd;
 
-        static string _server = @"115.69.214.82;";
+        static string _server = @"Server;";
 
         public static DateTime GetServerDateAndTime()
         {
@@ -39,7 +39,7 @@ namespace RIS.Utility
         public static string GetLegacyDbConnectionString()
         {
 
-            return "Data Source=" + _server + "Initial Catalog=DicomServer;" + "Persist Security Info=False;User ID=sa;Password=EmslDicomServer@2021;";
+            return "Data Source=" + _server + "Initial Catalog=DicomServer;" + "Persist Security Info=False;User ID=sa;Password=Emsl#Ris@Dec2014;";
 
         }
 

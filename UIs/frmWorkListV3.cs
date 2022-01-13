@@ -1,6 +1,7 @@
 ﻿using BrightIdeasSoftware;
 using DicomServer;
 using DocumentFormat.OpenXml.Packaging;
+using DocumentLib;
 using htmledit;
 using Itenso.TimePeriod;
 using Newtonsoft.Json;
@@ -55,8 +56,8 @@ namespace RIS.UIs
         DateTime _datefrm = Convert.ToDateTime("2021/10/01");
         DateTime _dateto;
         DateTime _serverDateTime;
-        private int _roleId = 0;
-        private int _tenantId = 0;
+        private int _roleId =0;
+        private int _tenantId =0;
         private int _consultantId = 0;
         private string _status = "All";
 
@@ -126,13 +127,15 @@ namespace RIS.UIs
         private async void frmWorkListV3_Load(object sender, EventArgs e)
         {
 
-            macroListDictionary = new Dictionary<string, string>();
+             macroListDictionary = new Dictionary<string, string>();
 
             _user = await new RISAPIConsumerService().GetUserById(MainForm.LoggedinUser.UserId);
 
             _roleId = _user.RoleId;
             _tenantId = _user.TenantId;
             _consultantId = _user.RCId;
+
+            ReportFileNameWithPath = _user.ReportCreateLocation;
 
             ctrlHospitalSearch.Location = new Point(txtStudySource.Location.X, txtStudySource.Location.Y);
             ctrlHospitalSearch.ItemSelected += ctrlHospitalSearch_ItemSelected;
@@ -196,7 +199,7 @@ namespace RIS.UIs
 
         private async void LoadIncompleteWorkListOnPageLoading(User user)
         {
-
+           
 
             nCurPageNumber = 0;
             nPageCount = 0;
@@ -217,16 +220,18 @@ namespace RIS.UIs
                 {
                     dateTimePickerStudyFrom.Value = _serverDateTime.AddDays(-8);
                     dateTimePickerStudyTo.Value = _serverDateTime;
-                    SearchFilter = textBoxFilterSimple.Text;
+                    SearchFilter=textBoxFilterSimple.Text;
                     RadiologistPanel.Location = new Point(-1000, 20);
 
                 }));
-
+              
 
 
                 if (_user.RoleId == 3)
                 {
                     ReportConsultant _consultant = new ReportService().GetReportConsultant(_user.RCId);
+                    macroListDictionary = await new RISAPIConsumerService().GetMacroList(_user.RCId);
+                    
 
                     this.Invoke(new MethodInvoker(delegate ()
                     {
@@ -235,15 +240,16 @@ namespace RIS.UIs
 
                         contextMenuStrip1.Visible = false;
                         contextMenuStrip1.Hide();
-
+                        btnCancelAssignment.Visible = false;
                         tabControl1.TabPages.Remove(tabPage3);
+                        lblMacroDictionary.Tag = macroListDictionary;
 
                     }));
 
-
+                  
                     _isReportWindowAllowed = true;
 
-                    macroListDictionary = await new RISAPIConsumerService().GetMacroList(_user.RCId);
+                   
 
                     List<HtmlTempleForReport> _templistList = await new RISAPIConsumerService().GetHtmlTemplateForReport(_consultant.RCId);
 
@@ -256,14 +262,15 @@ namespace RIS.UIs
 
                     this.Invoke(new MethodInvoker(delegate ()
                     {
-
+                    
                         ShowAssignedToRadiologistPanel.Visible = true;
                         contextMenuStrip1.Visible = false;
+                        btnCancelAssignment.Visible = false;
                         contextMenuStrip1.Hide();
 
                     }));
 
-
+                   
                 }
 
 
@@ -294,7 +301,7 @@ namespace RIS.UIs
 
             timer1.Start();
 
-
+         
 
         }
 
@@ -314,20 +321,20 @@ namespace RIS.UIs
 
             g_datefrm = _datefrm; g_dateto = _dateto; g_roleId = _roleId; g_tenantId = _tenantId; g_consultantId = _consultantId; g_status = _status; g_SearchFilter = SearchFilter;
 
-
+            
 
             int nTotalItemCount = await GetIncompleteItemCount(_datefrm, _dateto, _roleId, _tenantId, _consultantId, _status, SearchFilter);
 
             g_nTotalItemCount = nTotalItemCount;
 
-
+           
 
             nPageCount = (new RISPagingService()).GetPageCount(nTotalItemCount, onePageItemCount);
 
 
             nCurPageNumber = 1;
 
-
+           
 
 
             LoadWorkListOnePageToLvListCtrl(nCurPageNumber, onePageItemCount);
@@ -346,7 +353,7 @@ namespace RIS.UIs
 
         }
 
-        private void GetTextMacrosList(ref IDictionary<string, string> d, int _consultantId)
+        private void GetTextMacrosList(ref IDictionary<string, string> d,int _consultantId)
         {
             string m, e;
 
@@ -368,8 +375,7 @@ namespace RIS.UIs
             //toolStripStatusLabel3.Text = "aasdfasdfasdf";
             if (InvokeRequired)
             {
-                this.Invoke(new MethodInvoker(delegate
-                {
+                this.Invoke(new MethodInvoker(delegate {
                     PageNumber.Text = $"{nCurPageNumber}/{nPageCount}  (Count={g_nTotalItemCount})";
                     prevPageBtn.Enabled = state;
                     nextPageBtn.Enabled = state;
@@ -384,8 +390,7 @@ namespace RIS.UIs
             //toolStripStatusLabel3.Text = "aasdfasdfasdf";
             if (InvokeRequired)
             {
-                this.Invoke(new MethodInvoker(delegate
-                {
+                this.Invoke(new MethodInvoker(delegate {
                     ReportPageNumber.Text = $"{nCurPageNumber}/{nPageCount}  (Count={g_nTotalItemCount})";
                     rptPrevBtn.Enabled = state;
                     rptNextBtn.Enabled = state;
@@ -400,27 +405,25 @@ namespace RIS.UIs
 
             if (nPageCount == 0)
             {
-                this.Invoke(new MethodInvoker(delegate
-                {
+                this.Invoke(new MethodInvoker(delegate {
                     this.olvWorklist.Items.Clear();
                 }));
                 return;
             }
 
-
+           
             List<VMRISWorklistSubSetForLV> _wListItem = await (new RISAPIConsumerService()).GetSearchFilterIncompleteOnePageItems(g_datefrm, g_dateto, g_roleId, g_tenantId, g_consultantId, g_status, g_SearchFilter, nCurPageNumber, onePageItemCount);
             if (_wListItem == null || _wListItem.Count() == 0)
             {
-                this.Invoke(new MethodInvoker(delegate
-                {
+                this.Invoke(new MethodInvoker(delegate {
                     this.olvWorklist.Items.Clear();
                 }));
                 return;
             }
-
-
+            
+           
             setObjectToLvList(_wListItem);
-
+           
         }
 
         private void setObjectToLvList(List<VMRISWorklistSubSetForLV> worklistItem)
@@ -429,9 +432,8 @@ namespace RIS.UIs
 
 
 
-
-            this.PersonColumn.ImageGetter = delegate (object row)
-            {
+          
+            this.PersonColumn.ImageGetter = delegate (object row) {
 
                 string sex = ((VMRISWorklistSubSetForLV)row).PatientSex.ToUpperInvariant();
                 if (sex.Equals("M"))
@@ -451,7 +453,7 @@ namespace RIS.UIs
             };
 
 
-
+           
             this.emslViewer.ImageGetter = delegate (object rowObject)
             {
                 // this would essentially be the same as using the ImageAspectName
@@ -485,15 +487,15 @@ namespace RIS.UIs
             List<ShortCutKey> _shortKeys = new ReportService().GetShortCutKeys(_counsultant.RCId);
 
             d.Clear();
-
-            foreach (var item in _shortKeys)
+         
+            foreach(var item in _shortKeys)
             {
                 m = item.textmacro.ToUpper(); //convert to upper case
                 e = item.expandedtext.ToString();
 
                 d.Add(m, e);
             }
-
+          
         }
 
         //private async void LoadWorkListAndReportList(User user)
@@ -511,16 +513,16 @@ namespace RIS.UIs
         //        List<VMRISWorklist> _CompletedList = await LoadAllCompletedStudies(_serverDateTime, _serverDateTime, _roleId, _tenantId, _consultantId, _status);
 
 
-
+               
         //        populateReportLv(_CompletedList);
 
-
+              
 
         //        if (_user.RoleId != 3)
         //        {
         //            LoadRadiologists();
 
-
+                    
 
 
         //        }
@@ -548,6 +550,12 @@ namespace RIS.UIs
 
         private void populateReportLv(List<VMRISWorklist> worklistItem)
         {
+
+            this.PrintColumn.ImageGetter = delegate (object row) {
+
+               return "Printer";
+            };
+
             this.olvCompleteWorklist.SetObjects(worklistItem);
         }
 
@@ -559,12 +567,12 @@ namespace RIS.UIs
             sender.Visible = false;
         }
 
-
+       
         //private async void LoadRadiologists()
         //{
 
         //    List<ReportConsultant> _radList = await new RISAPIConsumerService().GetReportConsultants();
-
+            
         //    LoadRadiologistSimpleLv(_radList);
 
         //}
@@ -576,7 +584,7 @@ namespace RIS.UIs
 
         private void ctrlProcedureSearch_ItemSelected(SearchResultListControl<HISModalityProcedureMapping> sender, HISModalityProcedureMapping item)
         {
-            // txtProcedure.Text = item.HISProcDescription;
+           // txtProcedure.Text = item.HISProcDescription;
             txtProcedure.Tag = item;
             sender.Visible = false;
         }
@@ -590,8 +598,8 @@ namespace RIS.UIs
 
         private async Task<List<VMRISWorklist>> LoadAllIncompleteStudies(DateTime datefrm, DateTime dateto, int roleId, int tenantId, int consultantId, string status)
         {
-
-
+           
+            
             List<VMRISWorklist> _worklistItem = await new RISService().GetAlldWorklists(datefrm, dateto, roleId, tenantId, consultantId, status);
 
             return _worklistItem;
@@ -708,7 +716,7 @@ namespace RIS.UIs
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void CheckBox3CheckedChanged(object sender, EventArgs e)
@@ -748,7 +756,7 @@ namespace RIS.UIs
             {
                 OpenProcedureWithViewer();
             }
-            else if (_user.RoleId == 4)
+            else if(_user.RoleId == 4)
             {
                 OnPreviewStudies();
             }
@@ -756,8 +764,8 @@ namespace RIS.UIs
             {
                 OpenProcedureWithViewer();
             }
-
-
+            
+          
         }
 
         private void OnPreviewStudies()
@@ -809,13 +817,9 @@ namespace RIS.UIs
 
             if (wItem != null)
             {
-                using (var form = new frmUpdateWorkListInfo(wItem, "worklist"))
+                using (var form = new frmUpdateWorkListInfo(wItem,"worklist"))
                     form.ShowDialog();
             }
-        }
-        private void CommandCancelWorkListItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnBrowse1_Click(object sender, EventArgs e)
@@ -839,12 +843,12 @@ namespace RIS.UIs
                     {
 
                         FileInfo fi = new FileInfo(imgsrc);
-
+                        
                         ListViewItem _item = new ListViewItem();
                         _item.SubItems.Add(imgsrc);
                         _item.Tag = fi.Name + "|" + fi.FullName + "|" + fi.Extension;
                         _item.ToolTipText = imgsrc;
-                        lvImgLists.Items.Add(_item);
+                        lvImgLists.Items.Add(_item); 
                     }
 
                     lvImgLists.Columns.Add("", 20, HorizontalAlignment.Left);
@@ -973,43 +977,42 @@ namespace RIS.UIs
                 for (int i = 0; i < lvImgLists.Items.Count; i++)
                 {
 
-                    DateTime _serverDateTime = await new RISAPIConsumerService().GetServerDateAndTimeAPICallFuncAsync();
+                     DateTime _serverDateTime = await new RISAPIConsumerService().GetServerDateAndTimeAPICallFuncAsync();
 
                     ListViewItem litem = lvImgLists.Items[i];  //picks list item
-                    string[] fileinfo = litem.Tag.ToString().Split('|');
-                    _inputParameter.Username = "ftp-user";
-                    _inputParameter.Password = "123";
-                    _inputParameter.Server = "FTP://103.120.201.105/";
-                    _inputParameter.Filename = _tenant.ShortName + "_" + _serverDateTime.Ticks.ToString() + fileinfo[2].ToString();
-                    _inputParameter.FullName = fileinfo[1].ToString();
+                        string[] fileinfo = litem.Tag.ToString().Split('|');
+                        _inputParameter.Username = "ftp-user";
+                        _inputParameter.Password = "123";
+                        _inputParameter.Server = "FTP://103.120.201.105/";
+                        _inputParameter.Filename = _tenant.ShortName + "_" + _serverDateTime.Ticks.ToString()+ fileinfo[2].ToString();
+                        _inputParameter.FullName = fileinfo[1].ToString();
 
-                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(string.Format("{0}/{1}", _inputParameter.Server, _inputParameter.Filename)));
-                    request.Method = WebRequestMethods.Ftp.UploadFile;
-                    request.Credentials = new NetworkCredential(_inputParameter.Username, _inputParameter.Password);
-                    Stream ftpStream = request.GetRequestStream();
-                    FileStream fs = File.OpenRead(_inputParameter.FullName);
-                    byte[] buffer = new byte[1024];
-                    double total = (double)fs.Length;
-                    int byteRead = 0;
+                        FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(string.Format("{0}/{1}", _inputParameter.Server, _inputParameter.Filename)));
+                        request.Method = WebRequestMethods.Ftp.UploadFile;
+                        request.Credentials = new NetworkCredential(_inputParameter.Username, _inputParameter.Password);
+                        Stream ftpStream = request.GetRequestStream();
+                        FileStream fs = File.OpenRead(_inputParameter.FullName);
+                        byte[] buffer = new byte[1024];
+                        double total = (double)fs.Length;
+                        int byteRead = 0;
+                      
+                        do
+                        {
+                                byteRead = fs.Read(buffer, 0, 1024);
+                                ftpStream.Write(buffer, 0, byteRead);
+                               
 
-                    do
-                    {
-                        byteRead = fs.Read(buffer, 0, 1024);
-                        ftpStream.Write(buffer, 0, byteRead);
+                        } while (byteRead != 0);
 
+                        fs.Close();
+                        ftpStream.Close();
 
-                    } while (byteRead != 0);
-
-                    fs.Close();
-                    ftpStream.Close();
-
-
+                    
                 }
 
                 return await Task.FromResult(true);
 
-            }
-            catch (Exception ex)
+            }catch(Exception ex)
             {
                 return false;
             }
@@ -1177,11 +1180,11 @@ namespace RIS.UIs
             {
                 //if (!backgroundWorker.CancellationPending)
                 //{
-                byteRead = fs.Read(buffer, 0, 1024);
-                ftpStream.Write(buffer, 0, byteRead);
-                read += (double)byteRead;
-                double percentage = (read / total) * 100;
-                // backgroundWorker.ReportProgress((int)percentage);
+                    byteRead = fs.Read(buffer, 0, 1024);
+                    ftpStream.Write(buffer, 0, byteRead);
+                    read += (double)byteRead;
+                    double percentage = (read / total) * 100;
+                   // backgroundWorker.ReportProgress((int)percentage);
                 //}
 
             } while (byteRead != 0);
@@ -1235,18 +1238,27 @@ namespace RIS.UIs
 
                     //if (!IsUNCConnected)
                     //{
-                    //    IsUNCConnected = unc.NetUseWithCredentials(Constants._DicomFilePath, "Administrator", "", "EmslAdm@2014");
+                     //   IsUNCConnected = unc.NetUseWithCredentials(Constants._DicomFilePath, "Administrator", "", "EmslAdm@2014");
                     //}
 
-                    if (!IsUNCConnected)
-                    {
-                        // TODO: These can be configurable
+                    //if (IsUNCConnected)
+                    //{
+                    // TODO: These can be configurable
 
-                        DateTime _OpinionDateTime = await new RISAPIConsumerService().GetServerDateAndTimeAPICallFuncAsync();
+                    DateTime _OpinionDateTime = await new RISAPIConsumerService().GetServerDateAndTimeAPICallFuncAsync();
 
                         ReportConsultant _radiologist = tabPage2.Tag as ReportConsultant;
-                        var radiAntPath = @"C:\Program Files\RadiAntViewer64bit\RadiAntViewer.exe";
-                        var networkRootPath = _radiologist.DicomImagePath; //@"D:\DICOM\DicomServer_v1.5.0\Incoming\1";
+                        var radiAntPath = Constants.radintViewerPath; 
+                        var networkRootPath = string.Empty; //_radiologist.DicomImagePath; //@"D:\DICOM\DicomServer_v1.5.0\Incoming";
+
+                    if (_radiologist==null || string.IsNullOrEmpty(_radiologist.DicomImagePath))
+                    {
+                        networkRootPath = @"C:\";
+                    }
+                    else
+                    {
+                        networkRootPath = _radiologist.DicomImagePath;
+                    }
 
                         var reportObj = new VMReportObj()
                         {
@@ -1273,17 +1285,24 @@ namespace RIS.UIs
 
                         if (MainForm.LoggedinUser.IsReportWriteAllow)
                         {
-                            //this.StartViewer(studies, networkRootPath, radiAntPath);
+                            VMProcIdAndStatus procstate = new VMProcIdAndStatus();
+                            procstate.ProcId = wlObj.ProcId;
+                            procstate.Status = 5;
+                            bool isUpstateupdated = await new RISAPIConsumerService().UpdateProcedureStatus(procstate); //5 -> In Prgress
 
-                            using (var form = new frmHtmlReport(reportObj))
+                         
+
+                          this.StartViewer(studies, networkRootPath, radiAntPath);
+
+                            using (var form = new frmHtmlReportV2(reportObj))
                             {
                                 form.Owner = this;
                                 DialogResult result = form.ShowDialog();
 
                                 if (result == DialogResult.OK)
                                 {
-                                    //form.Dispose();
-                                    this.RefreshPage();
+                                     //form.Dispose();
+                                     this.RefreshPage();
                                 }
                             }
 
@@ -1294,18 +1313,32 @@ namespace RIS.UIs
                             this.StartViewer(studies, networkRootPath, radiAntPath);
 
                         }
+                        else if (MainForm.LoggedinUser.IsMainViewerAlloted)
+                        {
 
-                    }
-                    else
-                    {
-                        this.Cursor = Cursors.Default;
-                        MessageBox.Show("Failed to connect to with server." + "\r\nPlz. check your internet connection and try again." + Constants._DicomFilePath + "\r\nLastError = " + unc.LastError.ToString(),
-                                        "Failed to connect",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Error);
+                           this.StartViewer(studies, networkRootPath, radiAntPath);
 
-                        IsUNCConnected = false;
-                    }
+                        }
+                        else
+                        {
+                             MessageBox.Show("Thank you.","RIS",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                        }
+
+                    //}
+                    //else
+                    //{
+                    //    this.Cursor = Cursors.Default;
+                    //    MessageBox.Show("Failed to connect to with server." + "\r\nPlz. check your internet connection and try again." + Constants._DicomFilePath + "\r\nLastError = " + unc.LastError.ToString(),
+                    //                    "Failed to connect",
+                    //                    MessageBoxButtons.OK,
+                    //                    MessageBoxIcon.Error);
+
+                    //    IsUNCConnected = false;
+                    //}
+
+
+
+
                     //StartViewer(reportObj);
                     //StartReportFile(reportObj);
                 }
@@ -1315,32 +1348,40 @@ namespace RIS.UIs
 
         private void StartViewer(List<VMRISWorklistSubSetForLV> studies, string networkRootPath, string ViewerPath)
         {
-            this.EndTask("RadiAntViewer.exe");
-
-            //     var directories = studies
-            //.Select(item => Path.Combine(networkRootPath, item.TenantId.ToString(), item.StudyInstanceUid))
-            //.ToList();
-
-            var directories = studies
-                   .Select(item => Path.Combine(networkRootPath, item.StudyInstanceUid))
-                   .ToList();
-
-            var args = String.Format("-d {0}", String.Join(" ", directories));
-
-            ProcessStartInfo vrProcess = new ProcessStartInfo
+            try
             {
-                Arguments = args,
-                FileName = ViewerPath
-            };
+
+                this.EndTask("RadiAntViewer.exe");
+
+                //     var directories = studies
+                //.Select(item => Path.Combine(networkRootPath, item.TenantId.ToString(), item.StudyInstanceUid))
+                //.ToList();
+
+                var directories = studies
+                       .Select(item => Path.Combine(networkRootPath, item.StudyInstanceUid))
+                       .ToList();
+
+                var args = String.Format("-d {0}", String.Join(" ", directories));
+
+                ProcessStartInfo vrProcess = new ProcessStartInfo
+                {
+                    Arguments = args,
+                    FileName = ViewerPath
+                };
 
 
-            Process p2 = new Process();
+                Process p2 = new Process();
 
-            p2.StartInfo = vrProcess;
+                p2.StartInfo = vrProcess;
 
-            p2.Start();
+                p2.Start();
 
+            }catch(Exception ex)
+            {
 
+            }
+
+            
         }
 
         private string GetNetworkPath()
@@ -1363,7 +1404,7 @@ namespace RIS.UIs
             return request.RequestUri.AbsoluteUri;
         }
 
-        private void OpenAddendumForReview(VMRISWorklistSubSetForLV _wlObj)
+        private async void OpenAddendumForReview(VMRISWorklistSubSetForLV _wlObj)
         {
             var selectedStudies = GetSelectedStudies(olvWorklist);
             if (selectedStudies.Count == 0)
@@ -1372,16 +1413,84 @@ namespace RIS.UIs
             var studies = selectedStudies.Select(s => s.Item1).ToList();
             VMRISWorklistSubSetForLV wlObj = _wlObj;
 
-            RadiologistOpinionOne _existingXrayOpinion = null;
-            RadiologistOpinionTwo _existingCTMRIOpinion = null;
+           
+
+            DateTime _OpinionDateTime = await new RISAPIConsumerService().GetServerDateAndTimeAPICallFuncAsync();
+            ConsultantOpinionOnStudy ObjOpinion = new ReportService().GetReportConsultantOpinionOnStudy(wlObj.ProcId, wlObj.ConsultantId);
+
+            ReportConsultant _radiologist = tabPage2.Tag as ReportConsultant;
+            var radiAntPath = Constants.radintViewerPath;
+            var networkRootPath = string.Empty; //_radiologist.DicomImagePath; //@"D:\DICOM\DicomServer_v1.5.0\Incoming";
+
+            if (_radiologist == null || string.IsNullOrEmpty(_radiologist.DicomImagePath))
+            {
+                networkRootPath = @"C:\";
+            }
+            else
+            {
+                networkRootPath = _radiologist.DicomImagePath;
+            }
+
+            var reportObj = new VMReportObj()
+            {
+                Studies = studies,
+                ViewerExecutablePath = radiAntPath,
+                NetworkRootPath = networkRootPath,
+                WordfilePath = ReportFileNameWithPath,
+                isReportWindowAllowed = MainForm.LoggedinUser.IsReportWriteAllow,
+                isMainViewerAlloted = MainForm.LoggedinUser.IsMainViewerAlloted,
+                ReportFileNameWithPath = ReportFileNameWithPath,
+                ReportFilePath = ReportFilePath,
+                vmRISWorkList = wlObj,
+                MsWord_masteremplatecontent = (tabPage1.Tag as MasterTemplate).TemplateContent,
+                Html_masteremplatecontent = (tabPage1.Tag as MasterTemplate).HtmlContent,
+                ReportConsultant = tabPage2.Tag as ReportConsultant,
+                user = _user,
+                IsEditWillSave = true,
+                ConsultantOpinionOnStudy = ObjOpinion,
+                OpinionDateTime = _OpinionDateTime,
+                htmlTemplates = ShowAssignedToRadiologistPanel.Tag as List<HtmlTempleForReport>,
+                macroDictionary = lblMacroDictionary.Tag as Dictionary<string, string>
+                
+            };
+
+
+            if (MainForm.LoggedinUser.IsReportWriteAllow)
+            {
+                this.StartViewer(studies, networkRootPath, radiAntPath);
+
+                using (var form = new frmHtmlReportV2(reportObj))
+                {
+                    form.Owner = this;
+                    DialogResult result = form.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        //form.Dispose();
+                        this.RefreshPage();
+                    }
+                }
+
+            }
+            else if (!MainForm.LoggedinUser.IsReportWriteAllow && MainForm.LoggedinUser.IsMainViewerAlloted)
+            {
+
+                this.StartViewer(studies, networkRootPath, radiAntPath);
+
+            }
+            else
+            {
+                MessageBox.Show("Thank you.", "RIS", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
 
 
 
         }
 
+      
 
-
-
+      
 
         public void EndTask(string taskname)
         {
@@ -1394,8 +1503,7 @@ namespace RIS.UIs
                     process.Kill();
 
                 }
-            }
-            catch (Exception ex)
+            }catch(Exception ex)
             {
 
             }
@@ -1406,13 +1514,13 @@ namespace RIS.UIs
 
             DateTime _serverDateTime = Utils.GetServerDateAndTime();
 
-
-            template.ReplaceText("Report_Type", "DEPARTMENT OF RADIOLOGY & IMAGING");
-
+            
+           template.ReplaceText("Report_Type", "DEPARTMENT OF RADIOLOGY & IMAGING");
+            
 
 
             template.ReplaceText("Id_No", wListItem.PatientId.ToString());
-
+          
             template.ReplaceText("Received_date", wListItem.OrderDateTime.ToString());
             template.ReplaceText("Report_Date", _serverDateTime.ToString());
             //template.ReplaceText("daily_id", txtDID.Text);
@@ -1432,20 +1540,20 @@ namespace RIS.UIs
 
                 MemoryStream ms = new MemoryStream(_doctor.ESignature);
 
-                Novacode.Image image = template.AddImage(ms);
+            Novacode.Image image = template.AddImage(ms);
 
-                Picture picture = image.CreatePicture();
+            Picture picture = image.CreatePicture();
 
-                // Get the default Footer for this document.
-                Footer footer_default = template.Footers.odd;
+            // Get the default Footer for this document.
+            Footer footer_default = template.Footers.odd;
 
-                // Insert a new Paragraph into the document.
-                Paragraph p1 = footer_default.InsertParagraph();
-                p1.Alignment = Alignment.left;
-                p1.AppendPicture(picture);
+            // Insert a new Paragraph into the document.
+            Paragraph p1 = footer_default.InsertParagraph();
+            p1.Alignment = Alignment.left;
+            p1.AppendPicture(picture);
 
-
-
+           
+            
                 p1.AppendLine(_doctor.Name);
                 p1.AppendLine(_doctor.IdentityLine1);
                 p1.AppendLine(_doctor.IdentityLine2);
@@ -1462,7 +1570,7 @@ namespace RIS.UIs
                 template.ReplaceText("Identity_Line4", "");
                 template.ReplaceText("Identity_Line5", " ");
             }
-
+        
 
             return template;
         }
@@ -1575,7 +1683,7 @@ namespace RIS.UIs
 
 
 
-            // Process procvr = Process.Start(vrProcess);
+           // Process procvr = Process.Start(vrProcess);
 
             Process p2 = new Process();
 
@@ -1666,7 +1774,8 @@ namespace RIS.UIs
 
 
 
-                List<SelectedProcedureForAssign> _assignProcList = new List<SelectedProcedureForAssign>();
+                List<SelectedProcedureForAssign> _assignProcList=new List<SelectedProcedureForAssign>();
+                List<SelectedProcedureForAssign> _ReassignProcList = new List<SelectedProcedureForAssign>();
                 foreach (ListViewItem eachItem in olvWorklist.CheckedItems)
                 {
                     VMRISWorklistSubSetForLV vmWLObj = eachItem.Tag as VMRISWorklistSubSetForLV;
@@ -1678,12 +1787,34 @@ namespace RIS.UIs
                         Obj.Status = 4;
                         Obj.RadNextCloudID = _consultant.RadNextCloudID;
                         _assignProcList.Add(Obj);
+
+                       
+                        if (vmWLObj.Share_Id != null)
+                        {
+                            Obj = new SelectedProcedureForAssign();
+                            Obj.ProcId = vmWLObj.ProcId;
+                            Obj.ConsultantID = 0;
+                            Obj.Status = 3;
+                            Obj.RadNextCloudID = null;
+                            _ReassignProcList.Add(Obj);
+                        }
+
+
+                    }
+                }
+
+
+                if (_ReassignProcList.Count > 0)
+                {
+                    var result = Task.Run(async () => await new RISAPIConsumerService().CancelAssignedToRadiologistAPICall(_ReassignProcList)).GetAwaiter().GetResult();
+
+                    if (result)
+                    {
                     }
                 }
 
                 if (_assignProcList.Count > 0)
                 {
-
                     var result = Task.Run(async () => await new RISAPIConsumerService().AssignedToRadiologistAPICall(_assignProcList)).GetAwaiter().GetResult();
 
                     if (result)
@@ -1709,11 +1840,11 @@ namespace RIS.UIs
                         {
                             _serverDateTime = Task.Run(async () => await new RISAPIConsumerService().GetServerDateAndTimeAPICallFuncAsync()).GetAwaiter().GetResult();
 
+                           
+                             _datefrm = dateTimePickerStudyFrom.Value;
+                             _dateto = dateTimePickerStudyTo.Value;
 
-                            _datefrm = dateTimePickerStudyFrom.Value;
-                            _dateto = dateTimePickerStudyTo.Value;
-
-
+                            
                             string SearchFilter = this.textBoxFilterSimple.Text;
                             LoadInitialIncompleteStudies(_datefrm, _dateto, _roleId, _tenantId, _consultantId, _status, SearchFilter);
                             //List<VMRISWorklist> _IncompleteworkList = await LoadAllIncompleteStudies(_datefrm, _dateto, _roleId, _tenantId, _consultantId, _status);
@@ -1724,8 +1855,7 @@ namespace RIS.UIs
 
                     }
                 }
-            }
-            catch (Exception ex)
+            }catch(Exception ex)
             {
 
                 MessageBox.Show(ex.Message, "RIS", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1736,8 +1866,7 @@ namespace RIS.UIs
 
         private void lvRadiologist_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            foreach (ListViewItem item in lvRadiologist.Items)
-            {
+            foreach(ListViewItem item in lvRadiologist.Items){
 
                 if (item.Index != e.Index) item.Checked = false;
             }
@@ -1835,7 +1964,7 @@ namespace RIS.UIs
             {
                 try
                 {
-                    LoadIncompleteWorkListOnPageLoading(_user);
+                     LoadIncompleteWorkListOnPageLoading(_user);
 
                 }
                 catch (Exception ex)
@@ -1871,7 +2000,7 @@ namespace RIS.UIs
 
         private void SetReportPageNumberValue()
         {
-            PageNumber.Text = $"{nCurPageNumber}/{nPageCount}  (Count={g_nTotalItemCount})";
+            ReportPageNumber.Text = $"{nCurPageNumber}/{nPageCount}  (Count={g_nTotalItemCount})";
         }
 
 
@@ -1937,31 +2066,31 @@ namespace RIS.UIs
                 {
                     OpenReportPrintOnly(wlObj, _OpinionDateTime);
                 }
-
+               
             }
 
 
             if (_roleId == 3)
             {
-
-                OpenReportWithViewerEditable(wlObj, _OpinionDateTime);
-
+               
+                   OpenReportWithViewerEditable(wlObj, _OpinionDateTime);
+               
             }
 
 
-            if (_roleId != 3 && _roleId != 4)
+            if(_roleId != 3 && _roleId != 4)
             {
                 if (MainForm.LoggedinUser.IsMainViewerAlloted)
                 {
-                    OpenReportWithViewerNonEditable(wlObj, _OpinionDateTime);
+                    OpenReportWithViewerNonEditable(wlObj,_OpinionDateTime);
                 }
                 else
                 {
-                    OpenReportPrintOnly(wlObj, _OpinionDateTime);
+                    OpenReportPrintOnly(wlObj,_OpinionDateTime);
                 }
             }
 
-
+         
 
         }
 
@@ -1974,7 +2103,7 @@ namespace RIS.UIs
             var studies = selectedStudies.Select(s => s.Item1).ToList();
 
 
-            var radiAntPath = @"C:\Program Files\RadiAntViewer64bit\RadiAntViewer.exe";
+            var radiAntPath = Constants.radintViewerPath; //@"C:\Program Files\RadiAntViewer64bit\RadiAntViewer.exe";
             var networkRootPath = Constants._DicomFilePath; //@"D:\DICOM\DicomServer_v1.5.0\Incoming";
             ConsultantOpinionOnStudy Obj = new ReportService().GetReportConsultantOpinionOnStudy(wlObj.ProcId, wlObj.ConsultantId);
 
@@ -1982,13 +2111,13 @@ namespace RIS.UIs
             {
 
                 vmRISWorkList = wlObj,
-
+                MsWord_masteremplatecontent = (tabPage1.Tag as MasterTemplate).TemplateContent,
                 Html_masteremplatecontent = (tabPage1.Tag as MasterTemplate).HtmlContent,
                 ReportConsultant = tabPage2.Tag as ReportConsultant,
                 user = _user,
                 IsEditWillSave = false,
                 ConsultantOpinionOnStudy = Obj,
-                OpinionDateTime = opdate,
+                OpinionDateTime= opdate,
                 htmlTemplates = ShowAssignedToRadiologistPanel.Tag as List<HtmlTempleForReport>
             };
 
@@ -2000,7 +2129,7 @@ namespace RIS.UIs
 
             }
 
-            using (var form = new frmHtmlReport(reportObj))
+            using (var form = new frmHtmlReportV2(reportObj))
             {
                 form.ShowDialog();
 
@@ -2012,7 +2141,7 @@ namespace RIS.UIs
             }
         }
 
-        private void OpenReportWithViewerEditable(VMRISWorklistSubSetForLV wlObj, DateTime opdate)
+        private void OpenReportWithViewerEditable(VMRISWorklistSubSetForLV wlObj,DateTime opdate)
         {
 
             var selectedStudies = GetSelectedStudies(olvCompleteWorklist);
@@ -2022,22 +2151,23 @@ namespace RIS.UIs
             var studies = selectedStudies.Select(s => s.Item1).ToList();
 
 
-            var radiAntPath = @"C:\Program Files\RadiAntViewer64bit\RadiAntViewer.exe";
-            var networkRootPath = Constants._DicomFilePath; //@"D:\Cloud\DICOMFILES\Incoming\1";
+            var radiAntPath = Constants.radintViewerPath; //@"C:\Program Files\RadiAntViewer64bit\RadiAntViewer.exe";
+            var networkRootPath = Constants._DicomFilePath; //@"D:\DICOM\DicomServer_v1.5.0\Incoming";
             ConsultantOpinionOnStudy Obj = new ReportService().GetReportConsultantOpinionOnStudy(wlObj.ProcId, wlObj.ConsultantId);
 
             var reportObj = new VMReportObj()
             {
-
+                
                 vmRISWorkList = wlObj,
-
+                MsWord_masteremplatecontent = (tabPage1.Tag as MasterTemplate).TemplateContent,
                 Html_masteremplatecontent = (tabPage1.Tag as MasterTemplate).HtmlContent,
                 ReportConsultant = tabPage2.Tag as ReportConsultant,
                 user = _user,
                 IsEditWillSave = true,
                 ConsultantOpinionOnStudy = Obj,
-                OpinionDateTime = opdate,
-                htmlTemplates = ShowAssignedToRadiologistPanel.Tag as List<HtmlTempleForReport>
+                OpinionDateTime= opdate,
+                htmlTemplates = ShowAssignedToRadiologistPanel.Tag as List<HtmlTempleForReport>,
+                macroDictionary= lblMacroDictionary.Tag as Dictionary<string, string>
             };
 
 
@@ -2045,10 +2175,10 @@ namespace RIS.UIs
             {
                 this.StartViewer(studies, networkRootPath, radiAntPath);
 
-
+               
             }
 
-            using (var form = new frmHtmlReport(reportObj))
+            using (var form = new frmHtmlReportV2(reportObj))
             {
                 form.ShowDialog();
                 if (form.DialogResult == DialogResult.OK || form.DialogResult == DialogResult.Cancel)
@@ -2059,7 +2189,7 @@ namespace RIS.UIs
 
         }
 
-        private void OpenReportPrintOnly(VMRISWorklistSubSetForLV wlObj, DateTime opdate)
+        private void OpenReportPrintOnly(VMRISWorklistSubSetForLV wlObj,DateTime opdate)
         {
 
             ConsultantOpinionOnStudy Obj = new ReportService().GetReportConsultantOpinionOnStudy(wlObj.ProcId, wlObj.ConsultantId);
@@ -2067,16 +2197,17 @@ namespace RIS.UIs
             var reportObj = new VMReportObj()
             {
                 vmRISWorkList = wlObj,
-                ConsultantOpinionOnStudy = Obj,
+                ConsultantOpinionOnStudy= Obj,
+                MsWord_masteremplatecontent = (tabPage1.Tag as MasterTemplate).TemplateContent,
                 Html_masteremplatecontent = (tabPage1.Tag as MasterTemplate).HtmlContent,
                 ReportConsultant = tabPage2.Tag as ReportConsultant,
                 user = _user,
-                OpinionDateTime = opdate,
-                IsEditWillSave = false
+                OpinionDateTime=opdate,
+                IsEditWillSave=false
             };
 
 
-            using (var form = new frmHtmlReport(reportObj))
+            using (var form = new frmHtmlReportV2(reportObj))
             {
                 form.ShowDialog();
                 if (form.DialogResult == DialogResult.OK || form.DialogResult == DialogResult.Cancel)
@@ -2084,12 +2215,12 @@ namespace RIS.UIs
                     RefreshPage();
                 }
             }
-
+          
         }
 
         private void btnPdfDownload_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Under Construction", "RIS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Under Construction","RIS",MessageBoxButtons.OK,MessageBoxIcon.Warning);
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2112,7 +2243,7 @@ namespace RIS.UIs
             }
         }
 
-
+      
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -2152,7 +2283,7 @@ namespace RIS.UIs
 
 
 
-
+           
         }
 
         private void searchStudiesButton_Click(object sender, EventArgs e)
@@ -2160,42 +2291,44 @@ namespace RIS.UIs
 
         }
 
-        private void btnSearchReports_Click(object sender, EventArgs e)
+        private  void btnSearchReports_Click(object sender, EventArgs e)
         {
 
-            Exception exception = null;
-            using (var form = new WaitingForm(async () =>
+            if (_user != null)
             {
-                try
-                {
-                    LoadReportListOnly();
 
-                }
-                catch (Exception ex)
+                Exception exception = null;
+                using (var form = new WaitingForm(async () =>
                 {
-                    exception = ex;
-                    Log.ApplicationLog.Error("Report Loading: " + ex.GetAllMessages());
-                }
-            })
-            {
-                Title = "Report Loading",
-                Message = "Report Loading..."
-            })
-            {
-                form.ShowDialog();
+                    try
+                    {
+                        LoadCompletedWorkListOnPageLoading(_user);
 
-                if (exception != null)
+                    }
+                    catch (Exception ex)
+                    {
+                        exception = ex;
+                        Log.ApplicationLog.Error("WorkList Loading: " + ex.GetAllMessages());
+                    }
+                })
                 {
-                    MessageBox.Show(this, exception.Message,
-                        "Report List Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    Title = "WorkList Loading",
+                    Message = "WorkList Loading..."
+                })
+                {
+                    form.ShowDialog();
+
+                    if (exception != null)
+                    {
+                        MessageBox.Show(this, exception.Message,
+                            "WorkList Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    //DialogResult = DialogResult.OK;
                 }
 
-                //DialogResult = DialogResult.OK;
             }
-
-
-
 
         }
 
@@ -2291,15 +2424,15 @@ namespace RIS.UIs
         private void LoadCompletedWorkListOnPageLoading(User user)
         {
             DateTime _datefrm = dtpReportfrom.Value;
-            DateTime _dateto = dtpReportTo.Value;
-            string SearchFilter = textBoxFilterSimple.Text;
+            DateTime _dateto =  dtpReportTo.Value;
+            string SearchFilter = txtReportSearchFilter.Text;
 
             LoadInitialCompletedStudies(_datefrm, _dateto, _roleId, _tenantId, _consultantId, _status, SearchFilter);
         }
 
         private async void LoadInitialCompletedStudies(DateTime _datefrm, DateTime _dateto, int _roleId, int _tenantId, int _consultantId, string _status, string SearchFilter)
         {
-
+            
             int nTotalItemCount = await GetCompletedItemCount(_datefrm, _dateto, _roleId, _tenantId, _consultantId, _status, SearchFilter);
 
             g_datefrm = _datefrm; g_dateto = _dateto; g_roleId = _roleId; g_tenantId = _tenantId; g_consultantId = _consultantId; g_status = _status; g_SearchFilter = SearchFilter;
@@ -2309,9 +2442,9 @@ namespace RIS.UIs
 
             nPageCount = (new RISPagingService()).GetPageCount(nTotalItemCount, onePageItemCount);
             nCurPageNumber = 1;
-
-
-
+           
+            
+            
             LoadCompletedWorkListOnePageToLvListCtrl(nCurPageNumber, onePageItemCount);
 
 
@@ -2330,9 +2463,8 @@ namespace RIS.UIs
 
             if (nPageCount == 0)
             {
-                this.Invoke(new MethodInvoker(delegate
-                {
-                    this.olvWorklist.Items.Clear();
+                this.Invoke(new MethodInvoker(delegate {
+                    this.olvCompleteWorklist.Items.Clear();
                 }));
                 return;
             }
@@ -2341,9 +2473,8 @@ namespace RIS.UIs
             List<VMRISWorklistSubSetForLV> _wListItem = await (new RISAPIConsumerService()).GetSearchFilterCompleteOnePageItems(g_datefrm, g_dateto, g_roleId, g_tenantId, g_consultantId, g_status, g_SearchFilter, nCurPageNumber, onePageItemCount);
             if (_wListItem == null || _wListItem.Count() == 0)
             {
-                this.Invoke(new MethodInvoker(delegate
-                {
-                    this.olvWorklist.Items.Clear();
+                this.Invoke(new MethodInvoker(delegate {
+                    this.olvCompleteWorklist.Items.Clear();
                 }));
                 return;
             }
@@ -2351,13 +2482,20 @@ namespace RIS.UIs
 
             setObjectToReportLvList(_wListItem);
 
-
+            
 
         }
 
         private void setObjectToReportLvList(List<VMRISWorklistSubSetForLV> objectRes)
         {
             if (objectRes == null || objectRes.Count() == 0) return;
+
+            this.PrintColumn.ImageGetter = delegate (object row) {
+
+                return "Printer";
+            };
+
+
             this.olvCompleteWorklist.SetObjects(objectRes);
         }
 
@@ -2377,7 +2515,7 @@ namespace RIS.UIs
             LoadWorkListOnePageToLvListCtrl(nCurPageNumber, onePageItemCount);
         }
 
-        private void toolStripDropDownButton1_Click(object sender, EventArgs e)
+        private void btnCancelAssignment_Click(object sender, EventArgs e)
         {
             if (olvWorklist.Items.Count == 0) return;
 
@@ -2386,13 +2524,17 @@ namespace RIS.UIs
             {
                 VMRISWorklistSubSetForLV vmWLObj = eachItem.Tag as VMRISWorklistSubSetForLV;
                 SelectedProcedureForAssign Obj = new SelectedProcedureForAssign();
-                if (vmWLObj != null)
+                if (vmWLObj != null && (vmWLObj.Status==4 || vmWLObj.Status == 3))
                 {
                     Obj.ProcId = vmWLObj.ProcId;
                     Obj.ConsultantID = 0;
                     Obj.Status = 3;
                     Obj.RadNextCloudID = null;
                     _assignProcList.Add(Obj);
+                }
+                else
+                {
+
                 }
             }
             if (_assignProcList.Count > 0)
@@ -2408,10 +2550,10 @@ namespace RIS.UIs
 
                     MessageBox.Show("Cancel Assignment", "RIS", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    foreach (ListViewItem item in lvRadiologist.Items)
-                    {
-                        item.Checked = false;
-                    }
+                    //foreach (ListViewItem item in lvRadiologist.Items)
+                    //{
+                    //    item.Checked = false;
+                    //}
 
                     foreach (ListViewItem item in olvWorklist.Items)
                     {
@@ -2420,7 +2562,7 @@ namespace RIS.UIs
 
                     if (_user != null)
                     {
-                        _serverDateTime = Task.Run(async () => await new RISAPIConsumerService().GetServerDateAndTimeAPICallFuncAsync()).GetAwaiter().GetResult();
+                        //_serverDateTime = Task.Run(async () => await new RISAPIConsumerService().GetServerDateAndTimeAPICallFuncAsync()).GetAwaiter().GetResult();
 
 
                         _datefrm = dateTimePickerStudyFrom.Value;
@@ -2436,12 +2578,132 @@ namespace RIS.UIs
 
         }
 
-        public class JsonResponseStruct
+        private void rptNextBtn_Click(object sender, EventArgs e)
         {
-            public string Data;
+            if (nCurPageNumber + 1 > nPageCount) return;
+            nCurPageNumber++;
+            SetReportPageNumberValue();
+            LoadCompletedWorkListOnePageToLvListCtrl(nCurPageNumber, onePageItemCount);
+        }
 
+        private void rptPrevBtn_Click(object sender, EventArgs e)
+        {
+            if (nCurPageNumber - 1 < 1) return;
+            nCurPageNumber--;
+            SetReportPageNumberValue();
+            LoadCompletedWorkListOnePageToLvListCtrl(nCurPageNumber, onePageItemCount);
+        }
+
+        private void txtReportSearchFilter_TextChanged(object sender, EventArgs e)
+        {
+            this.TimedFilter(this.olvCompleteWorklist, txtReportSearchFilter.Text);
+        }
+
+        private void btnOpenWithWord_Click(object sender, EventArgs e)
+        {
+            btnOpenWithWord.Enabled = false;
+            
+            ConvertTo(".docx");
+
+
+            btnOpenWithWord.Enabled = true;
         }
 
 
+        private async void ConvertTo(string extension)
+        {
+
+            var selectedStudies = GetSelectedStudies(olvCompleteWorklist);
+            if (selectedStudies.Count == 0)
+                return;
+
+            var studies = selectedStudies.Select(s => s.Item1).ToList();
+            VMRISWorklistSubSetForLV patient = studies.FirstOrDefault();
+            ReportConsultant consultant = tabPage2.Tag as ReportConsultant;
+
+            ConsultantOpinionOnStudy consultantOpinionObj = new ReportService().GetReportConsultantOpinionOnStudy(patient.ProcId, patient.ConsultantId);
+
+
+            if (consultant == null && patient.Status == 6)
+            {
+                consultant = await new RISAPIConsumerService().GetReportConsultant(patient.ConsultantId);
+            }
+
+
+
+            MemoryStream signature = new MemoryStream(consultant.ESignature);
+
+            Dictionary<string, string> textReplacements = DocumentHelper.PatientToTemplateDictionary(patient, consultant);
+            Dictionary<string, DocumentLib.Image> imageFileReplacements = DocumentHelper.SignatureToTemplateDictionary(signature);
+
+            string outFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DateTime.Now.ToString("yyyyMMdd-hhmmss") + extension);
+            string outDocxFile = ".docx".Equals(extension, StringComparison.OrdinalIgnoreCase) ? outFile : null;
+            string outPdfFile = ".pdf".Equals(extension, StringComparison.OrdinalIgnoreCase) ? outFile : "";
+
+           string templateFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "HtmlEditor") + @"\RIS_Master_Template.docx";
+
+           
+
+           string htmlText = consultantOpinionObj.ReportContent;
+
+
+            WordDocumentOptions options = new WordDocumentOptions();
+            options.TopMargin = 2F;
+            options.BottomMargin = 2F;
+            options.LeftMargin = 1F;
+            options.RightMargin = 1F;
+
+            MyDocument.ConvertFromHtmlText(AdjustHtmlText(htmlText), templateFile, textReplacements, imageFileReplacements, options, outDocxFile, outPdfFile);
+
+
+            //if (openFile)
+            //{
+            if (!string.IsNullOrEmpty(outDocxFile))
+                Process.Start(outDocxFile);
+            if (!string.IsNullOrEmpty(outPdfFile))
+                Process.Start(outPdfFile);
+            //}
+
+            //MessageBox.Show("Document converted successfully...");
+        }
+
+
+        private static string AdjustHtmlText(string text)
+        {
+            const string HTML_TEMPLATE = "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"></head><body>{0}</body></html>";
+            bool containHtmlTag = text.IndexOf("<html>", StringComparison.OrdinalIgnoreCase) > 0 && text.IndexOf("</html>", StringComparison.OrdinalIgnoreCase) > 0;
+            return containHtmlTag ? text : string.Format(HTML_TEMPLATE, text);
+        }
+
+        private void btnOpenWithPDF_Click(object sender, EventArgs e)
+        {
+            btnOpenWithPDF.Enabled = false;
+            
+            ConvertTo(".pdf");
+
+            btnOpenWithPDF.Enabled = true;
+        }
+
+        private void OpenStudiesInQuickView_Click(object sender, EventArgs e)
+        {
+                var selectedStudies = GetSelectedStudies(olvCompleteWorklist);
+                if (selectedStudies.Count == 0)
+                    return;
+
+                using (var form = new PreviewForm(selectedStudies.Select(s => s.Item1).ToList()))
+                    form.ShowDialog();
+            
+        }
     }
+
+
+
+
+    public class JsonResponseStruct
+    {
+        public string Data;
+
+    }
+
+
 }

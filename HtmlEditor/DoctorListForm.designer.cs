@@ -184,37 +184,37 @@ namespace htmledit
             // 
             // htmledSignature
             // 
-            this.htmledSignature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.htmledSignature.BodyInnerHTML = null;
-            this.htmledSignature.BodyInnerText = null;
-            this.htmledSignature.EnterToBR = true;
-            this.htmledSignature.FontSize = WinHtmlEditor.FontSize.Three;
-            this.htmledSignature.Location = new System.Drawing.Point(403, 129);
-            this.htmledSignature.MacroListDictionary = null;
-            this.htmledSignature.Name = "htmledSignature";
-            this.htmledSignature.ShowStatusBar = false;
-            this.htmledSignature.ShowToolBar = false;
-            this.htmledSignature.ShowWb = true;
-            this.htmledSignature.Size = new System.Drawing.Size(364, 116);
-            this.htmledSignature.TabIndex = 8;
-            this.htmledSignature.WebBrowserShortcutsEnabled = true;
-            // 
-            // htmledPreview
-            // 
-            this.htmledPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.htmledPreview.BodyInnerHTML = null;
-            this.htmledPreview.BodyInnerText = null;
-            this.htmledPreview.EnterToBR = true;
-            this.htmledPreview.FontSize = WinHtmlEditor.FontSize.Three;
-            this.htmledPreview.Location = new System.Drawing.Point(403, 264);
-            this.htmledPreview.MacroListDictionary = null;
-            this.htmledPreview.Name = "htmledPreview";
-            this.htmledPreview.ShowStatusBar = false;
-            this.htmledPreview.ShowToolBar = false;
-            this.htmledPreview.ShowWb = true;
-            this.htmledPreview.Size = new System.Drawing.Size(364, 177);
-            this.htmledPreview.TabIndex = 10;
-            this.htmledPreview.WebBrowserShortcutsEnabled = true;
+            //this.htmledSignature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            //this.htmledSignature.BodyInnerHTML = null;
+            //this.htmledSignature.BodyInnerText = null;
+            //this.htmledSignature.EnterToBR = true;
+            //this.htmledSignature.FontSize = WinHtmlEditor.FontSize.Three;
+            //this.htmledSignature.Location = new System.Drawing.Point(403, 129);
+            //this.htmledSignature.MacroListDictionary = null;
+            //this.htmledSignature.Name = "htmledSignature";
+            //this.htmledSignature.ShowStatusBar = false;
+            //this.htmledSignature.ShowToolBar = false;
+            //this.htmledSignature.ShowWb = true;
+            //this.htmledSignature.Size = new System.Drawing.Size(364, 116);
+            //this.htmledSignature.TabIndex = 8;
+            //this.htmledSignature.WebBrowserShortcutsEnabled = true;
+            //// 
+            //// htmledPreview
+            //// 
+            //this.htmledPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            //this.htmledPreview.BodyInnerHTML = null;
+            //this.htmledPreview.BodyInnerText = null;
+            //this.htmledPreview.EnterToBR = true;
+            //this.htmledPreview.FontSize = WinHtmlEditor.FontSize.Three;
+            //this.htmledPreview.Location = new System.Drawing.Point(403, 264);
+            //this.htmledPreview.MacroListDictionary = null;
+            //this.htmledPreview.Name = "htmledPreview";
+            //this.htmledPreview.ShowStatusBar = false;
+            //this.htmledPreview.ShowToolBar = false;
+            //this.htmledPreview.ShowWb = true;
+            //this.htmledPreview.Size = new System.Drawing.Size(364, 177);
+            //this.htmledPreview.TabIndex = 10;
+            //this.htmledPreview.WebBrowserShortcutsEnabled = true;
             // 
             // lblPreview
             // 
@@ -241,14 +241,14 @@ namespace htmledit
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.htmledSignature);
+            //this.Controls.Add(this.htmledSignature);
             this.Controls.Add(this.txtDoctorName);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.htmledPreview);
+           // this.Controls.Add(this.htmledPreview);
             this.Controls.Add(this.pbSignature);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -267,14 +267,14 @@ namespace htmledit
         #endregion
 
         private System.Windows.Forms.PictureBox pbSignature;
-        private WinHtmlEditor.HtmlEditor htmledPreview;
+       
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox txtDoctorName;
-        private WinHtmlEditor.HtmlEditor htmledSignature;
+      
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnCancel;

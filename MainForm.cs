@@ -236,11 +236,19 @@ namespace RIS.UI
 
 
                         foreach (Form form in this.MdiChildren)
-
                         {
+                             form.Close();
+                        }
 
-                            form.Close();
 
+                        if (_frm.Equals("frmWorkListV3") && (LoggedinUser.RoleId == 3 || LoggedinUser.RoleId == 4))
+                        {
+                            frmShow.WindowState = FormWindowState.Normal;
+                            this.Hide();
+                            frmShow.Show();
+                            
+
+                            return;
                         }
 
 
@@ -249,15 +257,18 @@ namespace RIS.UI
                             frmShow.MdiParent = this;
                             frmShow.WindowState = FormWindowState.Maximized;
                             frmShow.Show();
+
                         }
                         else if(_displayType == "WS")
                         {
-                            frmShow.WindowState = FormWindowState.Maximized;
-                            frmShow.ShowDialog();
+                            frmShow.WindowState = FormWindowState.Normal;
+                            frmShow.Show();
+                           
                             //this.Enabled = false;
-                        }else
+                        }
+                        else
                         {
-                            frmShow.ShowDialog();
+                            frmShow.Show();
                             //this.Enabled = false;
                         }
 

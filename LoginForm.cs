@@ -107,9 +107,13 @@ namespace RIS.UI
             }
         }
 
-        private void PerformLogin()
+        private  void PerformLogin()
         {
-            
+
+           // LoginUser _loggedInUser = await new RISAPIConsumerService().CheckLoginAsync(txtUserName.Text, txtPassword.Text);
+
+
+
             if ((new RISService()).CheckLogin(txtUserName.Text, txtPassword.Text, out loggedInuser))
             {
 
@@ -175,7 +179,11 @@ namespace RIS.UI
         private void LoginForm_Load(object sender, EventArgs e)
         {
             //panel2.Paint += new PaintEventHandler(panel2_Paint);
-           // panel2.Refresh();
+            // panel2.Refresh();
+
+            lblSoftwareby.Text = "Software developed by: E-Medical Solution Ltd.";
+            lblContact.Text = "Mobile: 01715307840.";
+
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)

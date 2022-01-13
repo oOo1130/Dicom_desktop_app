@@ -17,8 +17,8 @@ namespace RIS.UIs
     {
         private VMRISWorklistSubSetForLV _workListItem;
         bool unlocked = true;
-        private string _calledFrom = string.Empty; 
-
+        private string _calledFrom = string.Empty;
+        List<ReferralPhysician> _physicianList;
         public frmUpdateWorkListInfo(VMRISWorklistSubSetForLV workList, string calledFrom)
         {
             
@@ -40,18 +40,21 @@ namespace RIS.UIs
             {
                 btnUpdate.Tag = wlObj;
 
+                txtPatientId.Text = workListItem.PatientId;
+                txtPatientName.Text = workListItem.PatientName;
+                txtHospital.Text = workListItem.HospitalName;
                 lblHISProcedure.Text = workListItem.ProcedureName;
                 txtProcedure.Text = workListItem.ProcedureHISName;
                 txtClinicalHistory.Text = workListItem.ClinicalHistory;
                 txtReferralPhysician.Text = workListItem.ReferralPhysician;
                 cmbStatus.Text = workListItem.Status.ToString();
-
-                if (_calledFrom.Equals("report"))
-                {
-                    txtProcedure.Enabled=false;
-                    txtClinicalHistory.Enabled = false;
-                    txtReferralPhysician.Enabled = false;
-                }
+                txtFileName.Text = workListItem.StudyInstanceUid;
+                //if (_calledFrom.Equals("report"))
+                //{
+                //    txtProcedure.Enabled=false;
+                //    txtClinicalHistory.Enabled = false;
+                //    txtReferralPhysician.Enabled = false;
+                //}
 
 
             }
@@ -60,7 +63,7 @@ namespace RIS.UIs
             unlocked = true;
         }
 
-        private void frmUpdateWorkListInfo_Load(object sender, EventArgs e)
+        private async void frmUpdateWorkListInfo_Load(object sender, EventArgs e)
         {
             HideAllDefaultHidden();
 
@@ -68,6 +71,10 @@ namespace RIS.UIs
 
             ctrlProcedureSearch.Location = new Point(txtProcedure.Location.X, txtProcedure.Location.Y);
             ctrlProcedureSearch.ItemSelected += ctrlProcedureSearch_ItemSelected;
+
+
+            _physicianList = await new RISAPIConsumerService().GetTenantPhysicianList(_workListItem.TenantId);
+
         }
 
         private void ctrlProcedureSearch_ItemSelected(SearchResultListControl<HISProcedure> sender, HISProcedure item)
@@ -230,6 +237,39 @@ namespace RIS.UIs
             //    form.WindowState = FormWindowState.Maximized;
             //    form.ShowDialog();
             //}
+        }
+
+        private void btnAddReferral_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtReferralPhysician.Text))
+            {
+                ReferralPhysician _physician = new ReferralPhysician();
+                _physician.ReferralName = txtReferralPhysician.Text;
+                _physician.TenantId = _workListItem.TenantId;
+
+                var result = Task.Run(async () => await new RISAPIConsumerService().AddToReferral(_physician)).GetAwaiter().GetResult();
+
+                if (result)
+                {
+                    MessageBox.Show("New referral added successfully.", "RIS-EMSL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Sorry! Fail to add new referral.", "RIS-EMSL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void chkEnable_Click(object sender, EventArgs e)
+        {
+            if (chkEnable.Checked)
+            {
+                cmbStatus.Enabled = true;
+            }
+            else
+            {
+                cmbStatus.Enabled = false;
+            }
         }
     }
 }

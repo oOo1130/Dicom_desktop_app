@@ -35,10 +35,9 @@
             this.treeMenu = new System.Windows.Forms.TreeView();
             this.lblWorkStationId = new System.Windows.Forms.Label();
             this.treeImageList = new System.Windows.Forms.ImageList(this.components);
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblNetConnectionStatus = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.SuspendLayout();
             // 
             // imgListLage
@@ -85,6 +84,25 @@
             this.treeImageList.ImageSize = new System.Drawing.Size(16, 16);
             this.treeImageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // lblNetConnectionStatus
+            // 
+            this.lblNetConnectionStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNetConnectionStatus.AutoSize = true;
+            this.lblNetConnectionStatus.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNetConnectionStatus.ForeColor = System.Drawing.Color.Green;
+            this.lblNetConnectionStatus.Location = new System.Drawing.Point(950, 4);
+            this.lblNetConnectionStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 0);
+            this.lblNetConnectionStatus.Name = "lblNetConnectionStatus";
+            this.lblNetConnectionStatus.Size = new System.Drawing.Size(0, 17);
+            this.lblNetConnectionStatus.TabIndex = 15;
+            this.lblNetConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 30000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // toolStrip1
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(12, 12);
@@ -94,40 +112,14 @@
             this.toolStrip1.TabIndex = 8;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Green;
-            this.label1.Location = new System.Drawing.Point(493, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 17);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Net Connection: ";
-            // 
-            // lblNetConnectionStatus
-            // 
-            this.lblNetConnectionStatus.AutoSize = true;
-            this.lblNetConnectionStatus.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNetConnectionStatus.ForeColor = System.Drawing.Color.Green;
-            this.lblNetConnectionStatus.Location = new System.Drawing.Point(608, 2);
-            this.lblNetConnectionStatus.Name = "lblNetConnectionStatus";
-            this.lblNetConnectionStatus.Size = new System.Drawing.Size(0, 17);
-            this.lblNetConnectionStatus.TabIndex = 15;
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 30000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::RIS.Properties.Resources.Software_Back1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1028, 609);
             this.Controls.Add(this.lblNetConnectionStatus);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.treeMenu);
             this.Controls.Add(this.lblWorkStationId);
             this.Controls.Add(this.btnClose);
@@ -136,8 +128,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RIS HOME";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -150,9 +142,8 @@
         private System.Windows.Forms.TreeView treeMenu;
         public System.Windows.Forms.Label lblWorkStationId;
         private System.Windows.Forms.ImageList treeImageList;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblNetConnectionStatus;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
     }
 }
