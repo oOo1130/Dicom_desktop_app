@@ -2694,6 +2694,11 @@ namespace RIS.UIs
                     form.ShowDialog();
             
         }
+
+        private void objectListView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 

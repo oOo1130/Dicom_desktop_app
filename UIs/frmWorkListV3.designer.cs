@@ -230,6 +230,7 @@ namespace RIS.UIs
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.txtConfirmNewPassword = new System.Windows.Forms.TextBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.imageList3 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -246,6 +247,11 @@ namespace RIS.UIs
             this.label22 = new System.Windows.Forms.Label();
             this.txtSearchRadiologist = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.miniToolStrip = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -293,6 +299,7 @@ namespace RIS.UIs
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lvRadiologist)).BeginInit();
             this.panel2.SuspendLayout();
+            this.toolStrip5.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList2
@@ -352,37 +359,38 @@ namespace RIS.UIs
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CommandUpdateWorkListInfo,
             this.CommandAttachFile,
             this.commandCancelWorkListItem,
             this.commandDeleteWorklistItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(189, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(222, 100);
             // 
             // CommandUpdateWorkListInfo
             // 
             this.CommandUpdateWorkListInfo.Name = "CommandUpdateWorkListInfo";
-            this.CommandUpdateWorkListInfo.Size = new System.Drawing.Size(188, 22);
+            this.CommandUpdateWorkListInfo.Size = new System.Drawing.Size(221, 24);
             this.CommandUpdateWorkListInfo.Text = "Update WorkList Info ";
             this.CommandUpdateWorkListInfo.Click += new System.EventHandler(this.CommandUpdateWorkListInfo_Click);
             // 
             // CommandAttachFile
             // 
             this.CommandAttachFile.Name = "CommandAttachFile";
-            this.CommandAttachFile.Size = new System.Drawing.Size(188, 22);
+            this.CommandAttachFile.Size = new System.Drawing.Size(221, 24);
             this.CommandAttachFile.Text = "Attach File";
             // 
             // commandCancelWorkListItem
             // 
             this.commandCancelWorkListItem.Name = "commandCancelWorkListItem";
-            this.commandCancelWorkListItem.Size = new System.Drawing.Size(188, 22);
+            this.commandCancelWorkListItem.Size = new System.Drawing.Size(221, 24);
             this.commandCancelWorkListItem.Text = "Cancel WorkList Item";
             // 
             // commandDeleteWorklistItem
             // 
             this.commandDeleteWorklistItem.Name = "commandDeleteWorklistItem";
-            this.commandDeleteWorklistItem.Size = new System.Drawing.Size(188, 22);
+            this.commandDeleteWorklistItem.Size = new System.Drawing.Size(221, 24);
             this.commandDeleteWorklistItem.Text = "Delete WorkList Item";
             // 
             // hotItemStyle1
@@ -393,12 +401,14 @@ namespace RIS.UIs
             // statusStrip1
             // 
             this.statusStrip1.AutoSize = false;
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel3});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 698);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 859);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1370, 51);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1827, 63);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -406,13 +416,13 @@ namespace RIS.UIs
             // 
             this.toolStripStatusLabel1.Margin = new System.Windows.Forms.Padding(15, 3, 0, 0);
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 48);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 60);
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.BackColor = System.Drawing.Color.Transparent;
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(1340, 46);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(1792, 57);
             this.toolStripStatusLabel3.Spring = true;
             this.toolStripStatusLabel3.Text = "toolStripStatusLabel3";
             this.toolStripStatusLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -424,13 +434,15 @@ namespace RIS.UIs
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.ImageList = this.imageList3;
             this.tabControl1.ItemSize = new System.Drawing.Size(79, 30);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1370, 698);
+            this.tabControl1.Size = new System.Drawing.Size(1827, 859);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 10200;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
@@ -442,9 +454,10 @@ namespace RIS.UIs
             this.tabPage2.Controls.Add(this.gbStudiesSearchCriteria);
             this.tabPage2.ImageIndex = 0;
             this.tabPage2.Location = new System.Drawing.Point(4, 34);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1362, 660);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(1819, 821);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Tag = "tab0";
             this.tabPage2.Text = "Work List";
@@ -456,9 +469,11 @@ namespace RIS.UIs
             this.groupBox1.Controls.Add(this.olvWorklist);
             this.groupBox1.Controls.Add(this.toolStrip_Footer);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 157);
+            this.groupBox1.Location = new System.Drawing.Point(4, 194);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1356, 500);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(1811, 623);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Worklist Items";
@@ -516,7 +531,8 @@ namespace RIS.UIs
             this.olvWorklist.IsSimpleDragSource = true;
             this.olvWorklist.IsSimpleDropSink = true;
             this.olvWorklist.LargeImageList = this.imageList2;
-            this.olvWorklist.Location = new System.Drawing.Point(3, 16);
+            this.olvWorklist.Location = new System.Drawing.Point(4, 19);
+            this.olvWorklist.Margin = new System.Windows.Forms.Padding(4);
             this.olvWorklist.Name = "olvWorklist";
             this.olvWorklist.OverlayImage.Image = global::RIS.Properties.Resources.logo_emedical;
             this.olvWorklist.OwnerDraw = true;
@@ -526,7 +542,7 @@ namespace RIS.UIs
             this.olvWorklist.ShowGroups = false;
             this.olvWorklist.ShowHeaderInAllViews = false;
             this.olvWorklist.ShowItemToolTips = true;
-            this.olvWorklist.Size = new System.Drawing.Size(1350, 456);
+            this.olvWorklist.Size = new System.Drawing.Size(1803, 572);
             this.olvWorklist.SmallImageList = this.imageList1;
             this.olvWorklist.SortGroupItemsByPrimaryColumn = false;
             this.olvWorklist.TabIndex = 16;
@@ -646,14 +662,15 @@ namespace RIS.UIs
             // toolStrip_Footer
             // 
             this.toolStrip_Footer.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip_Footer.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip_Footer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nextPageBtn,
             this.PageNumber,
             this.prevPageBtn});
-            this.toolStrip_Footer.Location = new System.Drawing.Point(3, 472);
+            this.toolStrip_Footer.Location = new System.Drawing.Point(4, 591);
             this.toolStrip_Footer.Name = "toolStrip_Footer";
             this.toolStrip_Footer.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip_Footer.Size = new System.Drawing.Size(1350, 25);
+            this.toolStrip_Footer.Size = new System.Drawing.Size(1803, 28);
             this.toolStrip_Footer.TabIndex = 15;
             this.toolStrip_Footer.Text = "toolStrip2";
             // 
@@ -665,7 +682,7 @@ namespace RIS.UIs
             this.nextPageBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nextPageBtn.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
             this.nextPageBtn.Name = "nextPageBtn";
-            this.nextPageBtn.Size = new System.Drawing.Size(23, 21);
+            this.nextPageBtn.Size = new System.Drawing.Size(29, 24);
             this.nextPageBtn.Text = "nextPageButton";
             this.nextPageBtn.ToolTipText = "Next Page";
             this.nextPageBtn.Click += new System.EventHandler(this.nextPageBtn_Click);
@@ -675,7 +692,7 @@ namespace RIS.UIs
             this.PageNumber.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.PageNumber.Name = "PageNumber";
             this.PageNumber.ReadOnly = true;
-            this.PageNumber.Size = new System.Drawing.Size(150, 25);
+            this.PageNumber.Size = new System.Drawing.Size(199, 28);
             this.PageNumber.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // prevPageBtn
@@ -686,7 +703,7 @@ namespace RIS.UIs
             this.prevPageBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.prevPageBtn.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.prevPageBtn.Name = "prevPageBtn";
-            this.prevPageBtn.Size = new System.Drawing.Size(23, 23);
+            this.prevPageBtn.Size = new System.Drawing.Size(29, 26);
             this.prevPageBtn.Text = "prevPageButton";
             this.prevPageBtn.ToolTipText = "Previous Page";
             this.prevPageBtn.Click += new System.EventHandler(this.prevPageBtn_Click);
@@ -703,10 +720,10 @@ namespace RIS.UIs
             this.btnRefresh,
             this.btnShowLog,
             this.btnCancelAssignment});
-            this.studiesToolStrip.Location = new System.Drawing.Point(3, 119);
+            this.studiesToolStrip.Location = new System.Drawing.Point(4, 147);
             this.studiesToolStrip.Name = "studiesToolStrip";
-            this.studiesToolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.studiesToolStrip.Size = new System.Drawing.Size(1356, 38);
+            this.studiesToolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.studiesToolStrip.Size = new System.Drawing.Size(1811, 47);
             this.studiesToolStrip.TabIndex = 11;
             // 
             // ShowAssignedToRadiologistPanel
@@ -714,7 +731,7 @@ namespace RIS.UIs
             this.ShowAssignedToRadiologistPanel.Image = global::RIS.Properties.Resources.Move;
             this.ShowAssignedToRadiologistPanel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ShowAssignedToRadiologistPanel.Name = "ShowAssignedToRadiologistPanel";
-            this.ShowAssignedToRadiologistPanel.Size = new System.Drawing.Size(156, 35);
+            this.ShowAssignedToRadiologistPanel.Size = new System.Drawing.Size(190, 44);
             this.ShowAssignedToRadiologistPanel.Text = "Assign To Radiologist";
             this.ShowAssignedToRadiologistPanel.Click += new System.EventHandler(this.ShowAssignedToRadiologistPanel_Click);
             // 
@@ -724,7 +741,7 @@ namespace RIS.UIs
             this.previewStudiesToolStripButton.Image = global::RIS.Properties.Resources.Preview;
             this.previewStudiesToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.previewStudiesToolStripButton.Name = "previewStudiesToolStripButton";
-            this.previewStudiesToolStripButton.Size = new System.Drawing.Size(76, 35);
+            this.previewStudiesToolStripButton.Size = new System.Drawing.Size(88, 44);
             this.previewStudiesToolStripButton.Text = "Preview";
             this.previewStudiesToolStripButton.Click += new System.EventHandler(this.previewStudiesToolStripButton_Click);
             // 
@@ -735,7 +752,7 @@ namespace RIS.UIs
             this.openWithRadiantToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openWithRadiantToolStripButton.Margin = new System.Windows.Forms.Padding(15, 1, 0, 2);
             this.openWithRadiantToolStripButton.Name = "openWithRadiantToolStripButton";
-            this.openWithRadiantToolStripButton.Size = new System.Drawing.Size(37, 35);
+            this.openWithRadiantToolStripButton.Size = new System.Drawing.Size(38, 44);
             this.openWithRadiantToolStripButton.Text = "toolStripDropDownButton1";
             this.openWithRadiantToolStripButton.Click += new System.EventHandler(this.openWithRadiantToolStripButton_Click);
             // 
@@ -746,7 +763,7 @@ namespace RIS.UIs
             this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(15, 1, 0, 2);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(28, 35);
+            this.btnRefresh.Size = new System.Drawing.Size(29, 44);
             this.btnRefresh.Text = "toolStripButton2";
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
@@ -757,7 +774,7 @@ namespace RIS.UIs
             this.btnShowLog.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnShowLog.Margin = new System.Windows.Forms.Padding(15, 1, 0, 2);
             this.btnShowLog.Name = "btnShowLog";
-            this.btnShowLog.Size = new System.Drawing.Size(28, 35);
+            this.btnShowLog.Size = new System.Drawing.Size(29, 44);
             this.btnShowLog.Text = "toolStripButton3";
             this.btnShowLog.ToolTipText = "Procedure Logs";
             this.btnShowLog.Click += new System.EventHandler(this.btnShowLog_Click);
@@ -769,7 +786,7 @@ namespace RIS.UIs
             this.btnCancelAssignment.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancelAssignment.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
             this.btnCancelAssignment.Name = "btnCancelAssignment";
-            this.btnCancelAssignment.Size = new System.Drawing.Size(137, 35);
+            this.btnCancelAssignment.Size = new System.Drawing.Size(162, 44);
             this.btnCancelAssignment.Text = "Cancel Assignment";
             this.btnCancelAssignment.Click += new System.EventHandler(this.btnCancelAssignment_Click);
             // 
@@ -789,9 +806,11 @@ namespace RIS.UIs
             this.gbStudiesSearchCriteria.Controls.Add(this.labelStudyDateTo);
             this.gbStudiesSearchCriteria.Controls.Add(this.dateTimePickerStudyTo);
             this.gbStudiesSearchCriteria.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbStudiesSearchCriteria.Location = new System.Drawing.Point(3, 3);
+            this.gbStudiesSearchCriteria.Location = new System.Drawing.Point(4, 4);
+            this.gbStudiesSearchCriteria.Margin = new System.Windows.Forms.Padding(4);
             this.gbStudiesSearchCriteria.Name = "gbStudiesSearchCriteria";
-            this.gbStudiesSearchCriteria.Size = new System.Drawing.Size(1356, 116);
+            this.gbStudiesSearchCriteria.Padding = new System.Windows.Forms.Padding(4);
+            this.gbStudiesSearchCriteria.Size = new System.Drawing.Size(1811, 143);
             this.gbStudiesSearchCriteria.TabIndex = 6;
             this.gbStudiesSearchCriteria.TabStop = false;
             this.gbStudiesSearchCriteria.Text = "Search Criteria";
@@ -799,16 +818,18 @@ namespace RIS.UIs
             // lblMacroDictionary
             // 
             this.lblMacroDictionary.AutoSize = true;
-            this.lblMacroDictionary.Location = new System.Drawing.Point(870, 26);
+            this.lblMacroDictionary.Location = new System.Drawing.Point(1160, 32);
+            this.lblMacroDictionary.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMacroDictionary.Name = "lblMacroDictionary";
-            this.lblMacroDictionary.Size = new System.Drawing.Size(41, 13);
+            this.lblMacroDictionary.Size = new System.Drawing.Size(54, 17);
             this.lblMacroDictionary.TabIndex = 27;
             this.lblMacroDictionary.Text = "label24";
             // 
             // txtRowPerpage
             // 
             this.txtRowPerpage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRowPerpage.Location = new System.Drawing.Point(873, 87);
+            this.txtRowPerpage.Location = new System.Drawing.Point(1167, 107);
+            this.txtRowPerpage.Margin = new System.Windows.Forms.Padding(4);
             this.txtRowPerpage.Maximum = new decimal(new int[] {
             128,
             0,
@@ -820,7 +841,7 @@ namespace RIS.UIs
             0,
             -2147483648});
             this.txtRowPerpage.Name = "txtRowPerpage";
-            this.txtRowPerpage.Size = new System.Drawing.Size(101, 20);
+            this.txtRowPerpage.Size = new System.Drawing.Size(135, 22);
             this.txtRowPerpage.TabIndex = 26;
             this.txtRowPerpage.Value = new decimal(new int[] {
             25,
@@ -832,16 +853,18 @@ namespace RIS.UIs
             // 
             this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(870, 71);
+            this.label21.Location = new System.Drawing.Point(1163, 87);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(76, 13);
+            this.label21.Size = new System.Drawing.Size(98, 17);
             this.label21.TabIndex = 25;
             this.label21.Text = "Row Per Page";
             // 
             // rowHeightUpDown
             // 
             this.rowHeightUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rowHeightUpDown.Location = new System.Drawing.Point(1030, 87);
+            this.rowHeightUpDown.Location = new System.Drawing.Point(1376, 107);
+            this.rowHeightUpDown.Margin = new System.Windows.Forms.Padding(4);
             this.rowHeightUpDown.Maximum = new decimal(new int[] {
             128,
             0,
@@ -853,7 +876,7 @@ namespace RIS.UIs
             0,
             -2147483648});
             this.rowHeightUpDown.Name = "rowHeightUpDown";
-            this.rowHeightUpDown.Size = new System.Drawing.Size(101, 20);
+            this.rowHeightUpDown.Size = new System.Drawing.Size(135, 22);
             this.rowHeightUpDown.TabIndex = 24;
             this.rowHeightUpDown.Value = new decimal(new int[] {
             35,
@@ -866,9 +889,10 @@ namespace RIS.UIs
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(1027, 71);
+            this.label20.Location = new System.Drawing.Point(1372, 87);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(66, 13);
+            this.label20.Size = new System.Drawing.Size(84, 17);
             this.label20.TabIndex = 23;
             this.label20.Text = "Row &Height:";
             // 
@@ -876,18 +900,21 @@ namespace RIS.UIs
             // 
             this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox10.Controls.Add(this.textBoxFilterSimple);
-            this.groupBox10.Location = new System.Drawing.Point(552, 66);
+            this.groupBox10.Location = new System.Drawing.Point(739, 81);
+            this.groupBox10.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(227, 44);
+            this.groupBox10.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox10.Size = new System.Drawing.Size(303, 54);
             this.groupBox10.TabIndex = 22;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Filter";
             // 
             // textBoxFilterSimple
             // 
-            this.textBoxFilterSimple.Location = new System.Drawing.Point(7, 20);
+            this.textBoxFilterSimple.Location = new System.Drawing.Point(9, 25);
+            this.textBoxFilterSimple.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxFilterSimple.Name = "textBoxFilterSimple";
-            this.textBoxFilterSimple.Size = new System.Drawing.Size(208, 20);
+            this.textBoxFilterSimple.Size = new System.Drawing.Size(276, 22);
             this.textBoxFilterSimple.TabIndex = 0;
             this.textBoxFilterSimple.TextChanged += new System.EventHandler(this.textBoxFilterSimple_TextChanged);
             // 
@@ -896,18 +923,21 @@ namespace RIS.UIs
             this.groupBox8.Controls.Add(this.checkBox3);
             this.groupBox8.Controls.Add(this.checkBox18);
             this.groupBox8.Controls.Add(this.chkItemCount);
-            this.groupBox8.Location = new System.Drawing.Point(81, 58);
+            this.groupBox8.Location = new System.Drawing.Point(108, 71);
+            this.groupBox8.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(235, 48);
+            this.groupBox8.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox8.Size = new System.Drawing.Size(313, 59);
             this.groupBox8.TabIndex = 17;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Settings";
             // 
             // checkBox3
             // 
-            this.checkBox3.Location = new System.Drawing.Point(6, 19);
+            this.checkBox3.Location = new System.Drawing.Point(8, 23);
+            this.checkBox3.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(62, 24);
+            this.checkBox3.Size = new System.Drawing.Size(83, 30);
             this.checkBox3.TabIndex = 1;
             this.checkBox3.Text = "&Groups";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -917,18 +947,20 @@ namespace RIS.UIs
             // 
             this.checkBox18.Checked = true;
             this.checkBox18.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox18.Location = new System.Drawing.Point(153, 20);
+            this.checkBox18.Location = new System.Drawing.Point(204, 25);
+            this.checkBox18.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox18.Name = "checkBox18";
-            this.checkBox18.Size = new System.Drawing.Size(66, 24);
+            this.checkBox18.Size = new System.Drawing.Size(88, 30);
             this.checkBox18.TabIndex = 10;
             this.checkBox18.Text = "Hot &Item";
             this.checkBox18.UseVisualStyleBackColor = true;
             // 
             // chkItemCount
             // 
-            this.chkItemCount.Location = new System.Drawing.Point(68, 20);
+            this.chkItemCount.Location = new System.Drawing.Point(91, 25);
+            this.chkItemCount.Margin = new System.Windows.Forms.Padding(4);
             this.chkItemCount.Name = "chkItemCount";
-            this.chkItemCount.Size = new System.Drawing.Size(83, 24);
+            this.chkItemCount.Size = new System.Drawing.Size(111, 30);
             this.chkItemCount.TabIndex = 2;
             this.chkItemCount.Text = "Item &Count";
             this.chkItemCount.UseVisualStyleBackColor = true;
@@ -937,9 +969,10 @@ namespace RIS.UIs
             // searchStudiesButton
             // 
             this.searchStudiesButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.searchStudiesButton.Location = new System.Drawing.Point(362, 26);
+            this.searchStudiesButton.Location = new System.Drawing.Point(483, 32);
+            this.searchStudiesButton.Margin = new System.Windows.Forms.Padding(4);
             this.searchStudiesButton.Name = "searchStudiesButton";
-            this.searchStudiesButton.Size = new System.Drawing.Size(95, 23);
+            this.searchStudiesButton.Size = new System.Drawing.Size(127, 28);
             this.searchStudiesButton.TabIndex = 21;
             this.searchStudiesButton.Text = "Search Studies";
             this.searchStudiesButton.UseVisualStyleBackColor = true;
@@ -948,35 +981,39 @@ namespace RIS.UIs
             // labelStudyDateFrom
             // 
             this.labelStudyDateFrom.Enabled = false;
-            this.labelStudyDateFrom.Location = new System.Drawing.Point(42, 31);
+            this.labelStudyDateFrom.Location = new System.Drawing.Point(56, 38);
+            this.labelStudyDateFrom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStudyDateFrom.Name = "labelStudyDateFrom";
-            this.labelStudyDateFrom.Size = new System.Drawing.Size(33, 13);
+            this.labelStudyDateFrom.Size = new System.Drawing.Size(44, 16);
             this.labelStudyDateFrom.TabIndex = 11;
             this.labelStudyDateFrom.Text = "From:";
             // 
             // dateTimePickerStudyFrom
             // 
             this.dateTimePickerStudyFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerStudyFrom.Location = new System.Drawing.Point(81, 29);
+            this.dateTimePickerStudyFrom.Location = new System.Drawing.Point(108, 36);
+            this.dateTimePickerStudyFrom.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePickerStudyFrom.Name = "dateTimePickerStudyFrom";
-            this.dateTimePickerStudyFrom.Size = new System.Drawing.Size(107, 20);
+            this.dateTimePickerStudyFrom.Size = new System.Drawing.Size(141, 22);
             this.dateTimePickerStudyFrom.TabIndex = 16;
             // 
             // labelStudyDateTo
             // 
             this.labelStudyDateTo.Enabled = false;
-            this.labelStudyDateTo.Location = new System.Drawing.Point(194, 31);
+            this.labelStudyDateTo.Location = new System.Drawing.Point(259, 38);
+            this.labelStudyDateTo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStudyDateTo.Name = "labelStudyDateTo";
-            this.labelStudyDateTo.Size = new System.Drawing.Size(23, 13);
+            this.labelStudyDateTo.Size = new System.Drawing.Size(31, 16);
             this.labelStudyDateTo.TabIndex = 13;
             this.labelStudyDateTo.Text = "To:";
             // 
             // dateTimePickerStudyTo
             // 
             this.dateTimePickerStudyTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerStudyTo.Location = new System.Drawing.Point(223, 29);
+            this.dateTimePickerStudyTo.Location = new System.Drawing.Point(297, 36);
+            this.dateTimePickerStudyTo.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePickerStudyTo.Name = "dateTimePickerStudyTo";
-            this.dateTimePickerStudyTo.Size = new System.Drawing.Size(103, 20);
+            this.dateTimePickerStudyTo.Size = new System.Drawing.Size(136, 22);
             this.dateTimePickerStudyTo.TabIndex = 17;
             // 
             // tabPage1
@@ -986,10 +1023,10 @@ namespace RIS.UIs
             this.tabPage1.Controls.Add(this.headerGroupBox1);
             this.tabPage1.ImageIndex = 1;
             this.tabPage1.Location = new System.Drawing.Point(4, 34);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(9, 4, 4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1362, 660);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(1819, 821);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Tag = "tab1";
             this.tabPage1.Text = "Report";
@@ -1001,9 +1038,11 @@ namespace RIS.UIs
             this.groupBox13.Controls.Add(this.olvCompleteWorklist);
             this.groupBox13.Controls.Add(this.toolStrip2);
             this.groupBox13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox13.Location = new System.Drawing.Point(3, 157);
+            this.groupBox13.Location = new System.Drawing.Point(4, 194);
+            this.groupBox13.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(1356, 500);
+            this.groupBox13.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox13.Size = new System.Drawing.Size(1811, 623);
             this.groupBox13.TabIndex = 13;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Worklist Items";
@@ -1059,7 +1098,8 @@ namespace RIS.UIs
             this.olvCompleteWorklist.IsSimpleDragSource = true;
             this.olvCompleteWorklist.IsSimpleDropSink = true;
             this.olvCompleteWorklist.LargeImageList = this.imageList2;
-            this.olvCompleteWorklist.Location = new System.Drawing.Point(3, 16);
+            this.olvCompleteWorklist.Location = new System.Drawing.Point(4, 19);
+            this.olvCompleteWorklist.Margin = new System.Windows.Forms.Padding(4);
             this.olvCompleteWorklist.Name = "olvCompleteWorklist";
             this.olvCompleteWorklist.OverlayImage.Image = global::RIS.Properties.Resources.logo_emedical;
             this.olvCompleteWorklist.OwnerDraw = true;
@@ -1069,7 +1109,7 @@ namespace RIS.UIs
             this.olvCompleteWorklist.ShowGroups = false;
             this.olvCompleteWorklist.ShowHeaderInAllViews = false;
             this.olvCompleteWorklist.ShowItemToolTips = true;
-            this.olvCompleteWorklist.Size = new System.Drawing.Size(1350, 456);
+            this.olvCompleteWorklist.Size = new System.Drawing.Size(1803, 572);
             this.olvCompleteWorklist.SmallImageList = this.imageList1;
             this.olvCompleteWorklist.SortGroupItemsByPrimaryColumn = false;
             this.olvCompleteWorklist.TabIndex = 0;
@@ -1172,29 +1212,31 @@ namespace RIS.UIs
             // 
             // contextMenuStrip2
             // 
+            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1});
             this.contextMenuStrip2.Name = "contextMenuStrip1";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(189, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(222, 28);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(188, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(221, 24);
             this.toolStripMenuItem1.Text = "Update WorkList Info ";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStrip2
             // 
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rptNextBtn,
             this.ReportPageNumber,
             this.rptPrevBtn});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 472);
+            this.toolStrip2.Location = new System.Drawing.Point(4, 591);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip2.Size = new System.Drawing.Size(1350, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(1803, 28);
             this.toolStrip2.TabIndex = 16;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -1206,7 +1248,7 @@ namespace RIS.UIs
             this.rptNextBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rptNextBtn.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
             this.rptNextBtn.Name = "rptNextBtn";
-            this.rptNextBtn.Size = new System.Drawing.Size(23, 21);
+            this.rptNextBtn.Size = new System.Drawing.Size(29, 24);
             this.rptNextBtn.Text = "nextPageButton";
             this.rptNextBtn.ToolTipText = "Next Page";
             this.rptNextBtn.Click += new System.EventHandler(this.rptNextBtn_Click);
@@ -1216,7 +1258,7 @@ namespace RIS.UIs
             this.ReportPageNumber.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ReportPageNumber.Name = "ReportPageNumber";
             this.ReportPageNumber.ReadOnly = true;
-            this.ReportPageNumber.Size = new System.Drawing.Size(150, 25);
+            this.ReportPageNumber.Size = new System.Drawing.Size(199, 28);
             this.ReportPageNumber.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // rptPrevBtn
@@ -1227,7 +1269,7 @@ namespace RIS.UIs
             this.rptPrevBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rptPrevBtn.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.rptPrevBtn.Name = "rptPrevBtn";
-            this.rptPrevBtn.Size = new System.Drawing.Size(23, 23);
+            this.rptPrevBtn.Size = new System.Drawing.Size(29, 26);
             this.rptPrevBtn.Text = "prevPageButton";
             this.rptPrevBtn.ToolTipText = "Previous Page";
             this.rptPrevBtn.Click += new System.EventHandler(this.rptPrevBtn_Click);
@@ -1242,10 +1284,10 @@ namespace RIS.UIs
             this.btnRefreshReportList,
             this.btnOpenWithWord,
             this.btnOpenWithPDF});
-            this.toolStrip1.Location = new System.Drawing.Point(3, 119);
+            this.toolStrip1.Location = new System.Drawing.Point(4, 147);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1356, 38);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(1811, 47);
             this.toolStrip1.TabIndex = 12;
             // 
             // OpenStudiesInQuickView
@@ -1254,7 +1296,7 @@ namespace RIS.UIs
             this.OpenStudiesInQuickView.Image = global::RIS.Properties.Resources.Preview;
             this.OpenStudiesInQuickView.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.OpenStudiesInQuickView.Name = "OpenStudiesInQuickView";
-            this.OpenStudiesInQuickView.Size = new System.Drawing.Size(76, 35);
+            this.OpenStudiesInQuickView.Size = new System.Drawing.Size(88, 44);
             this.OpenStudiesInQuickView.Text = "Preview";
             this.OpenStudiesInQuickView.Click += new System.EventHandler(this.OpenStudiesInQuickView_Click);
             // 
@@ -1265,7 +1307,7 @@ namespace RIS.UIs
             this.btnOpenInViewer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnOpenInViewer.Margin = new System.Windows.Forms.Padding(15, 1, 0, 2);
             this.btnOpenInViewer.Name = "btnOpenInViewer";
-            this.btnOpenInViewer.Size = new System.Drawing.Size(37, 35);
+            this.btnOpenInViewer.Size = new System.Drawing.Size(38, 44);
             this.btnOpenInViewer.Text = "toolStripDropDownButton1";
             this.btnOpenInViewer.ToolTipText = "Print Preview";
             this.btnOpenInViewer.Click += new System.EventHandler(this.btnOpenInViewer_Click);
@@ -1277,7 +1319,7 @@ namespace RIS.UIs
             this.btnRefreshReportList.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRefreshReportList.Margin = new System.Windows.Forms.Padding(15, 1, 0, 2);
             this.btnRefreshReportList.Name = "btnRefreshReportList";
-            this.btnRefreshReportList.Size = new System.Drawing.Size(28, 35);
+            this.btnRefreshReportList.Size = new System.Drawing.Size(29, 44);
             this.btnRefreshReportList.Text = "toolStripButton2";
             this.btnRefreshReportList.Click += new System.EventHandler(this.btnRefreshReportList_Click);
             // 
@@ -1288,7 +1330,7 @@ namespace RIS.UIs
             this.btnOpenWithWord.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnOpenWithWord.Margin = new System.Windows.Forms.Padding(15, 1, 0, 2);
             this.btnOpenWithWord.Name = "btnOpenWithWord";
-            this.btnOpenWithWord.Size = new System.Drawing.Size(28, 35);
+            this.btnOpenWithWord.Size = new System.Drawing.Size(29, 44);
             this.btnOpenWithWord.Text = "toolStripButton2";
             this.btnOpenWithWord.Click += new System.EventHandler(this.btnOpenWithWord_Click);
             // 
@@ -1299,7 +1341,7 @@ namespace RIS.UIs
             this.btnOpenWithPDF.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnOpenWithPDF.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
             this.btnOpenWithPDF.Name = "btnOpenWithPDF";
-            this.btnOpenWithPDF.Size = new System.Drawing.Size(28, 35);
+            this.btnOpenWithPDF.Size = new System.Drawing.Size(29, 44);
             this.btnOpenWithPDF.Text = "toolStripButton3";
             this.btnOpenWithPDF.Click += new System.EventHandler(this.btnOpenWithPDF_Click);
             // 
@@ -1316,9 +1358,11 @@ namespace RIS.UIs
             this.headerGroupBox1.Controls.Add(this.label26);
             this.headerGroupBox1.Controls.Add(this.dtpReportTo);
             this.headerGroupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.headerGroupBox1.Location = new System.Drawing.Point(3, 3);
+            this.headerGroupBox1.Location = new System.Drawing.Point(4, 4);
+            this.headerGroupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.headerGroupBox1.Name = "headerGroupBox1";
-            this.headerGroupBox1.Size = new System.Drawing.Size(1356, 116);
+            this.headerGroupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.headerGroupBox1.Size = new System.Drawing.Size(1811, 143);
             this.headerGroupBox1.TabIndex = 7;
             this.headerGroupBox1.TabStop = false;
             this.headerGroupBox1.Text = "Search Criteria";
@@ -1326,7 +1370,8 @@ namespace RIS.UIs
             // numericUpDown1
             // 
             this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown1.Location = new System.Drawing.Point(869, 80);
+            this.numericUpDown1.Location = new System.Drawing.Point(1162, 98);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             128,
             0,
@@ -1338,7 +1383,7 @@ namespace RIS.UIs
             0,
             -2147483648});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(101, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(135, 22);
             this.numericUpDown1.TabIndex = 24;
             this.numericUpDown1.Value = new decimal(new int[] {
             35,
@@ -1350,9 +1395,10 @@ namespace RIS.UIs
             // 
             this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(869, 65);
+            this.label23.Location = new System.Drawing.Point(1162, 80);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(66, 13);
+            this.label23.Size = new System.Drawing.Size(84, 17);
             this.label23.TabIndex = 23;
             this.label23.Text = "Row &Height:";
             // 
@@ -1360,18 +1406,21 @@ namespace RIS.UIs
             // 
             this.groupBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox11.Controls.Add(this.txtReportSearchFilter);
-            this.groupBox11.Location = new System.Drawing.Point(609, 61);
+            this.groupBox11.Location = new System.Drawing.Point(815, 75);
+            this.groupBox11.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(232, 44);
+            this.groupBox11.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox11.Size = new System.Drawing.Size(309, 54);
             this.groupBox11.TabIndex = 22;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Filter";
             // 
             // txtReportSearchFilter
             // 
-            this.txtReportSearchFilter.Location = new System.Drawing.Point(7, 20);
+            this.txtReportSearchFilter.Location = new System.Drawing.Point(9, 25);
+            this.txtReportSearchFilter.Margin = new System.Windows.Forms.Padding(4);
             this.txtReportSearchFilter.Name = "txtReportSearchFilter";
-            this.txtReportSearchFilter.Size = new System.Drawing.Size(209, 20);
+            this.txtReportSearchFilter.Size = new System.Drawing.Size(277, 22);
             this.txtReportSearchFilter.TabIndex = 0;
             this.txtReportSearchFilter.TextChanged += new System.EventHandler(this.txtReportSearchFilter_TextChanged);
             // 
@@ -1380,18 +1429,21 @@ namespace RIS.UIs
             this.groupBox12.Controls.Add(this.checkBox1);
             this.groupBox12.Controls.Add(this.checkBox2);
             this.groupBox12.Controls.Add(this.checkBox4);
-            this.groupBox12.Location = new System.Drawing.Point(998, 58);
+            this.groupBox12.Location = new System.Drawing.Point(1331, 71);
+            this.groupBox12.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(250, 48);
+            this.groupBox12.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox12.Size = new System.Drawing.Size(333, 59);
             this.groupBox12.TabIndex = 17;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Settings";
             // 
             // checkBox1
             // 
-            this.checkBox1.Location = new System.Drawing.Point(6, 19);
+            this.checkBox1.Location = new System.Drawing.Point(8, 23);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(62, 24);
+            this.checkBox1.Size = new System.Drawing.Size(83, 30);
             this.checkBox1.TabIndex = 1;
             this.checkBox1.Text = "&Groups";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -1400,18 +1452,20 @@ namespace RIS.UIs
             // 
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(153, 20);
+            this.checkBox2.Location = new System.Drawing.Point(204, 25);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(66, 24);
+            this.checkBox2.Size = new System.Drawing.Size(88, 30);
             this.checkBox2.TabIndex = 10;
             this.checkBox2.Text = "Hot &Item";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // checkBox4
             // 
-            this.checkBox4.Location = new System.Drawing.Point(68, 20);
+            this.checkBox4.Location = new System.Drawing.Point(91, 25);
+            this.checkBox4.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(83, 24);
+            this.checkBox4.Size = new System.Drawing.Size(111, 30);
             this.checkBox4.TabIndex = 2;
             this.checkBox4.Text = "Item &Count";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -1419,9 +1473,10 @@ namespace RIS.UIs
             // btnSearchReports
             // 
             this.btnSearchReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearchReports.Location = new System.Drawing.Point(355, 28);
+            this.btnSearchReports.Location = new System.Drawing.Point(473, 34);
+            this.btnSearchReports.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearchReports.Name = "btnSearchReports";
-            this.btnSearchReports.Size = new System.Drawing.Size(110, 23);
+            this.btnSearchReports.Size = new System.Drawing.Size(147, 28);
             this.btnSearchReports.TabIndex = 21;
             this.btnSearchReports.Text = "Search Studies";
             this.btnSearchReports.UseVisualStyleBackColor = true;
@@ -1430,35 +1485,39 @@ namespace RIS.UIs
             // label25
             // 
             this.label25.Enabled = false;
-            this.label25.Location = new System.Drawing.Point(14, 30);
+            this.label25.Location = new System.Drawing.Point(19, 37);
+            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(33, 13);
+            this.label25.Size = new System.Drawing.Size(44, 16);
             this.label25.TabIndex = 11;
             this.label25.Text = "From:";
             // 
             // dtpReportfrom
             // 
             this.dtpReportfrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpReportfrom.Location = new System.Drawing.Point(53, 28);
+            this.dtpReportfrom.Location = new System.Drawing.Point(71, 34);
+            this.dtpReportfrom.Margin = new System.Windows.Forms.Padding(4);
             this.dtpReportfrom.Name = "dtpReportfrom";
-            this.dtpReportfrom.Size = new System.Drawing.Size(114, 20);
+            this.dtpReportfrom.Size = new System.Drawing.Size(151, 22);
             this.dtpReportfrom.TabIndex = 16;
             // 
             // label26
             // 
             this.label26.Enabled = false;
-            this.label26.Location = new System.Drawing.Point(189, 32);
+            this.label26.Location = new System.Drawing.Point(252, 39);
+            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(23, 13);
+            this.label26.Size = new System.Drawing.Size(31, 16);
             this.label26.TabIndex = 13;
             this.label26.Text = "To:";
             // 
             // dtpReportTo
             // 
             this.dtpReportTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpReportTo.Location = new System.Drawing.Point(218, 29);
+            this.dtpReportTo.Location = new System.Drawing.Point(291, 36);
+            this.dtpReportTo.Margin = new System.Windows.Forms.Padding(4);
             this.dtpReportTo.Name = "dtpReportTo";
-            this.dtpReportTo.Size = new System.Drawing.Size(131, 20);
+            this.dtpReportTo.Size = new System.Drawing.Size(173, 22);
             this.dtpReportTo.TabIndex = 17;
             // 
             // tabPage3
@@ -1476,9 +1535,9 @@ namespace RIS.UIs
             this.tabPage3.Controls.Add(this.groupBox5);
             this.tabPage3.ImageIndex = 2;
             this.tabPage3.Location = new System.Drawing.Point(4, 34);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(9, 4, 4, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1362, 660);
+            this.tabPage3.Size = new System.Drawing.Size(1819, 821);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Tag = "tab2";
             this.tabPage3.Text = "Oder Entry";
@@ -1487,9 +1546,10 @@ namespace RIS.UIs
             // 
             // ctrlHospitalSearch
             // 
-            this.ctrlHospitalSearch.Location = new System.Drawing.Point(321, 700);
+            this.ctrlHospitalSearch.Location = new System.Drawing.Point(428, 862);
+            this.ctrlHospitalSearch.Margin = new System.Windows.Forms.Padding(5);
             this.ctrlHospitalSearch.Name = "ctrlHospitalSearch";
-            this.ctrlHospitalSearch.Size = new System.Drawing.Size(609, 501);
+            this.ctrlHospitalSearch.Size = new System.Drawing.Size(812, 617);
             this.ctrlHospitalSearch.TabIndex = 10201;
             this.ctrlHospitalSearch.Visible = false;
             this.ctrlHospitalSearch.SearchEsacaped += new RIS.SearchResultListControl<RIS.Models.Tenant>.SearchEscapeEventHandler(this.ctrlHospitalSearch_SearchEsacaped);
@@ -1498,9 +1558,10 @@ namespace RIS.UIs
             // 
             this.lvImgLists.FullRowSelect = true;
             this.lvImgLists.HideSelection = false;
-            this.lvImgLists.Location = new System.Drawing.Point(820, 170);
+            this.lvImgLists.Location = new System.Drawing.Point(1093, 209);
+            this.lvImgLists.Margin = new System.Windows.Forms.Padding(4);
             this.lvImgLists.Name = "lvImgLists";
-            this.lvImgLists.Size = new System.Drawing.Size(428, 89);
+            this.lvImgLists.Size = new System.Drawing.Size(569, 109);
             this.lvImgLists.TabIndex = 10056;
             this.lvImgLists.UseCompatibleStateImageBehavior = false;
             this.lvImgLists.View = System.Windows.Forms.View.Details;
@@ -1508,9 +1569,10 @@ namespace RIS.UIs
             // btnBrowse1
             // 
             this.btnBrowse1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowse1.Location = new System.Drawing.Point(1265, 170);
+            this.btnBrowse1.Location = new System.Drawing.Point(1687, 209);
+            this.btnBrowse1.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowse1.Name = "btnBrowse1";
-            this.btnBrowse1.Size = new System.Drawing.Size(41, 27);
+            this.btnBrowse1.Size = new System.Drawing.Size(55, 33);
             this.btnBrowse1.TabIndex = 10055;
             this.btnBrowse1.Text = "......";
             this.btnBrowse1.UseVisualStyleBackColor = true;
@@ -1521,9 +1583,10 @@ namespace RIS.UIs
             this.btnCreateOrder.BackColor = System.Drawing.Color.White;
             this.btnCreateOrder.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateOrder.ForeColor = System.Drawing.Color.Green;
-            this.btnCreateOrder.Location = new System.Drawing.Point(1067, 291);
+            this.btnCreateOrder.Location = new System.Drawing.Point(1423, 358);
+            this.btnCreateOrder.Margin = new System.Windows.Forms.Padding(4);
             this.btnCreateOrder.Name = "btnCreateOrder";
-            this.btnCreateOrder.Size = new System.Drawing.Size(181, 60);
+            this.btnCreateOrder.Size = new System.Drawing.Size(241, 74);
             this.btnCreateOrder.TabIndex = 41;
             this.btnCreateOrder.Text = "Create Order";
             this.btnCreateOrder.UseVisualStyleBackColor = false;
@@ -1549,9 +1612,11 @@ namespace RIS.UIs
             this.groupBox9.Controls.Add(this.radFemale);
             this.groupBox9.Controls.Add(this.label12);
             this.groupBox9.Controls.Add(this.label13);
-            this.groupBox9.Location = new System.Drawing.Point(40, 370);
+            this.groupBox9.Location = new System.Drawing.Point(53, 455);
+            this.groupBox9.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(526, 266);
+            this.groupBox9.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox9.Size = new System.Drawing.Size(701, 327);
             this.groupBox9.TabIndex = 40;
             this.groupBox9.TabStop = false;
             // 
@@ -1560,9 +1625,10 @@ namespace RIS.UIs
             this.dtpDOB.CalendarFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDOB.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDOB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDOB.Location = new System.Drawing.Point(98, 214);
+            this.dtpDOB.Location = new System.Drawing.Point(131, 263);
+            this.dtpDOB.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDOB.Name = "dtpDOB";
-            this.dtpDOB.Size = new System.Drawing.Size(127, 29);
+            this.dtpDOB.Size = new System.Drawing.Size(168, 34);
             this.dtpDOB.TabIndex = 10271;
             this.dtpDOB.Leave += new System.EventHandler(this.dtpDOB_Leave);
             // 
@@ -1571,9 +1637,10 @@ namespace RIS.UIs
             this.lblEntrtyDate.AutoSize = true;
             this.lblEntrtyDate.BackColor = System.Drawing.Color.Transparent;
             this.lblEntrtyDate.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEntrtyDate.Location = new System.Drawing.Point(15, 216);
+            this.lblEntrtyDate.Location = new System.Drawing.Point(20, 266);
+            this.lblEntrtyDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEntrtyDate.Name = "lblEntrtyDate";
-            this.lblEntrtyDate.Size = new System.Drawing.Size(35, 18);
+            this.lblEntrtyDate.Size = new System.Drawing.Size(45, 23);
             this.lblEntrtyDate.TabIndex = 10267;
             this.lblEntrtyDate.Text = "DOB";
             this.lblEntrtyDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1583,9 +1650,10 @@ namespace RIS.UIs
             this.lblDays.AutoSize = true;
             this.lblDays.BackColor = System.Drawing.Color.Transparent;
             this.lblDays.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDays.Location = new System.Drawing.Point(260, 161);
+            this.lblDays.Location = new System.Drawing.Point(347, 198);
+            this.lblDays.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDays.Name = "lblDays";
-            this.lblDays.Size = new System.Drawing.Size(37, 18);
+            this.lblDays.Size = new System.Drawing.Size(48, 23);
             this.lblDays.TabIndex = 10266;
             this.lblDays.Text = "Days";
             this.lblDays.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1595,9 +1663,10 @@ namespace RIS.UIs
             this.lblMonths.AutoSize = true;
             this.lblMonths.BackColor = System.Drawing.Color.Transparent;
             this.lblMonths.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMonths.Location = new System.Drawing.Point(186, 161);
+            this.lblMonths.Location = new System.Drawing.Point(248, 198);
+            this.lblMonths.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMonths.Name = "lblMonths";
-            this.lblMonths.Size = new System.Drawing.Size(55, 18);
+            this.lblMonths.Size = new System.Drawing.Size(70, 23);
             this.lblMonths.TabIndex = 10265;
             this.lblMonths.Text = "Months";
             this.lblMonths.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1607,9 +1676,10 @@ namespace RIS.UIs
             this.lblYears.AutoSize = true;
             this.lblYears.BackColor = System.Drawing.Color.Transparent;
             this.lblYears.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblYears.Location = new System.Drawing.Point(108, 161);
+            this.lblYears.Location = new System.Drawing.Point(144, 198);
+            this.lblYears.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblYears.Name = "lblYears";
-            this.lblYears.Size = new System.Drawing.Size(40, 18);
+            this.lblYears.Size = new System.Drawing.Size(51, 23);
             this.lblYears.TabIndex = 10264;
             this.lblYears.Text = "Years";
             this.lblYears.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1617,27 +1687,30 @@ namespace RIS.UIs
             // txtDays
             // 
             this.txtDays.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDays.Location = new System.Drawing.Point(250, 182);
+            this.txtDays.Location = new System.Drawing.Point(333, 224);
+            this.txtDays.Margin = new System.Windows.Forms.Padding(4);
             this.txtDays.Name = "txtDays";
-            this.txtDays.Size = new System.Drawing.Size(58, 26);
+            this.txtDays.Size = new System.Drawing.Size(76, 30);
             this.txtDays.TabIndex = 10270;
             this.txtDays.TextChanged += new System.EventHandler(this.txtDays_TextChanged);
             // 
             // txtMonths
             // 
             this.txtMonths.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMonths.Location = new System.Drawing.Point(177, 182);
+            this.txtMonths.Location = new System.Drawing.Point(236, 224);
+            this.txtMonths.Margin = new System.Windows.Forms.Padding(4);
             this.txtMonths.Name = "txtMonths";
-            this.txtMonths.Size = new System.Drawing.Size(67, 26);
+            this.txtMonths.Size = new System.Drawing.Size(88, 30);
             this.txtMonths.TabIndex = 10269;
             this.txtMonths.TextChanged += new System.EventHandler(this.txtMonths_TextChanged);
             // 
             // txtYears
             // 
             this.txtYears.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtYears.Location = new System.Drawing.Point(98, 182);
+            this.txtYears.Location = new System.Drawing.Point(131, 224);
+            this.txtYears.Margin = new System.Windows.Forms.Padding(4);
             this.txtYears.Name = "txtYears";
-            this.txtYears.Size = new System.Drawing.Size(64, 26);
+            this.txtYears.Size = new System.Drawing.Size(84, 30);
             this.txtYears.TabIndex = 10268;
             this.txtYears.TextChanged += new System.EventHandler(this.txtYears_TextChanged);
             // 
@@ -1645,9 +1718,11 @@ namespace RIS.UIs
             // 
             this.groupBox4.BackColor = System.Drawing.Color.LightGray;
             this.groupBox4.Controls.Add(this.label10);
-            this.groupBox4.Location = new System.Drawing.Point(0, 16);
+            this.groupBox4.Location = new System.Drawing.Point(0, 20);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(526, 27);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Size = new System.Drawing.Size(701, 33);
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
             // 
@@ -1655,9 +1730,10 @@ namespace RIS.UIs
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(6, 4);
+            this.label10.Location = new System.Drawing.Point(8, 5);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(121, 17);
+            this.label10.Size = new System.Drawing.Size(152, 21);
             this.label10.TabIndex = 0;
             this.label10.Text = "Patient Information";
             // 
@@ -1665,45 +1741,50 @@ namespace RIS.UIs
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(8, 60);
+            this.label8.Location = new System.Drawing.Point(11, 74);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(42, 17);
+            this.label8.Size = new System.Drawing.Size(52, 21);
             this.label8.TabIndex = 15;
             this.label8.Text = "MRN";
             // 
             // txtMRN
             // 
             this.txtMRN.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMRN.Location = new System.Drawing.Point(100, 60);
+            this.txtMRN.Location = new System.Drawing.Point(133, 74);
+            this.txtMRN.Margin = new System.Windows.Forms.Padding(4);
             this.txtMRN.Name = "txtMRN";
-            this.txtMRN.Size = new System.Drawing.Size(150, 25);
+            this.txtMRN.Size = new System.Drawing.Size(199, 29);
             this.txtMRN.TabIndex = 16;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(8, 101);
+            this.label11.Location = new System.Drawing.Point(11, 124);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(89, 17);
+            this.label11.Size = new System.Drawing.Size(108, 21);
             this.label11.TabIndex = 17;
             this.label11.Text = "Patient Name";
             // 
             // txtPatientName
             // 
             this.txtPatientName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPatientName.Location = new System.Drawing.Point(100, 98);
+            this.txtPatientName.Location = new System.Drawing.Point(133, 121);
+            this.txtPatientName.Margin = new System.Windows.Forms.Padding(4);
             this.txtPatientName.Name = "txtPatientName";
-            this.txtPatientName.Size = new System.Drawing.Size(404, 25);
+            this.txtPatientName.Size = new System.Drawing.Size(537, 29);
             this.txtPatientName.TabIndex = 18;
             this.txtPatientName.Leave += new System.EventHandler(this.txtPatientName_Leave);
             // 
             // radMale
             // 
             this.radMale.AutoSize = true;
-            this.radMale.Location = new System.Drawing.Point(100, 137);
+            this.radMale.Location = new System.Drawing.Point(133, 169);
+            this.radMale.Margin = new System.Windows.Forms.Padding(4);
             this.radMale.Name = "radMale";
-            this.radMale.Size = new System.Drawing.Size(48, 17);
+            this.radMale.Size = new System.Drawing.Size(59, 21);
             this.radMale.TabIndex = 19;
             this.radMale.TabStop = true;
             this.radMale.Text = "Male";
@@ -1712,9 +1793,10 @@ namespace RIS.UIs
             // radFemale
             // 
             this.radFemale.AutoSize = true;
-            this.radFemale.Location = new System.Drawing.Point(172, 137);
+            this.radFemale.Location = new System.Drawing.Point(229, 169);
+            this.radFemale.Margin = new System.Windows.Forms.Padding(4);
             this.radFemale.Name = "radFemale";
-            this.radFemale.Size = new System.Drawing.Size(59, 17);
+            this.radFemale.Size = new System.Drawing.Size(75, 21);
             this.radFemale.TabIndex = 20;
             this.radFemale.TabStop = true;
             this.radFemale.Text = "Female";
@@ -1724,9 +1806,10 @@ namespace RIS.UIs
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(8, 137);
+            this.label12.Location = new System.Drawing.Point(11, 169);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(51, 17);
+            this.label12.Size = new System.Drawing.Size(65, 21);
             this.label12.TabIndex = 21;
             this.label12.Text = "Gender";
             // 
@@ -1734,9 +1817,10 @@ namespace RIS.UIs
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(12, 182);
+            this.label13.Location = new System.Drawing.Point(16, 224);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(33, 17);
+            this.label13.Size = new System.Drawing.Size(40, 21);
             this.label13.TabIndex = 22;
             this.label13.Text = "Age";
             // 
@@ -1750,18 +1834,21 @@ namespace RIS.UIs
             this.groupBox7.Controls.Add(this.cmbCriticality);
             this.groupBox7.Controls.Add(this.label3);
             this.groupBox7.Controls.Add(this.groupBox2);
-            this.groupBox7.Location = new System.Drawing.Point(40, 13);
+            this.groupBox7.Location = new System.Drawing.Point(53, 16);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(526, 176);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox7.Size = new System.Drawing.Size(701, 217);
             this.groupBox7.TabIndex = 39;
             this.groupBox7.TabStop = false;
             // 
             // txtStudySource
             // 
             this.txtStudySource.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStudySource.Location = new System.Drawing.Point(98, 63);
+            this.txtStudySource.Location = new System.Drawing.Point(131, 78);
+            this.txtStudySource.Margin = new System.Windows.Forms.Padding(4);
             this.txtStudySource.Name = "txtStudySource";
-            this.txtStudySource.Size = new System.Drawing.Size(422, 25);
+            this.txtStudySource.Size = new System.Drawing.Size(561, 29);
             this.txtStudySource.TabIndex = 0;
             this.txtStudySource.TextChanged += new System.EventHandler(this.txtStudySource_TextChanged);
             // 
@@ -1769,9 +1856,10 @@ namespace RIS.UIs
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 63);
+            this.label1.Location = new System.Drawing.Point(8, 78);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 17);
+            this.label1.Size = new System.Drawing.Size(112, 21);
             this.label1.TabIndex = 1;
             this.label1.Text = "Study Source";
             // 
@@ -1779,18 +1867,20 @@ namespace RIS.UIs
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 98);
+            this.label2.Location = new System.Drawing.Point(8, 121);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 17);
+            this.label2.Size = new System.Drawing.Size(81, 21);
             this.label2.TabIndex = 2;
             this.label2.Text = "Physician";
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(98, 95);
+            this.textBox2.Location = new System.Drawing.Point(131, 117);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(307, 25);
+            this.textBox2.Size = new System.Drawing.Size(408, 29);
             this.textBox2.TabIndex = 3;
             // 
             // cmbCriticality
@@ -1800,18 +1890,20 @@ namespace RIS.UIs
             this.cmbCriticality.Items.AddRange(new object[] {
             "Normal",
             "Stat"});
-            this.cmbCriticality.Location = new System.Drawing.Point(98, 137);
+            this.cmbCriticality.Location = new System.Drawing.Point(131, 169);
+            this.cmbCriticality.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCriticality.Name = "cmbCriticality";
-            this.cmbCriticality.Size = new System.Drawing.Size(234, 25);
+            this.cmbCriticality.Size = new System.Drawing.Size(311, 29);
             this.cmbCriticality.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 140);
+            this.label3.Location = new System.Drawing.Point(8, 172);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 17);
+            this.label3.Size = new System.Drawing.Size(81, 21);
             this.label3.TabIndex = 5;
             this.label3.Text = "Criticality";
             // 
@@ -1819,9 +1911,11 @@ namespace RIS.UIs
             // 
             this.groupBox2.BackColor = System.Drawing.Color.LightGray;
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(0, 16);
+            this.groupBox2.Location = new System.Drawing.Point(0, 20);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(526, 27);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(701, 33);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
@@ -1829,9 +1923,10 @@ namespace RIS.UIs
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 4);
+            this.label4.Location = new System.Drawing.Point(8, 5);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(128, 17);
+            this.label4.Size = new System.Drawing.Size(164, 21);
             this.label4.TabIndex = 0;
             this.label4.Text = "Hospital Information";
             // 
@@ -1844,17 +1939,20 @@ namespace RIS.UIs
             this.groupBox6.Controls.Add(this.label6);
             this.groupBox6.Controls.Add(this.label7);
             this.groupBox6.Controls.Add(this.txtProcedure);
-            this.groupBox6.Location = new System.Drawing.Point(40, 195);
+            this.groupBox6.Location = new System.Drawing.Point(53, 240);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(526, 156);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox6.Size = new System.Drawing.Size(701, 192);
             this.groupBox6.TabIndex = 38;
             this.groupBox6.TabStop = false;
             // 
             // ctrlProcedureSearch
             // 
-            this.ctrlProcedureSearch.Location = new System.Drawing.Point(-44, 73);
+            this.ctrlProcedureSearch.Location = new System.Drawing.Point(-59, 90);
+            this.ctrlProcedureSearch.Margin = new System.Windows.Forms.Padding(5);
             this.ctrlProcedureSearch.Name = "ctrlProcedureSearch";
-            this.ctrlProcedureSearch.Size = new System.Drawing.Size(609, 456);
+            this.ctrlProcedureSearch.Size = new System.Drawing.Size(812, 561);
             this.ctrlProcedureSearch.TabIndex = 10202;
             this.ctrlProcedureSearch.Visible = false;
             // 
@@ -1870,18 +1968,21 @@ namespace RIS.UIs
             "MR",
             "MG",
             "ECG"});
-            this.cmbModalityInOrderEntry.Location = new System.Drawing.Point(98, 60);
+            this.cmbModalityInOrderEntry.Location = new System.Drawing.Point(131, 74);
+            this.cmbModalityInOrderEntry.Margin = new System.Windows.Forms.Padding(4);
             this.cmbModalityInOrderEntry.Name = "cmbModalityInOrderEntry";
-            this.cmbModalityInOrderEntry.Size = new System.Drawing.Size(234, 25);
+            this.cmbModalityInOrderEntry.Size = new System.Drawing.Size(311, 29);
             this.cmbModalityInOrderEntry.TabIndex = 8;
             // 
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.LightGray;
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Location = new System.Drawing.Point(0, 16);
+            this.groupBox3.Location = new System.Drawing.Point(0, 20);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(526, 27);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(701, 33);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             // 
@@ -1889,9 +1990,10 @@ namespace RIS.UIs
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 4);
+            this.label5.Location = new System.Drawing.Point(8, 5);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 17);
+            this.label5.Size = new System.Drawing.Size(109, 21);
             this.label5.TabIndex = 0;
             this.label5.Text = "Study Details";
             // 
@@ -1899,9 +2001,10 @@ namespace RIS.UIs
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(11, 63);
+            this.label6.Location = new System.Drawing.Point(15, 78);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 17);
+            this.label6.Size = new System.Drawing.Size(76, 21);
             this.label6.TabIndex = 9;
             this.label6.Text = "Modality";
             // 
@@ -1909,18 +2012,20 @@ namespace RIS.UIs
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(11, 109);
+            this.label7.Location = new System.Drawing.Point(15, 134);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 17);
+            this.label7.Size = new System.Drawing.Size(87, 21);
             this.label7.TabIndex = 10;
             this.label7.Text = "Procedure";
             // 
             // txtProcedure
             // 
             this.txtProcedure.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProcedure.Location = new System.Drawing.Point(98, 106);
+            this.txtProcedure.Location = new System.Drawing.Point(131, 130);
+            this.txtProcedure.Margin = new System.Windows.Forms.Padding(4);
             this.txtProcedure.Name = "txtProcedure";
-            this.txtProcedure.Size = new System.Drawing.Size(307, 25);
+            this.txtProcedure.Size = new System.Drawing.Size(408, 29);
             this.txtProcedure.TabIndex = 11;
             this.txtProcedure.TextChanged += new System.EventHandler(this.txtProcedure_TextChanged);
             // 
@@ -1928,28 +2033,31 @@ namespace RIS.UIs
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(712, 176);
+            this.label19.Location = new System.Drawing.Point(949, 217);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(81, 17);
+            this.label19.Size = new System.Drawing.Size(105, 21);
             this.label19.TabIndex = 37;
             this.label19.Text = "Upload Files";
             // 
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(820, 99);
+            this.textBox6.Location = new System.Drawing.Point(1093, 122);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
             this.textBox6.Multiline = true;
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(428, 37);
+            this.textBox6.Size = new System.Drawing.Size(569, 45);
             this.textBox6.TabIndex = 28;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(711, 102);
+            this.label14.Location = new System.Drawing.Point(948, 126);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(98, 17);
+            this.label14.Size = new System.Drawing.Size(125, 21);
             this.label14.TabIndex = 27;
             this.label14.Text = "Clinical History";
             // 
@@ -1957,9 +2065,11 @@ namespace RIS.UIs
             // 
             this.groupBox5.BackColor = System.Drawing.Color.LightGray;
             this.groupBox5.Controls.Add(this.label9);
-            this.groupBox5.Location = new System.Drawing.Point(705, 51);
+            this.groupBox5.Location = new System.Drawing.Point(940, 63);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(601, 27);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox5.Size = new System.Drawing.Size(801, 33);
             this.groupBox5.TabIndex = 26;
             this.groupBox5.TabStop = false;
             // 
@@ -1967,9 +2077,10 @@ namespace RIS.UIs
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(6, 4);
+            this.label9.Location = new System.Drawing.Point(8, 5);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(96, 17);
+            this.label9.Size = new System.Drawing.Size(120, 21);
             this.label9.TabIndex = 0;
             this.label9.Text = "Patient History";
             // 
@@ -1980,10 +2091,10 @@ namespace RIS.UIs
             this.tabPage4.Controls.Add(this.headerGroupBox2);
             this.tabPage4.ImageIndex = 9;
             this.tabPage4.Location = new System.Drawing.Point(4, 34);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(9, 4, 4, 4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1362, 660);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage4.Size = new System.Drawing.Size(1819, 821);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Job Done List";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1994,9 +2105,11 @@ namespace RIS.UIs
             this.groupBox16.Controls.Add(this.objectListView1);
             this.groupBox16.Controls.Add(this.toolStrip3);
             this.groupBox16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox16.Location = new System.Drawing.Point(3, 157);
+            this.groupBox16.Location = new System.Drawing.Point(4, 194);
+            this.groupBox16.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(1356, 500);
+            this.groupBox16.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox16.Size = new System.Drawing.Size(1811, 623);
             this.groupBox16.TabIndex = 15;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "Worklist Items";
@@ -2052,7 +2165,8 @@ namespace RIS.UIs
             this.objectListView1.IsSimpleDragSource = true;
             this.objectListView1.IsSimpleDropSink = true;
             this.objectListView1.LargeImageList = this.imageList2;
-            this.objectListView1.Location = new System.Drawing.Point(3, 16);
+            this.objectListView1.Location = new System.Drawing.Point(4, 19);
+            this.objectListView1.Margin = new System.Windows.Forms.Padding(4);
             this.objectListView1.Name = "objectListView1";
             this.objectListView1.OverlayImage.Image = global::RIS.Properties.Resources.logo_emedical;
             this.objectListView1.OwnerDraw = true;
@@ -2062,7 +2176,7 @@ namespace RIS.UIs
             this.objectListView1.ShowGroups = false;
             this.objectListView1.ShowHeaderInAllViews = false;
             this.objectListView1.ShowItemToolTips = true;
-            this.objectListView1.Size = new System.Drawing.Size(1350, 456);
+            this.objectListView1.Size = new System.Drawing.Size(1803, 572);
             this.objectListView1.SmallImageList = this.imageList1;
             this.objectListView1.SortGroupItemsByPrimaryColumn = false;
             this.objectListView1.TabIndex = 0;
@@ -2166,14 +2280,15 @@ namespace RIS.UIs
             // toolStrip3
             // 
             this.toolStrip3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton2,
             this.toolStripTextBox1,
             this.toolStripButton3});
-            this.toolStrip3.Location = new System.Drawing.Point(3, 472);
+            this.toolStrip3.Location = new System.Drawing.Point(4, 591);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip3.Size = new System.Drawing.Size(1350, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(1803, 28);
             this.toolStrip3.TabIndex = 16;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -2185,7 +2300,7 @@ namespace RIS.UIs
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 21);
+            this.toolStripButton2.Size = new System.Drawing.Size(29, 24);
             this.toolStripButton2.Text = "nextPageButton";
             this.toolStripButton2.ToolTipText = "Next Page";
             // 
@@ -2194,7 +2309,7 @@ namespace RIS.UIs
             this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.ReadOnly = true;
-            this.toolStripTextBox1.Size = new System.Drawing.Size(150, 25);
+            this.toolStripTextBox1.Size = new System.Drawing.Size(199, 28);
             this.toolStripTextBox1.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // toolStripButton3
@@ -2205,7 +2320,7 @@ namespace RIS.UIs
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 23);
+            this.toolStripButton3.Size = new System.Drawing.Size(29, 26);
             this.toolStripButton3.Text = "prevPageButton";
             this.toolStripButton3.ToolTipText = "Previous Page";
             // 
@@ -2218,10 +2333,10 @@ namespace RIS.UIs
             this.toolStripButton5,
             this.toolStripButton6,
             this.toolStripButton7});
-            this.toolStrip4.Location = new System.Drawing.Point(3, 119);
+            this.toolStrip4.Location = new System.Drawing.Point(4, 147);
             this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStrip4.Size = new System.Drawing.Size(1356, 38);
+            this.toolStrip4.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.toolStrip4.Size = new System.Drawing.Size(1811, 47);
             this.toolStrip4.TabIndex = 14;
             // 
             // toolStripButton4
@@ -2230,7 +2345,7 @@ namespace RIS.UIs
             this.toolStripButton4.Image = global::RIS.Properties.Resources.Preview;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(76, 35);
+            this.toolStripButton4.Size = new System.Drawing.Size(88, 44);
             this.toolStripButton4.Text = "Preview";
             // 
             // toolStripButton5
@@ -2240,7 +2355,7 @@ namespace RIS.UIs
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Margin = new System.Windows.Forms.Padding(15, 1, 0, 2);
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(28, 35);
+            this.toolStripButton5.Size = new System.Drawing.Size(29, 44);
             this.toolStripButton5.Text = "toolStripButton2";
             // 
             // toolStripButton6
@@ -2250,7 +2365,7 @@ namespace RIS.UIs
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Margin = new System.Windows.Forms.Padding(15, 1, 0, 2);
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(28, 35);
+            this.toolStripButton6.Size = new System.Drawing.Size(29, 44);
             this.toolStripButton6.Text = "toolStripButton2";
             // 
             // toolStripButton7
@@ -2260,7 +2375,7 @@ namespace RIS.UIs
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
             this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(28, 35);
+            this.toolStripButton7.Size = new System.Drawing.Size(29, 44);
             this.toolStripButton7.Text = "toolStripButton3";
             // 
             // headerGroupBox2
@@ -2275,9 +2390,11 @@ namespace RIS.UIs
             this.headerGroupBox2.Controls.Add(this.label17);
             this.headerGroupBox2.Controls.Add(this.dateTimePicker2);
             this.headerGroupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.headerGroupBox2.Location = new System.Drawing.Point(3, 3);
+            this.headerGroupBox2.Location = new System.Drawing.Point(4, 4);
+            this.headerGroupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.headerGroupBox2.Name = "headerGroupBox2";
-            this.headerGroupBox2.Size = new System.Drawing.Size(1356, 116);
+            this.headerGroupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.headerGroupBox2.Size = new System.Drawing.Size(1811, 143);
             this.headerGroupBox2.TabIndex = 8;
             this.headerGroupBox2.TabStop = false;
             this.headerGroupBox2.Text = "Search Criteria";
@@ -2285,7 +2402,8 @@ namespace RIS.UIs
             // numericUpDown2
             // 
             this.numericUpDown2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown2.Location = new System.Drawing.Point(869, 80);
+            this.numericUpDown2.Location = new System.Drawing.Point(1162, 98);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             128,
             0,
@@ -2297,7 +2415,7 @@ namespace RIS.UIs
             0,
             -2147483648});
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(101, 20);
+            this.numericUpDown2.Size = new System.Drawing.Size(135, 22);
             this.numericUpDown2.TabIndex = 24;
             this.numericUpDown2.Value = new decimal(new int[] {
             35,
@@ -2309,9 +2427,10 @@ namespace RIS.UIs
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(869, 65);
+            this.label15.Location = new System.Drawing.Point(1162, 80);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(66, 13);
+            this.label15.Size = new System.Drawing.Size(84, 17);
             this.label15.TabIndex = 23;
             this.label15.Text = "Row &Height:";
             // 
@@ -2319,26 +2438,30 @@ namespace RIS.UIs
             // 
             this.groupBox14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox14.Controls.Add(this.textBox1);
-            this.groupBox14.Location = new System.Drawing.Point(609, 61);
+            this.groupBox14.Location = new System.Drawing.Point(815, 75);
+            this.groupBox14.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(232, 44);
+            this.groupBox14.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox14.Size = new System.Drawing.Size(309, 54);
             this.groupBox14.TabIndex = 22;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "Filter";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(7, 20);
+            this.textBox1.Location = new System.Drawing.Point(9, 25);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(209, 20);
+            this.textBox1.Size = new System.Drawing.Size(277, 22);
             this.textBox1.TabIndex = 0;
             // 
             // button1
             // 
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(57, 81);
+            this.button1.Location = new System.Drawing.Point(76, 100);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 23);
+            this.button1.Size = new System.Drawing.Size(147, 28);
             this.button1.TabIndex = 21;
             this.button1.Text = "Search Studies";
             this.button1.UseVisualStyleBackColor = true;
@@ -2346,35 +2469,39 @@ namespace RIS.UIs
             // label16
             // 
             this.label16.Enabled = false;
-            this.label16.Location = new System.Drawing.Point(14, 30);
+            this.label16.Location = new System.Drawing.Point(19, 37);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(33, 13);
+            this.label16.Size = new System.Drawing.Size(44, 16);
             this.label16.TabIndex = 11;
             this.label16.Text = "From:";
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(53, 28);
+            this.dateTimePicker1.Location = new System.Drawing.Point(71, 34);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(114, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(151, 22);
             this.dateTimePicker1.TabIndex = 16;
             // 
             // label17
             // 
             this.label17.Enabled = false;
-            this.label17.Location = new System.Drawing.Point(189, 32);
+            this.label17.Location = new System.Drawing.Point(252, 39);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(23, 13);
+            this.label17.Size = new System.Drawing.Size(31, 16);
             this.label17.TabIndex = 13;
             this.label17.Text = "To:";
             // 
             // dateTimePicker2
             // 
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(218, 29);
+            this.dateTimePicker2.Location = new System.Drawing.Point(291, 36);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(131, 20);
+            this.dateTimePicker2.Size = new System.Drawing.Size(173, 22);
             this.dateTimePicker2.TabIndex = 17;
             // 
             // tabPage5
@@ -2382,10 +2509,10 @@ namespace RIS.UIs
             this.tabPage5.Controls.Add(this.groupBox15);
             this.tabPage5.ImageIndex = 10;
             this.tabPage5.Location = new System.Drawing.Point(4, 34);
-            this.tabPage5.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(9, 4, 4, 4);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1362, 660);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage5.Size = new System.Drawing.Size(1819, 821);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Change Password";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -2404,9 +2531,11 @@ namespace RIS.UIs
             this.groupBox15.Controls.Add(this.label29);
             this.groupBox15.Controls.Add(this.txtConfirmNewPassword);
             this.groupBox15.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox15.Location = new System.Drawing.Point(311, 53);
+            this.groupBox15.Location = new System.Drawing.Point(415, 65);
+            this.groupBox15.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Size = new System.Drawing.Size(619, 372);
+            this.groupBox15.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox15.Size = new System.Drawing.Size(825, 458);
             this.groupBox15.TabIndex = 26;
             this.groupBox15.TabStop = false;
             this.groupBox15.Text = "Change Password";
@@ -2414,18 +2543,20 @@ namespace RIS.UIs
             // txtOldPassword
             // 
             this.txtOldPassword.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOldPassword.Location = new System.Drawing.Point(254, 105);
+            this.txtOldPassword.Location = new System.Drawing.Point(339, 129);
+            this.txtOldPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtOldPassword.Name = "txtOldPassword";
             this.txtOldPassword.PasswordChar = '*';
-            this.txtOldPassword.Size = new System.Drawing.Size(162, 27);
+            this.txtOldPassword.Size = new System.Drawing.Size(215, 32);
             this.txtOldPassword.TabIndex = 14;
             // 
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(254, 236);
+            this.btnSave.Location = new System.Drawing.Point(339, 290);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(155, 37);
+            this.btnSave.Size = new System.Drawing.Size(207, 46);
             this.btnSave.TabIndex = 24;
             this.btnSave.Text = "Change Password";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -2434,9 +2565,10 @@ namespace RIS.UIs
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(120, 105);
+            this.label18.Location = new System.Drawing.Point(160, 129);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(98, 20);
+            this.label18.Size = new System.Drawing.Size(126, 25);
             this.label18.TabIndex = 16;
             this.label18.Text = "Old Password";
             // 
@@ -2444,18 +2576,20 @@ namespace RIS.UIs
             // 
             this.lblUserName.AutoSize = true;
             this.lblUserName.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserName.Location = new System.Drawing.Point(224, 47);
+            this.lblUserName.Location = new System.Drawing.Point(299, 58);
+            this.lblUserName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(0, 20);
+            this.lblUserName.Size = new System.Drawing.Size(0, 25);
             this.lblUserName.TabIndex = 23;
             // 
             // label24
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(120, 147);
+            this.label24.Location = new System.Drawing.Point(160, 181);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(104, 20);
+            this.label24.Size = new System.Drawing.Size(134, 25);
             this.label24.TabIndex = 17;
             this.label24.Text = "New Password";
             // 
@@ -2463,27 +2597,30 @@ namespace RIS.UIs
             // 
             this.lblUserId.AutoSize = true;
             this.lblUserId.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserId.Location = new System.Drawing.Point(-1000, 47);
+            this.lblUserId.Location = new System.Drawing.Point(-1333, 58);
+            this.lblUserId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUserId.Name = "lblUserId";
-            this.lblUserId.Size = new System.Drawing.Size(0, 20);
+            this.lblUserId.Size = new System.Drawing.Size(0, 25);
             this.lblUserId.TabIndex = 22;
             // 
             // txtNewPassword
             // 
             this.txtNewPassword.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNewPassword.Location = new System.Drawing.Point(254, 144);
+            this.txtNewPassword.Location = new System.Drawing.Point(339, 177);
+            this.txtNewPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtNewPassword.Name = "txtNewPassword";
             this.txtNewPassword.PasswordChar = '*';
-            this.txtNewPassword.Size = new System.Drawing.Size(162, 27);
+            this.txtNewPassword.Size = new System.Drawing.Size(215, 32);
             this.txtNewPassword.TabIndex = 15;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(129, 47);
+            this.label27.Location = new System.Drawing.Point(172, 58);
+            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(89, 20);
+            this.label27.Size = new System.Drawing.Size(114, 25);
             this.label27.TabIndex = 21;
             this.label27.Text = "User Name :";
             // 
@@ -2491,9 +2628,10 @@ namespace RIS.UIs
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(120, 189);
+            this.label28.Location = new System.Drawing.Point(160, 233);
+            this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(127, 20);
+            this.label28.Size = new System.Drawing.Size(164, 25);
             this.label28.TabIndex = 19;
             this.label28.Text = "Confirm Password";
             // 
@@ -2501,20 +2639,33 @@ namespace RIS.UIs
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(-1000, 47);
+            this.label29.Location = new System.Drawing.Point(-1333, 58);
+            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(62, 20);
+            this.label29.Size = new System.Drawing.Size(80, 25);
             this.label29.TabIndex = 20;
             this.label29.Text = "User Id :";
             // 
             // txtConfirmNewPassword
             // 
             this.txtConfirmNewPassword.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConfirmNewPassword.Location = new System.Drawing.Point(254, 189);
+            this.txtConfirmNewPassword.Location = new System.Drawing.Point(339, 233);
+            this.txtConfirmNewPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtConfirmNewPassword.Name = "txtConfirmNewPassword";
             this.txtConfirmNewPassword.PasswordChar = '*';
-            this.txtConfirmNewPassword.Size = new System.Drawing.Size(162, 27);
+            this.txtConfirmNewPassword.Size = new System.Drawing.Size(215, 32);
             this.txtConfirmNewPassword.TabIndex = 18;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.ImageIndex = 7;
+            this.tabPage6.Location = new System.Drawing.Point(4, 34);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(1819, 821);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "User list";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // imageList3
             // 
@@ -2547,39 +2698,42 @@ namespace RIS.UIs
             // 
             this.RadiologistPanel.BackColor = System.Drawing.Color.LightSeaGreen;
             this.RadiologistPanel.Controls.Add(this.tableLayoutPanel5);
-            this.RadiologistPanel.Location = new System.Drawing.Point(-1000, 116);
+            this.RadiologistPanel.Location = new System.Drawing.Point(-1333, 143);
+            this.RadiologistPanel.Margin = new System.Windows.Forms.Padding(4);
             this.RadiologistPanel.Name = "RadiologistPanel";
-            this.RadiologistPanel.Size = new System.Drawing.Size(479, 516);
+            this.RadiologistPanel.Size = new System.Drawing.Size(639, 635);
             this.RadiologistPanel.TabIndex = 10201;
             // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.BackColor = System.Drawing.Color.LightSkyBlue;
             this.tableLayoutPanel5.ColumnCount = 1;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 479F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 639F));
             this.tableLayoutPanel5.Controls.Add(this.btnAssingToRad, 0, 3);
             this.tableLayoutPanel5.Controls.Add(this.panel7, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.panel1, 0, 2);
             this.tableLayoutPanel5.Controls.Add(this.panel2, 0, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 4;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 413F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(479, 516);
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 508F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(639, 635);
             this.tableLayoutPanel5.TabIndex = 21;
             // 
             // btnAssingToRad
             // 
             this.btnAssingToRad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnAssingToRad.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAssingToRad.Location = new System.Drawing.Point(3, 483);
+            this.btnAssingToRad.Location = new System.Drawing.Point(4, 595);
+            this.btnAssingToRad.Margin = new System.Windows.Forms.Padding(4);
             this.btnAssingToRad.Name = "btnAssingToRad";
-            this.btnAssingToRad.Size = new System.Drawing.Size(111, 30);
+            this.btnAssingToRad.Size = new System.Drawing.Size(148, 36);
             this.btnAssingToRad.TabIndex = 24;
             this.btnAssingToRad.Text = "Assign";
             this.btnAssingToRad.UseVisualStyleBackColor = false;
@@ -2591,9 +2745,10 @@ namespace RIS.UIs
             this.panel7.Controls.Add(this.lblAddEditTitleText);
             this.panel7.Controls.Add(this.btnHideRadiologistPanel);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(3, 3);
+            this.panel7.Location = new System.Drawing.Point(4, 4);
+            this.panel7.Margin = new System.Windows.Forms.Padding(4);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(473, 31);
+            this.panel7.Size = new System.Drawing.Size(631, 38);
             this.panel7.TabIndex = 22;
             // 
             // lblAddEditTitleText
@@ -2601,9 +2756,10 @@ namespace RIS.UIs
             this.lblAddEditTitleText.AutoSize = true;
             this.lblAddEditTitleText.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAddEditTitleText.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblAddEditTitleText.Location = new System.Drawing.Point(5, 5);
+            this.lblAddEditTitleText.Location = new System.Drawing.Point(7, 6);
+            this.lblAddEditTitleText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAddEditTitleText.Name = "lblAddEditTitleText";
-            this.lblAddEditTitleText.Size = new System.Drawing.Size(103, 15);
+            this.lblAddEditTitleText.Size = new System.Drawing.Size(135, 19);
             this.lblAddEditTitleText.TabIndex = 21;
             this.lblAddEditTitleText.Text = "Select Radiologist";
             this.lblAddEditTitleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2614,9 +2770,10 @@ namespace RIS.UIs
             this.btnHideRadiologistPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnHideRadiologistPanel.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHideRadiologistPanel.ForeColor = System.Drawing.Color.Red;
-            this.btnHideRadiologistPanel.Location = new System.Drawing.Point(449, 0);
+            this.btnHideRadiologistPanel.Location = new System.Drawing.Point(599, 0);
+            this.btnHideRadiologistPanel.Margin = new System.Windows.Forms.Padding(4);
             this.btnHideRadiologistPanel.Name = "btnHideRadiologistPanel";
-            this.btnHideRadiologistPanel.Size = new System.Drawing.Size(24, 31);
+            this.btnHideRadiologistPanel.Size = new System.Drawing.Size(32, 38);
             this.btnHideRadiologistPanel.TabIndex = 20;
             this.btnHideRadiologistPanel.UseVisualStyleBackColor = true;
             this.btnHideRadiologistPanel.Click += new System.EventHandler(this.btnHideRadiologistPanel_Click_1);
@@ -2625,9 +2782,10 @@ namespace RIS.UIs
             // 
             this.panel1.Controls.Add(this.lvRadiologist);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 70);
+            this.panel1.Location = new System.Drawing.Point(4, 87);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(473, 407);
+            this.panel1.Size = new System.Drawing.Size(631, 500);
             this.panel1.TabIndex = 26;
             // 
             // lvRadiologist
@@ -2651,6 +2809,7 @@ namespace RIS.UIs
             this.lvRadiologist.IsSimpleDragSource = true;
             this.lvRadiologist.IsSimpleDropSink = true;
             this.lvRadiologist.Location = new System.Drawing.Point(0, 0);
+            this.lvRadiologist.Margin = new System.Windows.Forms.Padding(4);
             this.lvRadiologist.Name = "lvRadiologist";
             this.lvRadiologist.RowHeight = 25;
             this.lvRadiologist.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.Submenu;
@@ -2658,7 +2817,7 @@ namespace RIS.UIs
             this.lvRadiologist.ShowGroups = false;
             this.lvRadiologist.ShowHeaderInAllViews = false;
             this.lvRadiologist.ShowItemToolTips = true;
-            this.lvRadiologist.Size = new System.Drawing.Size(473, 407);
+            this.lvRadiologist.Size = new System.Drawing.Size(631, 500);
             this.lvRadiologist.SortGroupItemsByPrimaryColumn = false;
             this.lvRadiologist.TabIndex = 25;
             this.lvRadiologist.TriStateCheckBoxes = true;
@@ -2682,27 +2841,30 @@ namespace RIS.UIs
             this.panel2.Controls.Add(this.label22);
             this.panel2.Controls.Add(this.txtSearchRadiologist);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 40);
+            this.panel2.Location = new System.Drawing.Point(4, 50);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(473, 24);
+            this.panel2.Size = new System.Drawing.Size(631, 29);
             this.panel2.TabIndex = 28;
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(5, 3);
+            this.label22.Location = new System.Drawing.Point(7, 4);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(117, 17);
+            this.label22.Size = new System.Drawing.Size(151, 21);
             this.label22.TabIndex = 28;
             this.label22.Text = "Search Radiologist";
             // 
             // txtSearchRadiologist
             // 
             this.txtSearchRadiologist.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchRadiologist.Location = new System.Drawing.Point(128, 0);
+            this.txtSearchRadiologist.Location = new System.Drawing.Point(171, 0);
+            this.txtSearchRadiologist.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearchRadiologist.Name = "txtSearchRadiologist";
-            this.txtSearchRadiologist.Size = new System.Drawing.Size(345, 25);
+            this.txtSearchRadiologist.Size = new System.Drawing.Size(459, 29);
             this.txtSearchRadiologist.TabIndex = 27;
             this.txtSearchRadiologist.TextChanged += new System.EventHandler(this.txtSearchRadiologist_TextChanged);
             // 
@@ -2711,15 +2873,78 @@ namespace RIS.UIs
             this.timer1.Interval = 300000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // miniToolStrip
+            // 
+            this.miniToolStrip.AccessibleName = "New item selection";
+            this.miniToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDown;
+            this.miniToolStrip.AutoSize = false;
+            this.miniToolStrip.CanOverflow = false;
+            this.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.miniToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.miniToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.miniToolStrip.Location = new System.Drawing.Point(1494, 2);
+            this.miniToolStrip.Name = "miniToolStrip";
+            this.miniToolStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.miniToolStrip.Size = new System.Drawing.Size(1805, 28);
+            this.miniToolStrip.TabIndex = 15;
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton1.Image = global::RIS.Properties.Resources.navigate_right2;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton1.Text = "nextPageButton";
+            this.toolStripButton1.ToolTipText = "Next Page";
+            // 
+            // toolStripTextBox2
+            // 
+            this.toolStripTextBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripTextBox2.Name = "toolStripTextBox2";
+            this.toolStripTextBox2.ReadOnly = true;
+            this.toolStripTextBox2.Size = new System.Drawing.Size(199, 28);
+            this.toolStripTextBox2.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // toolStripButton8
+            // 
+            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton8.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton8.Image = global::RIS.Properties.Resources.navigate_left2;
+            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton8.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            this.toolStripButton8.Name = "toolStripButton8";
+            this.toolStripButton8.Size = new System.Drawing.Size(29, 26);
+            this.toolStripButton8.Text = "prevPageButton";
+            this.toolStripButton8.ToolTipText = "Previous Page";
+            // 
+            // toolStrip5
+            // 
+            this.toolStrip5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripTextBox2,
+            this.toolStripButton8});
+            this.toolStrip5.Location = new System.Drawing.Point(4, 783);
+            this.toolStrip5.Name = "toolStrip5";
+            this.toolStrip5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolStrip5.Size = new System.Drawing.Size(1805, 28);
+            this.toolStrip5.TabIndex = 15;
+            this.toolStrip5.Text = "toolStrip2";
+            // 
             // frmWorkListV3
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1827, 922);
             this.Controls.Add(this.RadiologistPanel);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmWorkListV3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Work List v3.0";
@@ -2798,6 +3023,8 @@ namespace RIS.UIs
             ((System.ComponentModel.ISupportInitialize)(this.lvRadiologist)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.toolStrip5.ResumeLayout(false);
+            this.toolStrip5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2806,10 +3033,6 @@ namespace RIS.UIs
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ImageList imageList2;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox18;
-        private System.Windows.Forms.CheckBox chkItemCount;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem CommandUpdateWorkListInfo;
         private System.Windows.Forms.ToolStripMenuItem CommandAttachFile;
@@ -2819,15 +3042,6 @@ namespace RIS.UIs
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        private HeaderGroupBox gbStudiesSearchCriteria;
-        private System.Windows.Forms.Button searchStudiesButton;
-        private System.Windows.Forms.Label labelStudyDateFrom;
-        private System.Windows.Forms.DateTimePicker dateTimePickerStudyFrom;
-        private System.Windows.Forms.Label labelStudyDateTo;
-        private System.Windows.Forms.DateTimePicker dateTimePickerStudyTo;
-        private System.Windows.Forms.ToolStrip studiesToolStrip;
-        private System.Windows.Forms.ToolStripDropDownButton ShowAssignedToRadiologistPanel;
-        private System.Windows.Forms.ToolStripButton previewStudiesToolStripButton;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
         public System.Windows.Forms.TabPage tabPage1;
@@ -2880,17 +3094,12 @@ namespace RIS.UIs
         private System.Windows.Forms.TextBox txtMonths;
         private System.Windows.Forms.TextBox txtYears;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
-        private System.Windows.Forms.ToolStripDropDownButton openWithRadiantToolStripButton;
         private System.Windows.Forms.Panel RadiologistPanel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Button btnAssingToRad;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label lblAddEditTitleText;
         private System.Windows.Forms.Button btnHideRadiologistPanel;
-        private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.TextBox textBoxFilterSimple;
-        private System.Windows.Forms.NumericUpDown rowHeightUpDown;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Panel panel1;
         private BrightIdeasSoftware.ObjectListView lvRadiologist;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
@@ -2932,13 +3141,11 @@ namespace RIS.UIs
         private BrightIdeasSoftware.OLVColumn olvColumn29;
         private BrightIdeasSoftware.OLVColumn olvColumn30;
         private BrightIdeasSoftware.OLVColumn olvColumn31;
-        private System.Windows.Forms.ToolStripButton btnRefresh;
         private System.Windows.Forms.ToolStripButton btnRefreshReportList;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripButton btnOpenWithWord;
-        private System.Windows.Forms.ToolStripButton btnShowLog;
         private BrightIdeasSoftware.ObjectListView olvWorklist;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
         private BrightIdeasSoftware.OLVColumn viewerImgColumn;
@@ -2959,14 +3166,10 @@ namespace RIS.UIs
         private System.Windows.Forms.ToolStripTextBox PageNumber;
         private System.Windows.Forms.ToolStripButton prevPageBtn;
         private System.Windows.Forms.ToolStripButton nextPageBtn;
-        private System.Windows.Forms.NumericUpDown txtRowPerpage;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label lblMacroDictionary;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton rptNextBtn;
         private System.Windows.Forms.ToolStripTextBox ReportPageNumber;
         private System.Windows.Forms.ToolStripButton rptPrevBtn;
-        private System.Windows.Forms.ToolStripButton btnCancelAssignment;
         private BrightIdeasSoftware.OLVColumn olvColumn5;
         private System.Windows.Forms.ToolStripButton btnOpenWithPDF;
         private System.Windows.Forms.TabPage tabPage4;
@@ -3019,5 +3222,35 @@ namespace RIS.UIs
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox txtConfirmNewPassword;
+        private System.Windows.Forms.ToolStrip studiesToolStrip;
+        private System.Windows.Forms.ToolStripDropDownButton ShowAssignedToRadiologistPanel;
+        private System.Windows.Forms.ToolStripButton previewStudiesToolStripButton;
+        private System.Windows.Forms.ToolStripDropDownButton openWithRadiantToolStripButton;
+        private System.Windows.Forms.ToolStripButton btnRefresh;
+        private System.Windows.Forms.ToolStripButton btnShowLog;
+        private System.Windows.Forms.ToolStripButton btnCancelAssignment;
+        private HeaderGroupBox gbStudiesSearchCriteria;
+        private System.Windows.Forms.Label lblMacroDictionary;
+        private System.Windows.Forms.NumericUpDown txtRowPerpage;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.NumericUpDown rowHeightUpDown;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.TextBox textBoxFilterSimple;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox18;
+        private System.Windows.Forms.CheckBox chkItemCount;
+        private System.Windows.Forms.Button searchStudiesButton;
+        private System.Windows.Forms.Label labelStudyDateFrom;
+        private System.Windows.Forms.DateTimePicker dateTimePickerStudyFrom;
+        private System.Windows.Forms.Label labelStudyDateTo;
+        private System.Windows.Forms.DateTimePicker dateTimePickerStudyTo;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.ToolStrip miniToolStrip;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox2;
+        private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.ToolStrip toolStrip5;
     }
 }
