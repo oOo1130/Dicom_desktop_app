@@ -156,7 +156,8 @@ namespace RIS.UIs
             {
                 try
                 {
-                    LoadIncompleteWorkListOnPageLoading(_user);
+                    //LoadIncompleteWorkListOnPageLoading(_user);
+                    LoadIncompleteUserListOnPageLoading(_user);
 
                 }
                 catch (Exception ex)
@@ -305,6 +306,61 @@ namespace RIS.UIs
 
         }
 
+        private async void LoadIncompleteUserListOnPageLoading(User user)
+        {
+
+            //nCurPageNumber = 0;
+            //nPageCount = 0;
+
+            string SearchFileName = "";
+
+
+            try
+            {
+
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+                    //dateTimePickerStudyFrom.Value = _serverDateTime.AddDays(-8);
+                    //dateTimePickerStudyTo.Value = _serverDateTime;
+                    SearchFileName = textFileName.Text;
+                    RadiologistPanel.Location = new Point(-1000, 20);
+
+                }));
+
+
+
+
+                //if (_user.RoleId != 3)
+                //{
+                //    List<VMReportConsultant> _radList = await new RISAPIConsumerService().GetReportConsultants();
+
+                //    LoadRadiologistSimpleLv(_radList);
+
+                //}
+
+
+                //MasterTemplate _mtemplate = await new RISAPIConsumerService().GetWordMasterTemplateContent();
+
+                //tabPage1.Tag = _mtemplate;
+
+
+
+                LoadInitialIncompleteUsers(_roleId, _tenantId, _consultantId, _status, SearchFileName);
+
+            }
+            catch (Exception ex)
+            {
+                Log.ApplicationLog.Error("Import worklist for display on LV: " + ex.GetAllMessages());
+            }
+
+
+            timer1.Start();
+
+
+
+        }
+
+
         DateTime g_datefrm;
         DateTime g_dateto;
         int g_roleId;
@@ -352,6 +408,46 @@ namespace RIS.UIs
 
 
         }
+
+        private async void LoadInitialIncompleteUsers(int _roleId, int _tenantId, int _consultantId, string _status, string SearchFilter)
+        {
+
+            onePageItemCount = Decimal.ToInt32(this.txtRowPerpage.Value);
+
+            g_datefrm = _datefrm; g_dateto = _dateto; g_roleId = _roleId; g_tenantId = _tenantId; g_consultantId = _consultantId; g_status = _status; g_SearchFilter = SearchFilter;
+
+
+
+            int nTotalItemCount = await GetIncompleteItemCount(_datefrm, _dateto, _roleId, _tenantId, _consultantId, _status, SearchFilter);
+
+            g_nTotalItemCount = nTotalItemCount;
+
+
+
+            nPageCount = (new RISPagingService()).GetPageCount(nTotalItemCount, onePageItemCount);
+
+
+            nCurPageNumber = 1;
+
+
+
+
+            LoadUserListOnePageToLvListCtrl(nCurPageNumber, onePageItemCount);
+
+
+            if (nPageCount > 0) SetEnabledPrevNextBtn(true);
+            else SetEnabledPrevNextBtn(false);
+
+            //if (_consultantId > 0)
+            //{
+            //    GetTextMacrosList(ref macroListDictionary, _consultantId);
+            //    lblMacroDictionary.Tag = macroListDictionary;
+            //}
+
+
+
+        }
+
 
         private void GetTextMacrosList(ref IDictionary<string, string> d,int _consultantId)
         {
@@ -426,6 +522,34 @@ namespace RIS.UIs
            
         }
 
+        private async void LoadUserListOnePageToLvListCtrl(int nCurPageNumber, int onePageItemCount)
+        {
+
+
+            if (nPageCount == 0)
+            {
+                this.Invoke(new MethodInvoker(delegate {
+                    this.UserListView.Items.Clear();
+                }));
+                return;
+            }
+
+
+            List<NextCloudUsers> _userlistItem = await (new RISAPIConsumerService()).GetSearchFilterIncompleteOnePageUserItems(g_SearchFilter, nCurPageNumber, onePageItemCount);
+            if (_userlistItem == null || _userlistItem.Count() == 0)
+            {
+                this.Invoke(new MethodInvoker(delegate {
+                    this.UserListView.Items.Clear();
+                }));
+                return;
+            }
+
+
+            setObjectToUserList(_userlistItem);
+
+        }
+
+
         private void setObjectToLvList(List<VMRISWorklistSubSetForLV> worklistItem)
         {
             if (worklistItem == null || worklistItem.Count() == 0) return;
@@ -474,6 +598,52 @@ namespace RIS.UIs
 
             this.olvWorklist.SetObjects(worklistItem);
         }
+
+        private void setObjectToUserList(List<NextCloudUsers> userlistItem)
+        {
+            if (userlistItem == null || userlistItem.Count() == 0) return;
+            this.PersonColumn.ImageGetter = delegate (object row) {
+
+                string sex = ((VMRISWorklistSubSetForLV)row).PatientSex.ToUpperInvariant();
+                if (sex.Equals("M"))
+                    return "groom";
+                if (sex.Equals("F"))
+                    return "woman"; // person
+
+
+                return "user";
+            };
+
+
+            this.viewerImgColumn.ImageGetter = delegate (object rowObject)
+            {
+                // this would essentially be the same as using the ImageAspectName
+                return RIS.Properties.Resources.RVIcon;
+            };
+
+
+
+            this.emslViewer.ImageGetter = delegate (object rowObject)
+            {
+                // this would essentially be the same as using the ImageAspectName
+                return RIS.Properties.Resources.EMSLViewer2;
+            };
+
+
+            //viewerImgColumn.ImageGetter += delegate (object rowObject) {
+            //    int imageListIndex = 19;
+
+            //    // some logic here
+            //    // decide which image to use based on rowObject properties or any other criteria
+
+            //    return imageListIndex;
+            //};
+
+
+
+            this.UserListView.SetObjects(userlistItem);
+        }
+
 
         private static async Task<int> GetIncompleteItemCount(DateTime _datefrm, DateTime _dateto, int _roleId, int _tenantId, int _consultantId, string _status, string SearchFilter)
         {
@@ -2288,7 +2458,7 @@ namespace RIS.UIs
 
         private void searchStudiesButton_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private  void btnSearchReports_Click(object sender, EventArgs e)
@@ -2696,6 +2866,21 @@ namespace RIS.UIs
         }
 
         private void objectListView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textFileName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GroupNameDropDownButton_Click(object sender, EventArgs e)
         {
 
         }

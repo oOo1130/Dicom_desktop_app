@@ -13,8 +13,8 @@ namespace RIS.Services
 {
     public class RISAPIConsumerService
     {
-        //private string _baseUrl = "http://localhost:5100/api/Riswork/";
-        private string _baseUrl = "http://115.69.214.82/api/Riswork/";
+        private string _baseUrl = "http://localhost:5100/api/Riswork/";
+        //private string _baseUrl = "http://115.69.214.82/api/Riswork/";
 
         private HttpClient client;
 
@@ -315,6 +315,43 @@ namespace RIS.Services
             }
 
         }
+
+        public async Task<List<NextCloudUsers>> GetSearchFilterIncompleteOnePageUserItems(string SearchFilter, int PageNo, int RecsPerPage)
+        {
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string strGetSearchFilterOnepageItemApiCall;
+
+                if (SearchFilter == "")
+                {
+                    strGetSearchFilterOnepageItemApiCall = $"PageNo={PageNo}&RecsPerPage={RecsPerPage}";
+
+                }
+                else
+                {
+                    strGetSearchFilterOnepageItemApiCall = $"SearchFilter={SearchFilter}&PageNo={PageNo}&RecsPerPage={RecsPerPage}";
+
+                }
+                //_dateFrom=2021%2F10%2F1&_dateTo=2021%2F11%2F28&roleId=1&tenantId=1&consultantId=1&_status=All&PageNo=1&RecsPerPage=1
+
+                HttpResponseMessage response = await client.GetAsync("GetSearchFilterIncompleteOnePageUserItems?" + strGetSearchFilterOnepageItemApiCall);
+                if (response.IsSuccessStatusCode)
+                {
+                    List<NextCloudUsers> OnePageItems = await response.Content.ReadAsAsync<List<NextCloudUsers>>();
+                    return OnePageItems;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+        }
+
 
         internal async Task<bool> UpdateWorklist(RISWorkList wlObj)
         {
@@ -743,5 +780,28 @@ namespace RIS.Services
                 }
             }
         }
+
+        //internal async Task<NextCloudUsers> GetUserList(int procId)
+        //{
+        //    HttpClient client;
+        //    using (client = new HttpClient())
+        //    {
+        //        client.BaseAddress = new Uri(_baseUrl);
+        //        client.DefaultRequestHeaders.Accept.Clear();
+        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        //        HttpResponseMessage response = await client.GetAsync("GetNextCloudUserList?ProcId=" + procId);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            NextCloudUsers _userlist = await response.Content.ReadAsAsync<NextCloudUsers>();
+        //            return _userlist;
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //}
+
     }
 }
