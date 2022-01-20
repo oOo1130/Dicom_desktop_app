@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace RIS.Services
 {
@@ -17,6 +18,7 @@ namespace RIS.Services
         //private string _baseUrl = "http://115.69.214.82/api/Riswork/";
 
         private HttpClient client;
+        private string _idval = "";
 
         public RISAPIConsumerService()
         {
@@ -38,6 +40,35 @@ namespace RIS.Services
                     strGetItemCountApiCall = $"_dateFrom={dateFrom}&_dateTo={dateTo}&roleId={roleId}&tenantId={tenantId}&consultantId={consultantId}&_status={_status}&SearchFilter={SearchFilter}";
 
                 HttpResponseMessage response = await client.GetAsync("GetIncompleteItemCount?" + strGetItemCountApiCall);
+                if (response.IsSuccessStatusCode)
+                {
+                    int Departmentdepartment = await response.Content.ReadAsAsync<int>();
+                    return Departmentdepartment;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+
+
+        }
+
+        public async Task<int> GetIncompleteUserCount(string GroupName, string SearchFilter)
+        {
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string strGetUSerCountApiCall;
+                if (GroupName == "")
+                    strGetUSerCountApiCall = $"SearchFilter&{SearchFilter}";
+                else
+                    strGetUSerCountApiCall = $"GroupName={GroupName}&SearchFilter&{SearchFilter}";
+
+                HttpResponseMessage response = await client.GetAsync("GetUserCount?" + strGetUSerCountApiCall);
                 if (response.IsSuccessStatusCode)
                 {
                     int Departmentdepartment = await response.Content.ReadAsAsync<int>();
@@ -316,7 +347,7 @@ namespace RIS.Services
 
         }
 
-        public async Task<List<NextCloudUsers>> GetSearchFilterIncompleteOnePageUserItems(string SearchFilter, int PageNo, int RecsPerPage)
+        public async Task<List<NextCloudUsers>> GetSearchFilterIncompleteOnePageUserItems(string GroupName, string SearchFilter, int PageNo, int RecsPerPage)
         {
             using (client = new HttpClient())
             {
@@ -326,17 +357,25 @@ namespace RIS.Services
 
                 string strGetSearchFilterOnepageItemApiCall;
 
-                if (SearchFilter == "")
-                {
-                    strGetSearchFilterOnepageItemApiCall = $"PageNo={PageNo}&RecsPerPage={RecsPerPage}";
+                //if (SearchFilter == "")
+                //{
+                //    strGetSearchFilterOnepageItemApiCall = $"PageNo={PageNo}&RecsPerPage={RecsPerPage}";
 
-                }
-                else
-                {
-                    strGetSearchFilterOnepageItemApiCall = $"SearchFilter={SearchFilter}&PageNo={PageNo}&RecsPerPage={RecsPerPage}";
+                //}
+                //else if(GroupName == "")
+                //{
+                //    strGetSearchFilterOnepageItemApiCall = $"SearchFilter={SearchFilter}&PageNo={PageNo}&RecsPerPage={RecsPerPage}";
 
-                }
+                //}
+                //else
+                //{
+                //    strGetSearchFilterOnepageItemApiCall = $"GroupName={GroupName}&SearchFilter={SearchFilter}&PageNo={PageNo}&RecsPerPage={RecsPerPage}";
+
+                //}
                 //_dateFrom=2021%2F10%2F1&_dateTo=2021%2F11%2F28&roleId=1&tenantId=1&consultantId=1&_status=All&PageNo=1&RecsPerPage=1
+
+                strGetSearchFilterOnepageItemApiCall = $"GroupName={GroupName}&SearchFilter={SearchFilter}&PageNo={PageNo}&RecsPerPage={RecsPerPage}";
+
 
                 HttpResponseMessage response = await client.GetAsync("GetSearchFilterIncompleteOnePageUserItems?" + strGetSearchFilterOnepageItemApiCall);
                 if (response.IsSuccessStatusCode)
@@ -781,27 +820,32 @@ namespace RIS.Services
             }
         }
 
-        //internal async Task<NextCloudUsers> GetUserList(int procId)
-        //{
-        //    HttpClient client;
-        //    using (client = new HttpClient())
-        //    {
-        //        client.BaseAddress = new Uri(_baseUrl);
-        //        client.DefaultRequestHeaders.Accept.Clear();
-        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        internal async Task<List<NextCloudUsers>> GetGroupName()
+        {
+            HttpClient client;
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //        HttpResponseMessage response = await client.GetAsync("GetNextCloudUserList?ProcId=" + procId);
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            NextCloudUsers _userlist = await response.Content.ReadAsAsync<NextCloudUsers>();
-        //            return _userlist;
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //}
+                HttpResponseMessage response = await client.GetAsync("GetGroupName");
+                //string jsonStr = Task.Run(async () => await response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    //JObject o = JObject.Parse(jsonStr);
+                    //_idval = (string)o.SelectToken("GroupName");
+                    //Console.WriteLine("_idval");
+                    List<NextCloudUsers> _userlist = await response.Content.ReadAsAsync<List<NextCloudUsers>>();
+
+                    return _userlist;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 
     }
 }

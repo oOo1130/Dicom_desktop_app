@@ -234,26 +234,24 @@ namespace RIS.UIs
             this.UserDataList = new System.Windows.Forms.GroupBox();
             this.UserListView = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn44 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn45 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn46 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            //this.olvColumn45 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            //this.olvColumn46 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn47 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn48 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn49 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.toolStrip6 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripTextBox3 = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
+            this.olvColumn50 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.toolStrip_User_Footer = new System.Windows.Forms.ToolStrip();
+            this.nextUserPageBtn = new System.Windows.Forms.ToolStripButton();
+            this.userPageNumber = new System.Windows.Forms.ToolStripTextBox();
+            this.prevUserPageBtn = new System.Windows.Forms.ToolStripButton();
             this.UserTools = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton14 = new System.Windows.Forms.ToolStripButton();
+            this.btnUserCancelAssign = new System.Windows.Forms.ToolStripButton();
             this.GroupNameDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.groupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchFilter = new RIS.HeaderGroupBox();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.label31 = new System.Windows.Forms.Label();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.label32 = new System.Windows.Forms.Label();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.textFileName = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.SearchUserButton = new System.Windows.Forms.Button();
             this.imageList3 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -319,11 +317,9 @@ namespace RIS.UIs
             this.tabPage6.SuspendLayout();
             this.UserDataList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserListView)).BeginInit();
-            this.toolStrip6.SuspendLayout();
+            this.toolStrip_User_Footer.SuspendLayout();
             this.UserTools.SuspendLayout();
             this.SearchFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.groupBox18.SuspendLayout();
             this.RadiologistPanel.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -2705,7 +2701,7 @@ namespace RIS.UIs
             // 
             this.UserDataList.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.UserDataList.Controls.Add(this.UserListView);
-            this.UserDataList.Controls.Add(this.toolStrip6);
+            this.UserDataList.Controls.Add(this.toolStrip_User_Footer);
             this.UserDataList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UserDataList.Location = new System.Drawing.Point(4, 194);
             this.UserDataList.Margin = new System.Windows.Forms.Padding(4);
@@ -2719,11 +2715,12 @@ namespace RIS.UIs
             // UserListView
             // 
             this.UserListView.AllColumns.Add(this.olvColumn44);
-            this.UserListView.AllColumns.Add(this.olvColumn45);
-            this.UserListView.AllColumns.Add(this.olvColumn46);
+            //this.UserListView.AllColumns.Add(this.olvColumn45);
+            //this.UserListView.AllColumns.Add(this.olvColumn46);
             this.UserListView.AllColumns.Add(this.olvColumn47);
             this.UserListView.AllColumns.Add(this.olvColumn48);
             this.UserListView.AllColumns.Add(this.olvColumn49);
+            this.UserListView.AllColumns.Add(this.olvColumn50);
             this.UserListView.AllowColumnReorder = true;
             this.UserListView.AllowDrop = true;
             this.UserListView.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(244)))), ((int)(((byte)(248)))));
@@ -2731,11 +2728,10 @@ namespace RIS.UIs
             this.UserListView.CheckBoxes = true;
             this.UserListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn44,
-            this.olvColumn45,
-            this.olvColumn46,
             this.olvColumn47,
             this.olvColumn48,
-            this.olvColumn49});
+            this.olvColumn49,
+            this.olvColumn50});
             this.UserListView.ContextMenuStrip = this.contextMenuStrip1;
             this.UserListView.Cursor = System.Windows.Forms.Cursors.Default;
             this.UserListView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2783,14 +2779,14 @@ namespace RIS.UIs
             // 
             // olvColumn45
             // 
-            this.olvColumn45.HeaderImageKey = "Viewer.png";
-            this.olvColumn45.Text = "";
-            this.olvColumn45.Width = 40;
+            //this.olvColumn45.HeaderImageKey = "Viewer.png";
+            //this.olvColumn45.Text = "";
+            //this.olvColumn45.Width = 40;
             // 
             // olvColumn46
             // 
-            this.olvColumn46.Text = "";
-            this.olvColumn46.Width = 40;
+            //this.olvColumn46.Text = "";
+            //this.olvColumn46.Width = 40;
             // 
             // olvColumn47
             // 
@@ -2807,55 +2803,62 @@ namespace RIS.UIs
             // olvColumn49
             // 
             this.olvColumn49.AspectName = "ShareStatus";
-            this.olvColumn49.HeaderImageKey = "user";
             this.olvColumn49.Text = "Share Status";
             this.olvColumn49.Width = 180;
             // 
-            // toolStrip6
+            // olvColumn50
             // 
-            this.toolStrip6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip6.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton9,
-            this.toolStripTextBox3,
-            this.toolStripButton10});
-            this.toolStrip6.Location = new System.Drawing.Point(4, 591);
-            this.toolStrip6.Name = "toolStrip6";
-            this.toolStrip6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip6.Size = new System.Drawing.Size(1803, 28);
-            this.toolStrip6.TabIndex = 15;
-            this.toolStrip6.Text = "toolStrip2";
+            this.olvColumn50.AspectName = "FileName";
+            this.olvColumn50.Text = "File Name";
+            this.olvColumn50.Width = 180;
             // 
-            // toolStripButton9
+            // toolStrip_User_Footer
             // 
-            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton9.Image = global::RIS.Properties.Resources.navigate_right2;
-            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton9.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(29, 24);
-            this.toolStripButton9.Text = "nextPageButton";
-            this.toolStripButton9.ToolTipText = "Next Page";
+            this.toolStrip_User_Footer.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip_User_Footer.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip_User_Footer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nextUserPageBtn,
+            this.userPageNumber,
+            this.prevUserPageBtn});
+            this.toolStrip_User_Footer.Location = new System.Drawing.Point(4, 591);
+            this.toolStrip_User_Footer.Name = "toolStrip_User_Footer";
+            this.toolStrip_User_Footer.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolStrip_User_Footer.Size = new System.Drawing.Size(1803, 28);
+            this.toolStrip_User_Footer.TabIndex = 15;
+            this.toolStrip_User_Footer.Text = "toolStrip2";
             // 
-            // toolStripTextBox3
+            // nextUserPageBtn
             // 
-            this.toolStripTextBox3.Name = "toolStripTextBox3";
-            this.toolStripTextBox3.ReadOnly = true;
-            this.toolStripTextBox3.Size = new System.Drawing.Size(199, 28);
-            this.toolStripTextBox3.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nextUserPageBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.nextUserPageBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nextUserPageBtn.Image = global::RIS.Properties.Resources.navigate_right2;
+            this.nextUserPageBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.nextUserPageBtn.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.nextUserPageBtn.Name = "nextUserPageBtn";
+            this.nextUserPageBtn.Size = new System.Drawing.Size(29, 24);
+            this.nextUserPageBtn.Text = "nextPageButton";
+            this.nextUserPageBtn.ToolTipText = "Next Page";
+            this.nextUserPageBtn.Click += new System.EventHandler(this.nextUserPageBtn_Click);
             // 
-            // toolStripButton10
+            // userPageNumber
             // 
-            this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton10.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton10.Image = global::RIS.Properties.Resources.navigate_left2;
-            this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton10.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.toolStripButton10.Name = "toolStripButton10";
-            this.toolStripButton10.Size = new System.Drawing.Size(29, 26);
-            this.toolStripButton10.Text = "prevPageButton";
-            this.toolStripButton10.ToolTipText = "Previous Page";
+            this.userPageNumber.Name = "userPageNumber";
+            this.userPageNumber.ReadOnly = true;
+            this.userPageNumber.Size = new System.Drawing.Size(199, 28);
+            this.userPageNumber.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // prevUserPageBtn
+            // 
+            this.prevUserPageBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.prevUserPageBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prevUserPageBtn.Image = global::RIS.Properties.Resources.navigate_left2;
+            this.prevUserPageBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.prevUserPageBtn.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            this.prevUserPageBtn.Name = "prevUserPageBtn";
+            this.prevUserPageBtn.Size = new System.Drawing.Size(29, 26);
+            this.prevUserPageBtn.Text = "prevPageButton";
+            this.prevUserPageBtn.ToolTipText = "Previous Page";
+            this.prevUserPageBtn.Click += new System.EventHandler(this.prevUserPageBtn_Click);
             // 
             // UserTools
             // 
@@ -2863,7 +2866,7 @@ namespace RIS.UIs
             this.UserTools.GripMargin = new System.Windows.Forms.Padding(2, 4, 0, 2);
             this.UserTools.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.UserTools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton14,
+            this.btnUserCancelAssign,
             this.GroupNameDropDownButton});
             this.UserTools.Location = new System.Drawing.Point(4, 147);
             this.UserTools.Name = "UserTools";
@@ -2871,19 +2874,23 @@ namespace RIS.UIs
             this.UserTools.Size = new System.Drawing.Size(1811, 47);
             this.UserTools.TabIndex = 11;
             // 
-            // toolStripButton14
+            // btnUserCancelAssign
             // 
-            this.toolStripButton14.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton14.Image = global::RIS.Properties.Resources.btnClose1;
-            this.toolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton14.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
-            this.toolStripButton14.Name = "toolStripButton14";
-            this.toolStripButton14.Size = new System.Drawing.Size(162, 44);
-            this.toolStripButton14.Text = "Cancel Assignment";
+            this.btnUserCancelAssign.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnUserCancelAssign.Image = global::RIS.Properties.Resources.btnClose1;
+            this.btnUserCancelAssign.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnUserCancelAssign.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
+            this.btnUserCancelAssign.Name = "btnUserCancelAssign";
+            this.btnUserCancelAssign.Size = new System.Drawing.Size(162, 44);
+            this.btnUserCancelAssign.Text = "Cancel Assignment";
+            this.btnUserCancelAssign.Click += new System.EventHandler(this.btnUserCancelAssign_Click);
+
             // 
             // GroupNameDropDownButton
             // 
             this.GroupNameDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.GroupNameDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.groupToolStripMenuItem});
             this.GroupNameDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("GroupNameDropDownButton.Image")));
             this.GroupNameDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.GroupNameDropDownButton.Name = "GroupNameDropDownButton";
@@ -2891,15 +2898,16 @@ namespace RIS.UIs
             this.GroupNameDropDownButton.Text = "GroupNameDropDownButton";
             this.GroupNameDropDownButton.Click += new System.EventHandler(this.GroupNameDropDownButton_Click);
             // 
+            // groupToolStripMenuItem
+            // 
+            this.groupToolStripMenuItem.Name = "groupToolStripMenuItem";
+            this.groupToolStripMenuItem.Size = new System.Drawing.Size(83, 26);
+            // 
             // SearchFilter
             // 
             this.SearchFilter.BackColor = System.Drawing.SystemColors.Menu;
-            this.SearchFilter.Controls.Add(this.numericUpDown3);
-            this.SearchFilter.Controls.Add(this.label31);
-            this.SearchFilter.Controls.Add(this.numericUpDown4);
-            this.SearchFilter.Controls.Add(this.label32);
             this.SearchFilter.Controls.Add(this.groupBox18);
-            this.SearchFilter.Controls.Add(this.button2);
+            this.SearchFilter.Controls.Add(this.SearchUserButton);
             this.SearchFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.SearchFilter.Location = new System.Drawing.Point(4, 4);
             this.SearchFilter.Margin = new System.Windows.Forms.Padding(4);
@@ -2910,109 +2918,39 @@ namespace RIS.UIs
             this.SearchFilter.TabStop = false;
             this.SearchFilter.Text = "Search Criteria";
             // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown3.Location = new System.Drawing.Point(759, 75);
-            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
-            128,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(135, 22);
-            this.numericUpDown3.TabIndex = 26;
-            this.numericUpDown3.Value = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-            // 
-            // label31
-            // 
-            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(756, 50);
-            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(98, 17);
-            this.label31.TabIndex = 25;
-            this.label31.Text = "Row Per Page";
-            // 
-            // numericUpDown4
-            // 
-            this.numericUpDown4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown4.Location = new System.Drawing.Point(964, 76);
-            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
-            128,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(135, 22);
-            this.numericUpDown4.TabIndex = 24;
-            this.numericUpDown4.Value = new decimal(new int[] {
-            35,
-            0,
-            0,
-            0});
-            // 
-            // label32
-            // 
-            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(961, 50);
-            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(84, 17);
-            this.label32.TabIndex = 23;
-            this.label32.Text = "Row &Height:";
-            // 
             // groupBox18
             // 
             this.groupBox18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox18.Controls.Add(this.textFileName);
-            this.groupBox18.Location = new System.Drawing.Point(206, 50);
+            this.groupBox18.Location = new System.Drawing.Point(332, 52);
             this.groupBox18.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox18.Size = new System.Drawing.Size(303, 54);
+            this.groupBox18.Size = new System.Drawing.Size(335, 54);
             this.groupBox18.TabIndex = 22;
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = "File Name";
             // 
             // textFileName
             // 
-            this.textFileName.Location = new System.Drawing.Point(9, 25);
+            this.textFileName.Location = new System.Drawing.Point(34, 22);
             this.textFileName.Margin = new System.Windows.Forms.Padding(4);
             this.textFileName.Name = "textFileName";
             this.textFileName.Size = new System.Drawing.Size(276, 22);
             this.textFileName.TabIndex = 0;
             this.textFileName.TextChanged += new System.EventHandler(this.textFileName_TextChanged);
             // 
-            // button2
+            // SearchUserButton
             // 
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(573, 69);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(127, 28);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "Search Studies";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.SearchUserButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.SearchUserButton.Location = new System.Drawing.Point(675, 67);
+            this.SearchUserButton.Margin = new System.Windows.Forms.Padding(4);
+            this.SearchUserButton.Name = "SearchUserButton";
+            this.SearchUserButton.Size = new System.Drawing.Size(127, 28);
+            this.SearchUserButton.TabIndex = 21;
+            this.SearchUserButton.Text = "Search Studies";
+            this.SearchUserButton.UseVisualStyleBackColor = true;
+            this.SearchUserButton.Click += new System.EventHandler(this.SearchUserButton_Click);
             // 
             // imageList3
             // 
@@ -3365,14 +3303,11 @@ namespace RIS.UIs
             this.UserDataList.ResumeLayout(false);
             this.UserDataList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserListView)).EndInit();
-            this.toolStrip6.ResumeLayout(false);
-            this.toolStrip6.PerformLayout();
+            this.toolStrip_User_Footer.ResumeLayout(false);
+            this.toolStrip_User_Footer.PerformLayout();
             this.UserTools.ResumeLayout(false);
             this.UserTools.PerformLayout();
             this.SearchFilter.ResumeLayout(false);
-            this.SearchFilter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
             this.RadiologistPanel.ResumeLayout(false);
@@ -3615,25 +3550,21 @@ namespace RIS.UIs
         private System.Windows.Forms.GroupBox UserDataList;
         private BrightIdeasSoftware.ObjectListView UserListView;
         private BrightIdeasSoftware.OLVColumn olvColumn44;
-        private BrightIdeasSoftware.OLVColumn olvColumn45;
-        private BrightIdeasSoftware.OLVColumn olvColumn46;
         private BrightIdeasSoftware.OLVColumn olvColumn47;
         private BrightIdeasSoftware.OLVColumn olvColumn48;
         private BrightIdeasSoftware.OLVColumn olvColumn49;
-        private System.Windows.Forms.ToolStrip toolStrip6;
-        private System.Windows.Forms.ToolStripButton toolStripButton9;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox3;
-        private System.Windows.Forms.ToolStripButton toolStripButton10;
+        private BrightIdeasSoftware.OLVColumn olvColumn50;
+        private System.Windows.Forms.ToolStrip toolStrip_User_Footer;
+        private System.Windows.Forms.ToolStripButton nextUserPageBtn;
+        private System.Windows.Forms.ToolStripTextBox userPageNumber;
+        private System.Windows.Forms.ToolStripButton prevUserPageBtn;
         private System.Windows.Forms.ToolStrip UserTools;
-        private System.Windows.Forms.ToolStripButton toolStripButton14;
+        private System.Windows.Forms.ToolStripButton btnUserCancelAssign;
         private HeaderGroupBox SearchFilter;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.Label label32;
         private System.Windows.Forms.GroupBox groupBox18;
         private System.Windows.Forms.TextBox textFileName;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button SearchUserButton;
         private System.Windows.Forms.ToolStripDropDownButton GroupNameDropDownButton;
+        private System.Windows.Forms.ToolStripMenuItem groupToolStripMenuItem;
     }
 }
