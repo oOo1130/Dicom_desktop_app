@@ -244,6 +244,7 @@
     <Compile Include="Models\VWModels\VMTenantRadiologistMapping.cs" />
     <Compile Include="Models\VWModels\VMUpdateTemplate.cs" />
     <Compile Include="Models\VWModels\VMUserDetail.cs" />
+    <Compile Include="Models\VWModels\VWNextCloudUser.cs" />
     <Compile Include="Models\WorkLIstStatusEnum.cs" />
     <Compile Include="Repositories\DicomRepository.cs" />
     <Compile Include="Repositories\ReportRepository.cs" />

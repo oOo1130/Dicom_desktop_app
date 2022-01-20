@@ -347,7 +347,7 @@ namespace RIS.Services
 
         }
 
-        public async Task<List<NextCloudUsers>> GetSearchFilterIncompleteOnePageUserItems(string GroupName, string SearchFilter, int PageNo, int RecsPerPage)
+        public async Task<List<VWNextCloudUser>> GetSearchFilterIncompleteOnePageUserItems(string GroupName, string SearchFilter, int PageNo, int RecsPerPage)
         {
             using (client = new HttpClient())
             {
@@ -380,7 +380,7 @@ namespace RIS.Services
                 HttpResponseMessage response = await client.GetAsync("GetSearchFilterIncompleteOnePageUserItems?" + strGetSearchFilterOnepageItemApiCall);
                 if (response.IsSuccessStatusCode)
                 {
-                    List<NextCloudUsers> OnePageItems = await response.Content.ReadAsAsync<List<NextCloudUsers>>();
+                    List<VWNextCloudUser> OnePageItems = await response.Content.ReadAsAsync<List<VWNextCloudUser>>();
                     return OnePageItems;
                 }
                 else

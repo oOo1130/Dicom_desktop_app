@@ -2796,19 +2796,19 @@ namespace RIS.UIs
             // 
             // olvColumn48
             // 
-            this.olvColumn48.AspectName = "UserName";
+            this.olvColumn48.AspectName = "RadNextCloudId";
             this.olvColumn48.Text = "User Name";
             this.olvColumn48.Width = 100;
             // 
             // olvColumn49
             // 
-            this.olvColumn49.AspectName = "ShareStatus";
+            this.olvColumn49.AspectName = "Share_id";
             this.olvColumn49.Text = "Share Status";
             this.olvColumn49.Width = 180;
             // 
             // olvColumn50
             // 
-            this.olvColumn50.AspectName = "FileName";
+            this.olvColumn50.AspectName = "StudyInstanceUid";
             this.olvColumn50.Text = "File Name";
             this.olvColumn50.Width = 180;
             // 
@@ -2895,7 +2895,7 @@ namespace RIS.UIs
             this.GroupNameDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.GroupNameDropDownButton.Name = "GroupNameDropDownButton";
             this.GroupNameDropDownButton.Size = new System.Drawing.Size(38, 44);
-            this.GroupNameDropDownButton.Text = "GroupNameDropDownButton";
+            this.GroupNameDropDownButton.Text = "All";
             this.GroupNameDropDownButton.Click += new System.EventHandler(this.GroupNameDropDownButton_Click);
             // 
             // groupToolStripMenuItem

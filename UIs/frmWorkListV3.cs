@@ -52,7 +52,7 @@ namespace RIS.UIs
         private bool _isReportWindowAllowed = false;
         User _user;
         VMReportObj rptObjUsedForOldReport;
-        List<NextCloudUsers> _userlistItem;
+        List<VWNextCloudUser> _userlistItem;
 
         DateTime _datefrm = Convert.ToDateTime("2021/10/01");
         DateTime _dateto;
@@ -160,7 +160,7 @@ namespace RIS.UIs
             {
                 try
                 {
-                    //LoadIncompleteWorkListOnPageLoading(_user);
+                    LoadIncompleteWorkListOnPageLoading(_user);
                     
                     LoadIncompleteUserListOnPageLoading(_user);
 
@@ -209,7 +209,7 @@ namespace RIS.UIs
 
             nCurPageNumber = 0;
             nPageCount = 0;
-            // this.PageNumber.Text = "";
+            this.PageNumber.Text = "";
 
 
             string SearchFilter = "";
@@ -329,7 +329,6 @@ namespace RIS.UIs
 
                 }));
 
-                
                 LoadInitialIncompleteUsers(_roleId, _tenantId, _consultantId, _status, fileName);
                 
             }
@@ -338,13 +337,8 @@ namespace RIS.UIs
                 Log.ApplicationLog.Error("Import Usernlist for display on LV: " + ex.GetAllMessages());
             }
 
-
             timer1.Start();
-
-
-
         }
-
 
         DateTime g_datefrm;
         DateTime g_dateto;
@@ -363,25 +357,17 @@ namespace RIS.UIs
 
             g_datefrm = _datefrm; g_dateto = _dateto; g_roleId = _roleId; g_tenantId = _tenantId; g_consultantId = _consultantId; g_status = _status; g_SearchFilter = SearchFilter;
 
-            
-
             int nTotalItemCount = await GetIncompleteItemCount(_datefrm, _dateto, _roleId, _tenantId, _consultantId, _status, SearchFilter);
 
             g_nTotalItemCount = nTotalItemCount;
-
-           
 
             nPageCount = (new RISPagingService()).GetPageCount(nTotalItemCount, onePageItemCount);
 
 
             nCurPageNumber = 1;
 
-           
-
-
             LoadWorkListOnePageToLvListCtrl(nCurPageNumber, onePageItemCount);
-
-
+            SetPageNumberValue();
             if (nPageCount > 0) SetEnabledPrevNextBtn(true);
             else SetEnabledPrevNextBtn(false);
 
@@ -411,6 +397,8 @@ namespace RIS.UIs
             uCurPageNumber = 1;
 
             LoadUserListOnePageToLvListCtrl(uCurPageNumber, onePageItemCount);
+
+            SetUserPageNumberValue();
 
             if (uPageCount > 0) SetEnabledUserPrevNextBtn(true);
             else SetEnabledUserPrevNextBtn(false);
@@ -508,7 +496,6 @@ namespace RIS.UIs
                 return;
             }
             
-           
             setObjectToLvList(_wListItem);
            
         }
@@ -524,7 +511,6 @@ namespace RIS.UIs
                 }));
                 return;
             }
-
 
             _userlistItem = await (new RISAPIConsumerService()).GetSearchFilterIncompleteOnePageUserItems(g_groupname ,g_SearchFilter, uCurPageNumber, onePageItemCount);
             if (_userlistItem == null || _userlistItem.Count() == 0)
@@ -542,9 +528,6 @@ namespace RIS.UIs
         private void setObjectToLvList(List<VMRISWorklistSubSetForLV> worklistItem)
         {
             if (worklistItem == null || worklistItem.Count() == 0) return;
-
-
-
           
             this.PersonColumn.ImageGetter = delegate (object row) {
 
@@ -553,7 +536,6 @@ namespace RIS.UIs
                     return "groom";
                 if (sex.Equals("F"))
                     return "woman"; // person
-
 
                 return "user";
             };
@@ -564,15 +546,12 @@ namespace RIS.UIs
                 // this would essentially be the same as using the ImageAspectName
                 return RIS.Properties.Resources.RVIcon;
             };
-
-
            
             this.emslViewer.ImageGetter = delegate (object rowObject)
             {
                 // this would essentially be the same as using the ImageAspectName
                 return RIS.Properties.Resources.EMSLViewer2;
             };
-
 
             //viewerImgColumn.ImageGetter += delegate (object rowObject) {
             //    int imageListIndex = 19;
@@ -583,12 +562,10 @@ namespace RIS.UIs
             //    return imageListIndex;
             //};
 
-
-
             this.olvWorklist.SetObjects(worklistItem);
         }
 
-        private void setObjectToUserList(List<NextCloudUsers> userlistItem)
+        private void setObjectToUserList(List<VWNextCloudUser> userlistItem)
         {
             if (userlistItem == null || userlistItem.Count() == 0) return;
             this.PersonColumn.ImageGetter = delegate (object row) {
@@ -2160,7 +2137,7 @@ namespace RIS.UIs
         {
             PageNumber.Text = $"{nCurPageNumber}/{nPageCount}  (Count={g_nTotalItemCount})";
         }
-            private void SetUserPageNumberValue()
+        private void SetUserPageNumberValue()
         {
             userPageNumber.Text = $"{uCurPageNumber}/{uPageCount}  (Count={g_nTotalItemCount})";
         }
@@ -2768,41 +2745,33 @@ namespace RIS.UIs
         {
             if (UserListView.Items.Count == 0) return;
 
-            List<SelectedProcedureForAssign> _assignProcList = new List<SelectedProcedureForAssign>();
+            List<SelectedProcedureForAssign> _assignUserList = new List<SelectedProcedureForAssign>();
             foreach (ListViewItem eachItem in UserListView.CheckedItems)
             {
-                VMRISWorklistSubSetForLV vmWLObj = eachItem.Tag as VMRISWorklistSubSetForLV;
+                VWNextCloudUser vmWLObj = eachItem.Tag as VWNextCloudUser;
                 SelectedProcedureForAssign Obj = new SelectedProcedureForAssign();
-                if (vmWLObj != null && (vmWLObj.Status == 4 || vmWLObj.Status == 3))
+                if (vmWLObj != null && vmWLObj.Share_id != null)
                 {
                     Obj.ProcId = vmWLObj.ProcId;
                     Obj.ConsultantID = 0;
                     Obj.Status = 3;
                     Obj.RadNextCloudID = null;
-                    _assignProcList.Add(Obj);
+                    _assignUserList.Add(Obj);
                 }
                 else
                 {
 
                 }
             }
-            if (_assignProcList.Count > 0)
+            if (_assignUserList.Count > 0)
             {
-                var result = Task.Run(async () => await new RISAPIConsumerService().CancelAssignedToRadiologistAPICall(_assignProcList)).GetAwaiter().GetResult();
+                var result = Task.Run(async () => await new RISAPIConsumerService().CancelAssignedToRadiologistAPICall(_assignUserList)).GetAwaiter().GetResult();
 
                 if (result)
                 {
-
                     SetRadiologistPanel(false);
 
-                    //txtSearchRadiologist.Text = "";
-
                     MessageBox.Show("Cancel Assignment", "RIS", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    //foreach (ListViewItem item in lvRadiologist.Items)
-                    //{
-                    //    item.Checked = false;
-                    //}
 
                     foreach (ListViewItem item in UserListView.Items)
                     {
@@ -2811,15 +2780,9 @@ namespace RIS.UIs
 
                     if (_user != null)
                     {
-                        //_serverDateTime = Task.Run(async () => await new RISAPIConsumerService().GetServerDateAndTimeAPICallFuncAsync()).GetAwaiter().GetResult();
 
-
-                        _datefrm = dateTimePickerStudyFrom.Value;
-                        _dateto = dateTimePickerStudyTo.Value;
-
-
-                        string SearchFilter = this.textBoxFilterSimple.Text;
-                        LoadInitialIncompleteStudies(_datefrm, _dateto, _roleId, _tenantId, _consultantId, _status, SearchFilter);
+                        string SearchFilter = this.textFileName.Text;
+                        LoadInitialIncompleteUsers( _roleId, _tenantId, _consultantId, _status, SearchFilter);
                     }
 
                 }
@@ -2991,6 +2954,7 @@ namespace RIS.UIs
         }
         private void GroupNameDropDownButton_Click(object sender, EventArgs e)
         {
+            g_groupname = "";
             Console.WriteLine("GroupNameDropDownButton");
         }
 
