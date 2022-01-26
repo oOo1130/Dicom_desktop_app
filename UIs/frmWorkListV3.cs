@@ -130,7 +130,6 @@ namespace RIS.UIs
 
         private async void frmWorkListV3_Load(object sender, EventArgs e)
         {
-
              macroListDictionary = new Dictionary<string, string>();
 
             _user = await new RISAPIConsumerService().GetUserById(MainForm.LoggedinUser.UserId);
@@ -144,16 +143,11 @@ namespace RIS.UIs
             ctrlHospitalSearch.Location = new Point(txtStudySource.Location.X, txtStudySource.Location.Y);
             ctrlHospitalSearch.ItemSelected += ctrlHospitalSearch_ItemSelected;
 
-
-
             ctrlProcedureSearch.Location = new Point(txtProcedure.Location.X, txtProcedure.Location.Y);
             ctrlProcedureSearch.ItemSelected += CtrlProcedureSearch_ItemSelected; ;
 
-
-
             btnCreateOrder.GotFocus += btnCreateOrder_GotFocus;
             btnCreateOrder.LostFocus += btnCreateOrder_LostFocus;
-
 
             Exception exception = null;
             using (var form = new WaitingForm(async () =>
@@ -161,9 +155,7 @@ namespace RIS.UIs
                 try
                 {
                     LoadIncompleteWorkListOnPageLoading(_user);
-                    
-                    LoadIncompleteUserListOnPageLoading(_user);
-
+                    LoadUserListOnPageLoading(_user);
                 }
                 catch (Exception ex)
                 {
@@ -178,6 +170,8 @@ namespace RIS.UIs
             {
                 form.ShowDialog();
                 InitialDropDownNextCloudUserPage();
+                Task.Run(async () => new RISAPIConsumerService().SetGroupName()).GetAwaiter().GetResult();
+
                 if (exception != null)
                 {
                     MessageBox.Show(this, exception.Message,
@@ -224,7 +218,7 @@ namespace RIS.UIs
 
                 this.Invoke(new MethodInvoker(delegate ()
                 {
-                    dateTimePickerStudyFrom.Value = _serverDateTime.AddDays(-8);
+                    dateTimePickerStudyFrom.Value = _serverDateTime.AddDays(-18);
                     dateTimePickerStudyTo.Value = _serverDateTime;
                     SearchFilter=textBoxFilterSimple.Text;
                     RadiologistPanel.Location = new Point(-1000, 20);
@@ -311,15 +305,13 @@ namespace RIS.UIs
 
         }
 
-        private void LoadIncompleteUserListOnPageLoading(User user)
+        private void LoadUserListOnPageLoading(User user)
         {
-
             uCurPageNumber = 0;
             uPageCount = 0;
 
             try
             {
-
                 this.Invoke(new MethodInvoker(delegate ()
                 {
                     //dateTimePickerStudyFrom.Value = _serverDateTime.AddDays(-8);
@@ -329,7 +321,7 @@ namespace RIS.UIs
 
                 }));
 
-                LoadInitialIncompleteUsers(_roleId, _tenantId, _consultantId, _status, fileName);
+                LoadInitialUsers(_roleId, _tenantId, _consultantId, _status, fileName);
                 
             }
             catch (Exception ex)
@@ -348,6 +340,7 @@ namespace RIS.UIs
         string g_status;
         string g_SearchFilter;
         int g_nTotalItemCount;
+        int g_uTotalItemCount;
         string g_groupname;
 
         private async void LoadInitialIncompleteStudies(DateTime _datefrm, DateTime _dateto, int _roleId, int _tenantId, int _consultantId, string _status, string SearchFilter)
@@ -363,11 +356,10 @@ namespace RIS.UIs
 
             nPageCount = (new RISPagingService()).GetPageCount(nTotalItemCount, onePageItemCount);
 
-
             nCurPageNumber = 1;
 
             LoadWorkListOnePageToLvListCtrl(nCurPageNumber, onePageItemCount);
-            SetPageNumberValue();
+
             if (nPageCount > 0) SetEnabledPrevNextBtn(true);
             else SetEnabledPrevNextBtn(false);
 
@@ -377,11 +369,9 @@ namespace RIS.UIs
             //    lblMacroDictionary.Tag = macroListDictionary;
             //}
 
-
-
         }
 
-        private async void LoadInitialIncompleteUsers(int _roleId, int _tenantId, int _consultantId, string _status, string SearchFilter)
+        private async void LoadInitialUsers(int _roleId, int _tenantId, int _consultantId, string _status, string SearchFilter)
         {
 
             onePageItemCount = Decimal.ToInt32(this.txtRowPerpage.Value);
@@ -390,7 +380,7 @@ namespace RIS.UIs
 
             int uTotalItemCount = await GetUserListCount(g_groupname, SearchFilter);
 
-            g_nTotalItemCount = uTotalItemCount;
+            g_uTotalItemCount = uTotalItemCount;
 
             uPageCount = (new RISPagingService()).GetPageCount(uTotalItemCount, onePageItemCount);
 
@@ -398,19 +388,13 @@ namespace RIS.UIs
 
             LoadUserListOnePageToLvListCtrl(uCurPageNumber, onePageItemCount);
 
-            SetUserPageNumberValue();
-
             if (uPageCount > 0) SetEnabledUserPrevNextBtn(true);
-            else SetEnabledUserPrevNextBtn(false);
 
             //if (_consultantId > 0)
             //{
             //    GetTextMacrosList(ref macroListDictionary, _consultantId);
             //    lblMacroDictionary.Tag = macroListDictionary;
             //}
-
-
-
         }
 
 
@@ -451,7 +435,7 @@ namespace RIS.UIs
             if (InvokeRequired)
             {
                 this.Invoke(new MethodInvoker(delegate {
-                    PageNumber.Text = $"{uCurPageNumber}/{uPageCount}  (Count={g_nTotalItemCount})";
+                    PageNumber.Text = $"{uCurPageNumber}/{uPageCount}  (Count={g_uTotalItemCount})";
                     prevUserPageBtn.Enabled = state;
                     nextUserPageBtn.Enabled = state;
                 }));
@@ -503,7 +487,6 @@ namespace RIS.UIs
         private async void LoadUserListOnePageToLvListCtrl(int uCurPageNumber, int onePageItemCount)
         {
 
-
             if (uPageCount == 0)
             {
                 this.Invoke(new MethodInvoker(delegate {
@@ -512,7 +495,7 @@ namespace RIS.UIs
                 return;
             }
 
-            _userlistItem = await (new RISAPIConsumerService()).GetSearchFilterIncompleteOnePageUserItems(g_groupname ,g_SearchFilter, uCurPageNumber, onePageItemCount);
+            _userlistItem = await (new RISAPIConsumerService()).GetSearchFilterOnePageUserItems(g_groupname ,g_SearchFilter, uCurPageNumber, onePageItemCount);
             if (_userlistItem == null || _userlistItem.Count() == 0)
             {
                 this.Invoke(new MethodInvoker(delegate {
@@ -575,7 +558,6 @@ namespace RIS.UIs
                     return "groom";
                 if (sex.Equals("F"))
                     return "woman"; // person
-
 
                 return "user";
             };
@@ -2139,7 +2121,7 @@ namespace RIS.UIs
         }
         private void SetUserPageNumberValue()
         {
-            userPageNumber.Text = $"{uCurPageNumber}/{uPageCount}  (Count={g_nTotalItemCount})";
+            userPageNumber.Text = $"{uCurPageNumber}/{uPageCount}  (Count={g_uTotalItemCount})";
         }
 
 
@@ -2433,7 +2415,7 @@ namespace RIS.UIs
 
         private void searchStudiesButton_Click(object sender, EventArgs e)
         {
-            _userlistItem = Task.Run(async () => await new RISAPIConsumerService().GetSearchFilterIncompleteOnePageUserItems(g_groupname, g_SearchFilter, nCurPageNumber, onePageItemCount)).GetAwaiter().GetResult();
+            _userlistItem = Task.Run(async () => await new RISAPIConsumerService().GetSearchFilterOnePageUserItems(g_groupname, g_SearchFilter, nCurPageNumber, onePageItemCount)).GetAwaiter().GetResult();
             setObjectToUserList(_userlistItem);
 
         }
@@ -2782,7 +2764,7 @@ namespace RIS.UIs
                     {
 
                         string SearchFilter = this.textFileName.Text;
-                        LoadInitialIncompleteUsers( _roleId, _tenantId, _consultantId, _status, SearchFilter);
+                        LoadInitialUsers( _roleId, _tenantId, _consultantId, _status, SearchFilter);
                     }
 
                 }
@@ -2915,7 +2897,7 @@ namespace RIS.UIs
         private void SearchUserButton_Click(object sender, EventArgs e)
         {
             string fileName = textFileName.Text;
-            LoadInitialIncompleteUsers(_roleId, _tenantId, _consultantId, _status, fileName);
+            LoadInitialUsers(_roleId, _tenantId, _consultantId, _status, fileName);
         }
 
         private void textFileName_TextChanged(object sender, EventArgs e)
@@ -2925,31 +2907,25 @@ namespace RIS.UIs
 
         public void InitialDropDownNextCloudUserPage() 
         {
-            List<NextCloudUsers> groupName = Task.Run(async () => await new RISAPIConsumerService().GetGroupName()).GetAwaiter().GetResult();
+            List<string> groupName = Task.Run(async () => await new RISAPIConsumerService().GetGroupName()).GetAwaiter().GetResult();
 
-            int count = groupName.Count;
-            string[] groupNames = new string[count];
             //List<string> groupNameList = new List<string>(new string[] { "gr1", "gr2", "gr3", "gr4", "gr5" });
-
-
-            for (int i = 0; i < count; i++)
+            if(groupName != null)
             {
-                string type = groupName.ElementAt<NextCloudUsers>(i).GroupName;
-                groupNames[i] = type;
+                foreach (var groupNameLabel in groupName)
+                {
+                    ToolStripMenuItem dropDownItemEach = new System.Windows.Forms.ToolStripMenuItem(groupNameLabel);
+                    dropDownItemEach.Name = "dropDownItem_" + groupNameLabel;
+                    dropDownItemEach.Text = groupNameLabel;
 
+                    dropDownItemEach.Click += new System.EventHandler(this.groupMenuItem_Click);
+
+                    GroupNameDropDownButton.DropDownItems.Add(dropDownItemEach);
+                }
             }
-
-            List<string> groupNameList = new List<string>(groupNames);
-
-            foreach (var groupNameLabel in groupNameList)
+            else
             {
-                ToolStripMenuItem dropDownItemEach = new System.Windows.Forms.ToolStripMenuItem(groupNameLabel);
-                dropDownItemEach.Name = "dropDownItem_"+groupNameLabel;
-                dropDownItemEach.Text = groupNameLabel;
-
-                dropDownItemEach.Click += new System.EventHandler(this.groupMenuItem_Click);
-
-                GroupNameDropDownButton.DropDownItems.Add(dropDownItemEach);
+                Console.WriteLine("no group!");
             }
         }
         private void GroupNameDropDownButton_Click(object sender, EventArgs e)

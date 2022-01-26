@@ -94,7 +94,7 @@ namespace RIS.Services
                 HttpResponseMessage response = await client.PostAsJsonAsync<HtmlTempleForReport>("UpdateHtmlTempalate", template);
                 if (response.IsSuccessStatusCode)
                 {
-                  
+
                     return true;
                 }
                 else
@@ -196,25 +196,25 @@ namespace RIS.Services
 
         internal async Task<bool> DeleteHtmlTemplate(HtmlTempleForReport template)
         {
-          
-                using (client = new HttpClient())
+
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PostAsJsonAsync<HtmlTempleForReport>("DeleteHtmlTemplate", template);
+                if (response.IsSuccessStatusCode)
                 {
-                    client.BaseAddress = new Uri(_baseUrl);
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    HttpResponseMessage response = await client.PostAsJsonAsync<HtmlTempleForReport>("DeleteHtmlTemplate", template);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return true;
                 }
+                else
+                {
+                    return false;
+                }
+            }
 
-            
+
         }
 
         public async Task<List<VMRISWorklist>> GetOnePageItems(DateTime dateFrom, DateTime dateTo, int roleId, int tenantId, int consultantId, string _status, int PageNo, int RecsPerPage)
@@ -254,7 +254,7 @@ namespace RIS.Services
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync("CheckLogin?userName=" + userName + "&password="+ password);
+                HttpResponseMessage response = await client.GetAsync("CheckLogin?userName=" + userName + "&password=" + password);
                 if (response.IsSuccessStatusCode)
                 {
                     LoginUser _loggeduser = await response.Content.ReadAsAsync<LoginUser>();
@@ -298,7 +298,7 @@ namespace RIS.Services
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync("GetUserById?userId="+ userId);
+                HttpResponseMessage response = await client.GetAsync("GetUserById?userId=" + userId);
                 if (response.IsSuccessStatusCode)
                 {
                     User _user = await response.Content.ReadAsAsync<User>();
@@ -347,7 +347,7 @@ namespace RIS.Services
 
         }
 
-        public async Task<List<VWNextCloudUser>> GetSearchFilterIncompleteOnePageUserItems(string GroupName, string SearchFilter, int PageNo, int RecsPerPage)
+        public async Task<List<VWNextCloudUser>> GetSearchFilterOnePageUserItems(string GroupName, string SearchFilter, int PageNo, int RecsPerPage)
         {
             using (client = new HttpClient())
             {
@@ -403,7 +403,7 @@ namespace RIS.Services
                 HttpResponseMessage response = await client.PostAsJsonAsync<RISWorkList>("UpdateRISWorklist", wlObj);
                 if (response.IsSuccessStatusCode)
                 {
-                   
+
                     return true;
                 }
                 else
@@ -425,7 +425,7 @@ namespace RIS.Services
                 HttpResponseMessage response = await client.PostAsJsonAsync<List<SelectedProcedureForAssign>>("AssignedToRadiologist", selectedWorklists);
                 if (response.IsSuccessStatusCode)
                 {
-                    
+
                     return true;
                 }
                 else
@@ -509,7 +509,7 @@ namespace RIS.Services
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync("GetTextMacrosList?ConsultantId="+ RCId);
+                HttpResponseMessage response = await client.GetAsync("GetTextMacrosList?ConsultantId=" + RCId);
                 if (response.IsSuccessStatusCode)
                 {
                     Dictionary<string, string> _d = await response.Content.ReadAsAsync<Dictionary<string, string>>();
@@ -530,7 +530,7 @@ namespace RIS.Services
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync("GetReportConsultant?ConsultantId="+ consultantId);
+                HttpResponseMessage response = await client.GetAsync("GetReportConsultant?ConsultantId=" + consultantId);
                 if (response.IsSuccessStatusCode)
                 {
                     ReportConsultant _consultant = await response.Content.ReadAsAsync<ReportConsultant>();
@@ -615,7 +615,7 @@ namespace RIS.Services
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync("GetReportConsultantOpinionOnStudy?ProcTd="+ procId+ "&ConsultantId="+consultantId);
+                HttpResponseMessage response = await client.GetAsync("GetReportConsultantOpinionOnStudy?ProcTd=" + procId + "&ConsultantId=" + consultantId);
                 if (response.IsSuccessStatusCode)
                 {
                     ConsultantOpinionOnStudy _opinion = await response.Content.ReadAsAsync<ConsultantOpinionOnStudy>();
@@ -744,7 +744,7 @@ namespace RIS.Services
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpResponseMessage response = await client.PostAsJsonAsync<ReportConsultant>("AddEditRadiologist", _consultant);
-                
+
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -820,7 +820,7 @@ namespace RIS.Services
             }
         }
 
-        internal async Task<List<NextCloudUsers>> GetGroupName()
+        internal async Task<List<string>> GetGroupName()
         {
             HttpClient client;
             using (client = new HttpClient())
@@ -833,10 +833,7 @@ namespace RIS.Services
                 //string jsonStr = Task.Run(async () => await response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
                 if (response.IsSuccessStatusCode)
                 {
-                    //JObject o = JObject.Parse(jsonStr);
-                    //_idval = (string)o.SelectToken("GroupName");
-                    //Console.WriteLine("_idval");
-                    List<NextCloudUsers> _userlist = await response.Content.ReadAsAsync<List<NextCloudUsers>>();
+                    List<string> _userlist = await response.Content.ReadAsAsync<List<string>>();
 
                     return _userlist;
                 }
@@ -847,5 +844,25 @@ namespace RIS.Services
             }
         }
 
+        internal async void SetGroupName()
+        {
+            HttpClient client;
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear(); 
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("SetGroupName");
+                //string jsonStr = Task.Run(async () => await response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Set Groupname");
+                }
+            }
+        }
     }
+        
+
+    
 }
