@@ -232,6 +232,7 @@
     <Compile Include="Models\StatusEnum.cs" />
     <Compile Include="Models\Tenant.cs" />
     <Compile Include="Models\TenantDefaultConsultantMapping.cs" />
+    <Compile Include="Models\VWModels\OcsResponse.cs" />
     <Compile Include="Models\VWModels\SelectedProcedureForAssign.cs" />
     <Compile Include="Models\VWModels\VMHISModalityProcedureMapping.cs" />
     <Compile Include="Models\VWModels\VMProcIdAndStatus.cs" />
@@ -245,6 +246,8 @@
     <Compile Include="Models\VWModels\VMUpdateTemplate.cs" />
     <Compile Include="Models\VWModels\VMUserDetail.cs" />
     <Compile Include="Models\VWModels\VWNextCloudUser.cs" />
+    <Compile Include="Models\VWModels\VWUserGroupList.cs" />
+    <Compile Include="Models\VWModels\VWUserList.cs" />
     <Compile Include="Models\WorkLIstStatusEnum.cs" />
     <Compile Include="Repositories\DicomRepository.cs" />
     <Compile Include="Repositories\ReportRepository.cs" />

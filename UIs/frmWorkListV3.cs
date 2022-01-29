@@ -52,7 +52,10 @@ namespace RIS.UIs
         private bool _isReportWindowAllowed = false;
         User _user;
         VMReportObj rptObjUsedForOldReport;
-        List<VWNextCloudUser> _userlistItem;
+        List<OcsResponse> _userlistItem;
+        List<OcsResponse> searchuserlistItem = new List<OcsResponse> { };
+
+        List<VWUserList> _userItems;
 
         DateTime _datefrm = Convert.ToDateTime("2021/10/01");
         DateTime _dateto;
@@ -72,6 +75,8 @@ namespace RIS.UIs
 
         private int onePageItemCount = 0;
         private string fileName = string.Empty;
+        private string groupName = string.Empty;
+        private string groupName1 = string.Empty;
         //private string _baseUrl = "http://115.69.214.82/api/Riswork/";
 
         [DllImport("user32")]
@@ -154,7 +159,7 @@ namespace RIS.UIs
             {
                 try
                 {
-                    LoadIncompleteWorkListOnPageLoading(_user);
+                    //LoadIncompleteWorkListOnPageLoading(_user);
                     LoadUserListOnPageLoading(_user);
                 }
                 catch (Exception ex)
@@ -169,7 +174,8 @@ namespace RIS.UIs
             })
             {
                 form.ShowDialog();
-                InitialDropDownNextCloudUserPage();
+
+                InitialGroupName();
                 Task.Run(async () => new RISAPIConsumerService().SetGroupName()).GetAwaiter().GetResult();
 
                 if (exception != null)
@@ -270,10 +276,7 @@ namespace RIS.UIs
 
                     }));
 
-                   
                 }
-
-
 
                 if (_user.RoleId != 3)
                 {
@@ -283,12 +286,9 @@ namespace RIS.UIs
 
                 }
 
-
                 MasterTemplate _mtemplate = await new RISAPIConsumerService().GetWordMasterTemplateContent();
 
                 tabPage1.Tag = _mtemplate;
-
-
 
                 LoadInitialIncompleteStudies(_datefrm, _dateto, _roleId, _tenantId, _consultantId, _status, SearchFilter);
 
@@ -298,11 +298,7 @@ namespace RIS.UIs
                 Log.ApplicationLog.Error("Import worklist for display on LV: " + ex.GetAllMessages());
             }
 
-
             timer1.Start();
-
-         
-
         }
 
         private void LoadUserListOnPageLoading(User user)
@@ -312,14 +308,6 @@ namespace RIS.UIs
 
             try
             {
-                this.Invoke(new MethodInvoker(delegate ()
-                {
-                    //dateTimePickerStudyFrom.Value = _serverDateTime.AddDays(-8);
-                    //dateTimePickerStudyTo.Value = _serverDateTime;
-                    fileName = textFileName.Text;
-                    RadiologistPanel.Location = new Point(-1000, 20);
-
-                }));
 
                 LoadInitialUsers(_roleId, _tenantId, _consultantId, _status, fileName);
                 
@@ -342,6 +330,7 @@ namespace RIS.UIs
         int g_nTotalItemCount;
         int g_uTotalItemCount;
         string g_groupname;
+        string u_username;
 
         private async void LoadInitialIncompleteStudies(DateTime _datefrm, DateTime _dateto, int _roleId, int _tenantId, int _consultantId, string _status, string SearchFilter)
         {
@@ -484,7 +473,7 @@ namespace RIS.UIs
            
         }
 
-        private async void LoadUserListOnePageToLvListCtrl(int uCurPageNumber, int onePageItemCount)
+        private  void LoadUserListOnePageToLvListCtrl(int uCurPageNumber, int onePageItemCount)
         {
 
             if (uPageCount == 0)
@@ -495,18 +484,61 @@ namespace RIS.UIs
                 return;
             }
 
-            _userlistItem = await (new RISAPIConsumerService()).GetSearchFilterOnePageUserItems(g_groupname ,g_SearchFilter, uCurPageNumber, onePageItemCount);
+            _userlistItem = Task.Run(async () => await new RISAPIConsumerService().GetUserInfo()).GetAwaiter().GetResult();
+
+            for (int i = 0; i < _userlistItem.Count; i++)
+            {
+                _userlistItem[i].groupname = Task.Run(async () => await new RISAPIConsumerService().GetGroupNameOfUser(_userlistItem[i].share_with)).GetAwaiter().GetResult();
+                _userlistItem[i].share_status = "Ready to Read";
+                _userlistItem[i].file_target = _userlistItem[i].path + _userlistItem[i].file_target;
+            }
             if (_userlistItem == null || _userlistItem.Count() == 0)
             {
                 this.Invoke(new MethodInvoker(delegate {
                     this.UserListView.Items.Clear();
                 }));
-                return;
+               return;
             }
-
-            setObjectToUserList(_userlistItem);
+            setObjectToUserGroupList();
+            //setObjectToUserList(_userlistItem);
+            //this.UserGroupListView.SetObjects(_userlistItem);
         }
 
+        private void setObjectToUserGroupList()
+        {
+            List<string> userNames = Task.Run(async () => await new RISAPIConsumerService().GetUserName()).GetAwaiter().GetResult();
+            List<VWUserList> userGroupData = new List<VWUserList> { };
+
+            if (groupName == "")
+            {
+                foreach(string userName in userNames)
+                {
+                    string groupName = Task.Run(async () => await new RISAPIConsumerService().GetGroupNameOfUser(userName)).GetAwaiter().GetResult();
+                    VWUserList item = new VWUserList();
+                    item.groupname = groupName;
+                    item.username = userName;
+                    userGroupData.Add(item);
+                }
+            }
+            else
+            {
+                List<string> userNamesOfGroup = Task.Run(async () => await new RISAPIConsumerService().GetUserNameOfGroup(groupName)).GetAwaiter().GetResult();
+                foreach (string userName in userNamesOfGroup)
+                {
+                    VWUserList item = new VWUserList();
+                    item.groupname = groupName;
+                    item.username = userName;
+                    userGroupData.Add(item);
+                }
+            }
+
+            //for(int i = 0; i < userGroup.Count; i++)
+            //{
+            //    userGroup.values
+            //}
+            this.UserGroupListView.SetObjects(userGroupData);
+
+        }
 
         private void setObjectToLvList(List<VMRISWorklistSubSetForLV> worklistItem)
         {
@@ -548,7 +580,7 @@ namespace RIS.UIs
             this.olvWorklist.SetObjects(worklistItem);
         }
 
-        private void setObjectToUserList(List<VWNextCloudUser> userlistItem)
+        private void setObjectToUserList(List<OcsResponse> userlistItem)
         {
             if (userlistItem == null || userlistItem.Count() == 0) return;
             this.PersonColumn.ImageGetter = delegate (object row) {
@@ -569,25 +601,11 @@ namespace RIS.UIs
                 return RIS.Properties.Resources.RVIcon;
             };
 
-
-
             this.emslViewer.ImageGetter = delegate (object rowObject)
             {
                 // this would essentially be the same as using the ImageAspectName
                 return RIS.Properties.Resources.EMSLViewer2;
             };
-
-
-            //viewerImgColumn.ImageGetter += delegate (object rowObject) {
-            //    int imageListIndex = 19;
-
-            //    // some logic here
-            //    // decide which image to use based on rowObject properties or any other criteria
-
-            //    return imageListIndex;
-            //};
-
-
 
             this.UserListView.SetObjects(userlistItem);
         }
@@ -1895,8 +1913,6 @@ namespace RIS.UIs
                     MessageBox.Show("Plz. select a consultant and try again", "Radiologist", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
                 }
 
-
-
                 List<SelectedProcedureForAssign> _assignProcList=new List<SelectedProcedureForAssign>();
                 List<SelectedProcedureForAssign> _ReassignProcList = new List<SelectedProcedureForAssign>();
                 foreach (ListViewItem eachItem in olvWorklist.CheckedItems)
@@ -1981,6 +1997,26 @@ namespace RIS.UIs
             }catch(Exception ex)
             {
 
+                MessageBox.Show(ex.Message, "RIS", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+        }
+
+
+        private void btnAssignToUser_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                var result = Task.Run(async () => await new RISAPIConsumerService().AssignedToUserAPICall(fileName, u_username)).GetAwaiter().GetResult();
+                if (result)
+                {
+                    MessageBox.Show("File assigned to " + u_username, "RIS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message, "RIS", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -2415,7 +2451,7 @@ namespace RIS.UIs
 
         private void searchStudiesButton_Click(object sender, EventArgs e)
         {
-            _userlistItem = Task.Run(async () => await new RISAPIConsumerService().GetSearchFilterOnePageUserItems(g_groupname, g_SearchFilter, nCurPageNumber, onePageItemCount)).GetAwaiter().GetResult();
+            //_userlistItem = Task.Run(async () => await new RISAPIConsumerService().GetSearchFilterOnePageUserItems(g_groupname, g_SearchFilter, nCurPageNumber, onePageItemCount)).GetAwaiter().GetResult();
             setObjectToUserList(_userlistItem);
 
         }
@@ -2727,46 +2763,20 @@ namespace RIS.UIs
         {
             if (UserListView.Items.Count == 0) return;
 
-            List<SelectedProcedureForAssign> _assignUserList = new List<SelectedProcedureForAssign>();
             foreach (ListViewItem eachItem in UserListView.CheckedItems)
             {
-                VWNextCloudUser vmWLObj = eachItem.Tag as VWNextCloudUser;
-                SelectedProcedureForAssign Obj = new SelectedProcedureForAssign();
-                if (vmWLObj != null && vmWLObj.Share_id != null)
-                {
-                    Obj.ProcId = vmWLObj.ProcId;
-                    Obj.ConsultantID = 0;
-                    Obj.Status = 3;
-                    Obj.RadNextCloudID = null;
-                    _assignUserList.Add(Obj);
-                }
-                else
-                {
-
-                }
-            }
-            if (_assignUserList.Count > 0)
-            {
-                var result = Task.Run(async () => await new RISAPIConsumerService().CancelAssignedToRadiologistAPICall(_assignUserList)).GetAwaiter().GetResult();
+                OcsResponse response = eachItem.Tag as OcsResponse;
+                int id = response.id;
+                var result = Task.Run(async () => await new RISAPIConsumerService().CancelAssignedToUser(response.id)).GetAwaiter().GetResult();
 
                 if (result)
                 {
-                    SetRadiologistPanel(false);
-
-                    MessageBox.Show("Cancel Assignment", "RIS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cancel Assignment to " + response.share_with, "RIS", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     foreach (ListViewItem item in UserListView.Items)
                     {
                         item.Checked = false;
                     }
-
-                    if (_user != null)
-                    {
-
-                        string SearchFilter = this.textFileName.Text;
-                        LoadInitialUsers( _roleId, _tenantId, _consultantId, _status, SearchFilter);
-                    }
-
                 }
             }
 
@@ -2836,8 +2846,6 @@ namespace RIS.UIs
 
            string templateFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "HtmlEditor") + @"\RIS_Master_Template.docx";
 
-           
-
            string htmlText = consultantOpinionObj.ReportContent;
 
 
@@ -2850,17 +2858,13 @@ namespace RIS.UIs
             MyDocument.ConvertFromHtmlText(AdjustHtmlText(htmlText), templateFile, textReplacements, imageFileReplacements, options, outDocxFile, outPdfFile);
 
 
-            //if (openFile)
-            //{
             if (!string.IsNullOrEmpty(outDocxFile))
                 Process.Start(outDocxFile);
             if (!string.IsNullOrEmpty(outPdfFile))
                 Process.Start(outPdfFile);
-            //}
 
             //MessageBox.Show("Document converted successfully...");
         }
-
 
         private static string AdjustHtmlText(string text)
         {
@@ -2894,23 +2898,40 @@ namespace RIS.UIs
 
         }
 
-        private void SearchUserButton_Click(object sender, EventArgs e)
-        {
-            string fileName = textFileName.Text;
-            LoadInitialUsers(_roleId, _tenantId, _consultantId, _status, fileName);
-        }
-
-        private void textFileName_TextChanged(object sender, EventArgs e)
+        private void SearchFile_Click(object sender, EventArgs e)
         {
             fileName = textFileName.Text;
+            foreach(var user in _userlistItem)
+            {
+                string[] path = user.file_target.Split('/');
+                if(path[path.Length - 1] == fileName)
+                {
+                    searchuserlistItem.Add(user);
+                }
+            }
+
+            setObjectToUserList(searchuserlistItem);
         }
 
-        public void InitialDropDownNextCloudUserPage() 
+        //private void textFileName_TextChanged(object sender, EventArgs e)
+        //{
+        //    fileName = textFileName.Text;
+        //}
+
+        public void InitialGroupName()
         {
+            //List<VWUserGroupList> userGroupList = new List<VWUserGroupList>();
+            //List<string> userName = Task.Run(async () => await new RISAPIConsumerService().GetUserName()).GetAwaiter().GetResult();
+            //for(int i = 0; i < userName.Count; i++)
+            //{
+            //    userGroupList[i].UserName = userName[i];
+            //    userGroupList[i].GroupName = Task.Run(async () => await new RISAPIConsumerService().GetGroupNameOfUser(userName[i])).GetAwaiter().GetResult();
+            //}
+
+            // groupnamedropdown button attribute
             List<string> groupName = Task.Run(async () => await new RISAPIConsumerService().GetGroupName()).GetAwaiter().GetResult();
 
-            //List<string> groupNameList = new List<string>(new string[] { "gr1", "gr2", "gr3", "gr4", "gr5" });
-            if(groupName != null)
+            if (groupName != null)
             {
                 foreach (var groupNameLabel in groupName)
                 {
@@ -2927,29 +2948,96 @@ namespace RIS.UIs
             {
                 Console.WriteLine("no group!");
             }
+
+            if (groupName != null)
+            {
+                foreach (var groupNameLabel in groupName)
+                {
+                    ToolStripMenuItem dropDownItemEach = new System.Windows.Forms.ToolStripMenuItem(groupNameLabel);
+                    dropDownItemEach.Name = "dropDownItem_" + groupNameLabel;
+                    dropDownItemEach.Text = groupNameLabel;
+
+                    dropDownItemEach.Click += new System.EventHandler(this.groupMenuItem1_Click);
+
+                    GroupNameDropDownButton1.DropDownItems.Add(dropDownItemEach);
+                }
+            }
+            else
+            {
+                Console.WriteLine("no group!");
+            }
+
         }
+
+        public void InitialUserNameOfGroup(string groupName)
+        {
+            //userNamedropdown button attribute
+
+            List<string> userName = Task.Run(async () => await new RISAPIConsumerService().GetUserNameOfGroup(groupName)).GetAwaiter().GetResult();
+
+            if (userName != null)
+            {
+                foreach (var userNameLabel in userName)
+                {
+                    ToolStripMenuItem dropDownItemEach = new System.Windows.Forms.ToolStripMenuItem(userNameLabel);
+                    dropDownItemEach.Name = "dropDownItem_" + userNameLabel;
+                    dropDownItemEach.Text = userNameLabel;
+
+                    dropDownItemEach.Click += new System.EventHandler(this.userMenuItem_Click);
+
+                    userNameDropDownButton.DropDownItems.Add(dropDownItemEach);
+                }
+            }
+            else
+            {
+                Console.WriteLine("no user!");
+            }
+
+        }
+
         private void GroupNameDropDownButton_Click(object sender, EventArgs e)
         {
-            g_groupname = "";
-            Console.WriteLine("GroupNameDropDownButton");
+            //g_groupname = "";
+            //Console.WriteLine("GroupNameDropDownButton");
+        }
+
+        private void GroupNameDropDownButton1_Click(object sender, EventArgs e)
+        {
+          
         }
 
         private void groupMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
-            Console.WriteLine(item.Text+ " clicked");
-            g_groupname = item.Text;
+            groupName = item.Text;
+            InitialUserNameOfGroup(groupName);
+            //setObjectToUserList(_userlistItem);
+        }
+
+        private void groupMenuItem1_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            groupName1 = item.Text;
+            InitialUserNameOfGroup(groupName1);
+            //setObjectToUserList(_userlistItem);
+        }
+
+        private void userMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            Console.WriteLine(item.Text + " clicked");
+            u_username = item.Text;
+        }
+
+        private void userNameDropDownButton_Click(object sender, EventArgs e)
+        {
+            //ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            //Console.WriteLine(item.Text + " clicked");
+            //u_username = item.Text;
         }
     }
 
-
-
-
-    public class JsonResponseStruct
-    {
-        public string Data;
-
     }
 
 
-}
+

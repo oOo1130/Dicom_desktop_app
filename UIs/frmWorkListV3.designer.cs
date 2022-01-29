@@ -231,13 +231,13 @@ namespace RIS.UIs
             this.label29 = new System.Windows.Forms.Label();
             this.txtConfirmNewPassword = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
             this.UserDataList = new System.Windows.Forms.GroupBox();
+            this.UserGroupList = new System.Windows.Forms.GroupBox();
             this.UserListView = new BrightIdeasSoftware.ObjectListView();
+            this.UserGroupListView = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn44 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            //this.olvColumn45 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            //this.olvColumn46 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn47 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn48 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn49 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn50 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.toolStrip_User_Footer = new System.Windows.Forms.ToolStrip();
@@ -245,9 +245,15 @@ namespace RIS.UIs
             this.userPageNumber = new System.Windows.Forms.ToolStripTextBox();
             this.prevUserPageBtn = new System.Windows.Forms.ToolStripButton();
             this.UserTools = new System.Windows.Forms.ToolStrip();
+            this.GroupTools = new System.Windows.Forms.ToolStrip();
             this.btnUserCancelAssign = new System.Windows.Forms.ToolStripButton();
+            this.btnAssignToRadiologistPanel = new System.Windows.Forms.ToolStripDropDownButton();
             this.GroupNameDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.GroupNameDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.groupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userNameDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.SearchFilter = new RIS.HeaderGroupBox();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.textFileName = new System.Windows.Forms.TextBox();
@@ -315,10 +321,14 @@ namespace RIS.UIs
             this.tabPage5.SuspendLayout();
             this.groupBox15.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.tabPage7.SuspendLayout();
             this.UserDataList.SuspendLayout();
+            this.UserGroupList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserListView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UserGroupListView)).BeginInit();
             this.toolStrip_User_Footer.SuspendLayout();
             this.UserTools.SuspendLayout();
+            this.GroupTools.SuspendLayout();
             this.SearchFilter.SuspendLayout();
             this.groupBox18.SuspendLayout();
             this.RadiologistPanel.SuspendLayout();
@@ -462,6 +472,7 @@ namespace RIS.UIs
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.ImageList = this.imageList3;
@@ -717,6 +728,7 @@ namespace RIS.UIs
             // 
             // PageNumber
             // 
+            this.PageNumber.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.PageNumber.Name = "PageNumber";
             this.PageNumber.ReadOnly = true;
             this.PageNumber.Size = new System.Drawing.Size(199, 28);
@@ -1282,6 +1294,7 @@ namespace RIS.UIs
             // 
             // ReportPageNumber
             // 
+            this.ReportPageNumber.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ReportPageNumber.Name = "ReportPageNumber";
             this.ReportPageNumber.ReadOnly = true;
             this.ReportPageNumber.Size = new System.Drawing.Size(199, 28);
@@ -2332,6 +2345,7 @@ namespace RIS.UIs
             // 
             // toolStripTextBox1
             // 
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.ReadOnly = true;
             this.toolStripTextBox1.Size = new System.Drawing.Size(199, 28);
@@ -2697,6 +2711,21 @@ namespace RIS.UIs
             this.tabPage6.Text = "User List";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.UserGroupList);
+            this.tabPage7.Controls.Add(this.GroupTools);
+            this.tabPage7.ImageIndex = 3;
+            this.tabPage7.Location = new System.Drawing.Point(4, 34);
+            this.tabPage7.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage7.Size = new System.Drawing.Size(1819, 821);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Tag = "tab0";
+            this.tabPage7.Text = "Group List";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
             // UserDataList
             // 
             this.UserDataList.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -2710,17 +2739,27 @@ namespace RIS.UIs
             this.UserDataList.Size = new System.Drawing.Size(1811, 623);
             this.UserDataList.TabIndex = 1;
             this.UserDataList.TabStop = false;
-            this.UserDataList.Text = "Worklist Items";
+            this.UserDataList.Text = "Userlist Items";
+            // 
+            // UserGroupList
+            // 
+            this.UserGroupList.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.UserGroupList.Controls.Add(this.UserGroupListView);
+            this.UserGroupList.Controls.Add(this.toolStrip_User_Footer);
+            this.UserGroupList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UserGroupList.Location = new System.Drawing.Point(4, 194);
+            this.UserGroupList.Margin = new System.Windows.Forms.Padding(4);
+            this.UserGroupList.Name = "UserGroupList";
+            this.UserGroupList.Padding = new System.Windows.Forms.Padding(4);
+            this.UserGroupList.Size = new System.Drawing.Size(1811, 623);
+            this.UserGroupList.TabIndex = 1;
+            this.UserGroupList.TabStop = false;
+            this.UserGroupList.Text = "GroupList";
             // 
             // UserListView
             // 
             this.UserListView.AllColumns.Add(this.olvColumn44);
-            //this.UserListView.AllColumns.Add(this.olvColumn45);
-            //this.UserListView.AllColumns.Add(this.olvColumn46);
             this.UserListView.AllColumns.Add(this.olvColumn47);
-            this.UserListView.AllColumns.Add(this.olvColumn48);
-            this.UserListView.AllColumns.Add(this.olvColumn49);
-            this.UserListView.AllColumns.Add(this.olvColumn50);
             this.UserListView.AllowColumnReorder = true;
             this.UserListView.AllowDrop = true;
             this.UserListView.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(244)))), ((int)(((byte)(248)))));
@@ -2728,10 +2767,7 @@ namespace RIS.UIs
             this.UserListView.CheckBoxes = true;
             this.UserListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn44,
-            this.olvColumn47,
-            this.olvColumn48,
-            this.olvColumn49,
-            this.olvColumn50});
+            this.olvColumn47});
             this.UserListView.ContextMenuStrip = this.contextMenuStrip1;
             this.UserListView.Cursor = System.Windows.Forms.Cursors.Default;
             this.UserListView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2777,40 +2813,73 @@ namespace RIS.UIs
             this.olvColumn44.Text = "";
             this.olvColumn44.Width = 35;
             // 
-            // olvColumn45
-            // 
-            //this.olvColumn45.HeaderImageKey = "Viewer.png";
-            //this.olvColumn45.Text = "";
-            //this.olvColumn45.Width = 40;
-            // 
-            // olvColumn46
-            // 
-            //this.olvColumn46.Text = "";
-            //this.olvColumn46.Width = 40;
-            // 
             // olvColumn47
             // 
-            this.olvColumn47.AspectName = "GroupName";
-            this.olvColumn47.Text = "Group Name";
+            this.olvColumn47.AspectName = "share_with";
+            this.olvColumn47.Text = "User Name";
             this.olvColumn47.Width = 80;
             // 
-            // olvColumn48
+            // UserGroupListView
             // 
-            this.olvColumn48.AspectName = "RadNextCloudId";
-            this.olvColumn48.Text = "User Name";
-            this.olvColumn48.Width = 100;
+            this.UserGroupListView.AllColumns.Add(this.olvColumn49);
+            this.UserGroupListView.AllColumns.Add(this.olvColumn50);
+            this.UserGroupListView.AllowColumnReorder = true;
+            this.UserGroupListView.AllowDrop = true;
+            this.UserGroupListView.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(244)))), ((int)(((byte)(248)))));
+            this.UserGroupListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(244)))));
+            this.UserGroupListView.CheckBoxes = true;
+            this.UserGroupListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn49,
+            this.olvColumn50});
+            this.UserGroupListView.ContextMenuStrip = this.contextMenuStrip1;
+            this.UserGroupListView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.UserGroupListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UserGroupListView.FullRowSelect = true;
+            this.UserGroupListView.HeaderWordWrap = true;
+            this.UserGroupListView.HideSelection = false;
+            this.UserGroupListView.HighlightBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(225)))), ((int)(((byte)(129)))));
+            this.UserGroupListView.HighlightForegroundColor = System.Drawing.Color.DarkGreen;
+            this.UserGroupListView.HotItemStyle = this.hotItemStyle1;
+            this.UserGroupListView.IncludeColumnHeadersInCopy = true;
+            this.UserGroupListView.IsSimpleDragSource = true;
+            this.UserGroupListView.IsSimpleDropSink = true;
+            this.UserGroupListView.LargeImageList = this.imageList2;
+            this.UserGroupListView.Location = new System.Drawing.Point(4, 19);
+            this.UserGroupListView.Margin = new System.Windows.Forms.Padding(4);
+            this.UserGroupListView.Name = "UserGroupListView";
+            this.UserGroupListView.OverlayImage.Image = global::RIS.Properties.Resources.logo_emedical;
+            this.UserGroupListView.OwnerDraw = true;
+            this.UserGroupListView.RowHeight = 35;
+            this.UserGroupListView.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.Submenu;
+            this.UserGroupListView.ShowCommandMenuOnRightClick = true;
+            this.UserGroupListView.ShowGroups = false;
+            this.UserGroupListView.ShowHeaderInAllViews = false;
+            this.UserGroupListView.ShowItemToolTips = true;
+            this.UserGroupListView.Size = new System.Drawing.Size(1803, 572);
+            this.UserGroupListView.SmallImageList = this.imageList1;
+            this.UserGroupListView.SortGroupItemsByPrimaryColumn = false;
+            this.UserGroupListView.TabIndex = 16;
+            this.UserGroupListView.TriStateCheckBoxes = true;
+            this.UserGroupListView.UseAlternatingBackColors = true;
+            this.UserGroupListView.UseCellFormatEvents = true;
+            this.UserGroupListView.UseCompatibleStateImageBehavior = false;
+            this.UserGroupListView.UseExplorerTheme = true;
+            this.UserGroupListView.UseFilterIndicator = true;
+            this.UserGroupListView.UseFiltering = true;
+            this.UserGroupListView.UseHotItem = true;
+            this.UserGroupListView.View = System.Windows.Forms.View.Details;
             // 
             // olvColumn49
             // 
-            this.olvColumn49.AspectName = "Share_id";
-            this.olvColumn49.Text = "Share Status";
-            this.olvColumn49.Width = 180;
+            this.olvColumn49.AspectName = "groupname";
+            this.olvColumn49.Text = "Group Name";
+            this.olvColumn49.Width = 80;
             // 
             // olvColumn50
             // 
-            this.olvColumn50.AspectName = "StudyInstanceUid";
-            this.olvColumn50.Text = "File Name";
-            this.olvColumn50.Width = 180;
+            this.olvColumn50.AspectName = "username";
+            this.olvColumn50.Text = "User Name";
+            this.olvColumn50.Width = 80;
             // 
             // toolStrip_User_Footer
             // 
@@ -2842,6 +2911,7 @@ namespace RIS.UIs
             // 
             // userPageNumber
             // 
+            this.userPageNumber.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.userPageNumber.Name = "userPageNumber";
             this.userPageNumber.ReadOnly = true;
             this.userPageNumber.Size = new System.Drawing.Size(199, 28);
@@ -2867,12 +2937,27 @@ namespace RIS.UIs
             this.UserTools.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.UserTools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnUserCancelAssign,
-            this.GroupNameDropDownButton});
+            this.btnAssignToRadiologistPanel,
+            this.GroupNameDropDownButton,
+            this.userNameDropDownButton});
             this.UserTools.Location = new System.Drawing.Point(4, 147);
             this.UserTools.Name = "UserTools";
             this.UserTools.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.UserTools.Size = new System.Drawing.Size(1811, 47);
             this.UserTools.TabIndex = 11;
+            // 
+            // GroupTools
+            // 
+            this.GroupTools.AutoSize = false;
+            this.GroupTools.GripMargin = new System.Windows.Forms.Padding(2, 4, 0, 2);
+            this.GroupTools.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.GroupTools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.GroupNameDropDownButton1});
+            this.GroupTools.Location = new System.Drawing.Point(4, 147);
+            this.GroupTools.Name = "GroupTools";
+            this.GroupTools.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.GroupTools.Size = new System.Drawing.Size(1811, 47);
+            this.GroupTools.TabIndex = 11;
             // 
             // btnUserCancelAssign
             // 
@@ -2884,7 +2969,15 @@ namespace RIS.UIs
             this.btnUserCancelAssign.Size = new System.Drawing.Size(162, 44);
             this.btnUserCancelAssign.Text = "Cancel Assignment";
             this.btnUserCancelAssign.Click += new System.EventHandler(this.btnUserCancelAssign_Click);
-
+            // 
+            // btnAssignToRadiologistPanel
+            // 
+            this.btnAssignToRadiologistPanel.Image = global::RIS.Properties.Resources.Move;
+            this.btnAssignToRadiologistPanel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAssignToRadiologistPanel.Name = "btnAssignToRadiologistPanel";
+            this.btnAssignToRadiologistPanel.Size = new System.Drawing.Size(143, 44);
+            this.btnAssignToRadiologistPanel.Text = "Assign To User";
+            this.btnAssignToRadiologistPanel.Click += new System.EventHandler(this.btnAssignToUser_Click);
             // 
             // GroupNameDropDownButton
             // 
@@ -2895,13 +2988,47 @@ namespace RIS.UIs
             this.GroupNameDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.GroupNameDropDownButton.Name = "GroupNameDropDownButton";
             this.GroupNameDropDownButton.Size = new System.Drawing.Size(38, 44);
-            this.GroupNameDropDownButton.Text = "All";
+            this.GroupNameDropDownButton.Text = "Select Group Name";
             this.GroupNameDropDownButton.Click += new System.EventHandler(this.GroupNameDropDownButton_Click);
+            // 
+            // GroupNameDropDownButton1
+            // 
+            this.GroupNameDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.GroupNameDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.groupToolStripMenuItem1});
+            this.GroupNameDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("GroupNameDropDownButton.Image")));
+            this.GroupNameDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.GroupNameDropDownButton1.Name = "GroupNameDropDownButton1";
+            this.GroupNameDropDownButton1.Size = new System.Drawing.Size(38, 44);
+            this.GroupNameDropDownButton1.Text = "Select Group Name";
+            this.GroupNameDropDownButton1.Click += new System.EventHandler(this.GroupNameDropDownButton1_Click);
             // 
             // groupToolStripMenuItem
             // 
             this.groupToolStripMenuItem.Name = "groupToolStripMenuItem";
             this.groupToolStripMenuItem.Size = new System.Drawing.Size(83, 26);
+            // 
+            // groupToolStripMenuItem1
+            // 
+            this.groupToolStripMenuItem1.Name = "groupToolStripMenuItem1";
+            this.groupToolStripMenuItem1.Size = new System.Drawing.Size(83, 26);
+            // 
+            // userToolStripMenuItem
+            // 
+            this.userToolStripMenuItem.Name = "userToolStripMenuItem";
+            this.userToolStripMenuItem.Size = new System.Drawing.Size(83, 26);
+            // 
+            // userNameDropDownButton
+            // 
+            this.userNameDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.userNameDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.userToolStripMenuItem});
+            this.userNameDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("userNameDropDownButton.Image")));
+            this.userNameDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.userNameDropDownButton.Name = "userNameDropDownButton";
+            this.userNameDropDownButton.Size = new System.Drawing.Size(38, 44);
+            this.userNameDropDownButton.Text = "Select User Name";
+            this.userNameDropDownButton.Click += new System.EventHandler(this.userNameDropDownButton_Click);
             // 
             // SearchFilter
             // 
@@ -2938,7 +3065,6 @@ namespace RIS.UIs
             this.textFileName.Name = "textFileName";
             this.textFileName.Size = new System.Drawing.Size(276, 22);
             this.textFileName.TabIndex = 0;
-            this.textFileName.TextChanged += new System.EventHandler(this.textFileName_TextChanged);
             // 
             // SearchUserButton
             // 
@@ -2948,9 +3074,9 @@ namespace RIS.UIs
             this.SearchUserButton.Name = "SearchUserButton";
             this.SearchUserButton.Size = new System.Drawing.Size(127, 28);
             this.SearchUserButton.TabIndex = 21;
-            this.SearchUserButton.Text = "Search Studies";
+            this.SearchUserButton.Text = "Search File";
             this.SearchUserButton.UseVisualStyleBackColor = true;
-            this.SearchUserButton.Click += new System.EventHandler(this.SearchUserButton_Click);
+            this.SearchUserButton.Click += new System.EventHandler(this.SearchFile_Click);
             // 
             // imageList3
             // 
@@ -3187,6 +3313,7 @@ namespace RIS.UIs
             // 
             // toolStripTextBox2
             // 
+            this.toolStripTextBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBox2.Name = "toolStripTextBox2";
             this.toolStripTextBox2.ReadOnly = true;
             this.toolStripTextBox2.Size = new System.Drawing.Size(199, 28);
@@ -3300,13 +3427,19 @@ namespace RIS.UIs
             this.groupBox15.ResumeLayout(false);
             this.groupBox15.PerformLayout();
             this.tabPage6.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
             this.UserDataList.ResumeLayout(false);
+            this.UserGroupList.ResumeLayout(false);
             this.UserDataList.PerformLayout();
+            this.UserGroupList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserListView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UserGroupListView)).EndInit();
             this.toolStrip_User_Footer.ResumeLayout(false);
             this.toolStrip_User_Footer.PerformLayout();
             this.UserTools.ResumeLayout(false);
+            this.GroupTools.ResumeLayout(false);
             this.UserTools.PerformLayout();
+            this.GroupTools.PerformLayout();
             this.SearchFilter.ResumeLayout(false);
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
@@ -3519,6 +3652,7 @@ namespace RIS.UIs
         private System.Windows.Forms.TextBox txtConfirmNewPassword;
         private System.Windows.Forms.ToolStrip studiesToolStrip;
         private System.Windows.Forms.ToolStripDropDownButton ShowAssignedToRadiologistPanel;
+        private System.Windows.Forms.ToolStripDropDownButton btnAssignToRadiologistPanel;
         private System.Windows.Forms.ToolStripButton previewStudiesToolStripButton;
         private System.Windows.Forms.ToolStripDropDownButton openWithRadiantToolStripButton;
         private System.Windows.Forms.ToolStripButton btnRefresh;
@@ -3547,11 +3681,13 @@ namespace RIS.UIs
         private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.ToolStrip toolStrip5;
         private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.GroupBox UserDataList;
+        private System.Windows.Forms.GroupBox UserGroupList;
         private BrightIdeasSoftware.ObjectListView UserListView;
+        private BrightIdeasSoftware.ObjectListView UserGroupListView;
         private BrightIdeasSoftware.OLVColumn olvColumn44;
         private BrightIdeasSoftware.OLVColumn olvColumn47;
-        private BrightIdeasSoftware.OLVColumn olvColumn48;
         private BrightIdeasSoftware.OLVColumn olvColumn49;
         private BrightIdeasSoftware.OLVColumn olvColumn50;
         private System.Windows.Forms.ToolStrip toolStrip_User_Footer;
@@ -3559,12 +3695,18 @@ namespace RIS.UIs
         private System.Windows.Forms.ToolStripTextBox userPageNumber;
         private System.Windows.Forms.ToolStripButton prevUserPageBtn;
         private System.Windows.Forms.ToolStrip UserTools;
+        private System.Windows.Forms.ToolStrip GroupTools;
         private System.Windows.Forms.ToolStripButton btnUserCancelAssign;
         private HeaderGroupBox SearchFilter;
         private System.Windows.Forms.GroupBox groupBox18;
         private System.Windows.Forms.TextBox textFileName;
         private System.Windows.Forms.Button SearchUserButton;
         private System.Windows.Forms.ToolStripDropDownButton GroupNameDropDownButton;
+        private System.Windows.Forms.ToolStripDropDownButton GroupNameDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem groupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem groupToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem userToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton userNameDropDownButton;
+        //private System.Windows.Forms.ToolStripDropDownMenu userNameDropDownButton;
     }
 }

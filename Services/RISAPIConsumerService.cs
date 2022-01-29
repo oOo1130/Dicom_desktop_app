@@ -436,6 +436,29 @@ namespace RIS.Services
 
         }
 
+        internal async Task<bool> AssignedToUserAPICall(string fileName, string userName)
+        {
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string GetFileNameUserName = $"fileName={fileName}&userName={userName}";
+
+                HttpResponseMessage response = await client.GetAsync("AssignedToUser?" + GetFileNameUserName);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+        }
+
         internal async Task<bool> CancelAssignedToRadiologistAPICall(List<SelectedProcedureForAssign> selectedWorklists)
         {
 
@@ -449,6 +472,28 @@ namespace RIS.Services
                 if (response.IsSuccessStatusCode)
                 {
 
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        internal async Task<bool> CancelAssignedToUser(int shareId)
+        {
+
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("CancelAssignedToUser?shareId=" + shareId);
+                if (response.IsSuccessStatusCode)
+                {
                     return true;
                 }
                 else
@@ -833,9 +878,9 @@ namespace RIS.Services
                 //string jsonStr = Task.Run(async () => await response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
                 if (response.IsSuccessStatusCode)
                 {
-                    List<string> _userlist = await response.Content.ReadAsAsync<List<string>>();
+                    List<string> _grouplist = await response.Content.ReadAsAsync<List<string>>();
 
-                    return _userlist;
+                    return _grouplist;
                 }
                 else
                 {
@@ -861,6 +906,124 @@ namespace RIS.Services
                 }
             }
         }
+
+        internal async Task<List<string>> GetUserName()
+        {
+            HttpClient client;
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("GetUserName");
+                //string jsonStr = Task.Run(async () => await response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    List<string> _userlist = await response.Content.ReadAsAsync<List<string>>();
+                    return _userlist;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        internal async Task<string> GetGroupNameOfUser(string user)
+        {
+            HttpClient client;
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("GetGroupNameOfUser?user=" + user);
+                //string jsonStr = Task.Run(async () => await response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    string _groupName = await response.Content.ReadAsAsync<string>();
+
+                    return _groupName;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        internal async Task<List<OcsResponse>> GetUserInfo()
+        {
+            HttpClient client;
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("GetUserInfo");
+                //string jsonStr = Task.Run(async () => await response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    List<OcsResponse> _userInfo = await response.Content.ReadAsAsync<List<OcsResponse>>();
+                    return _userInfo;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        internal async Task<List<string>> GetUserNameOfGroup(string groupName)
+        {
+            HttpClient client;
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("GetUserNameOfGroup?groupName=" + groupName);
+                //string jsonStr = Task.Run(async () => await response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    List<string> _userlist = await response.Content.ReadAsAsync<List<string>>();
+                    return _userlist;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        internal async Task<string> GetFilePathFromName(string fileName)
+        {
+            HttpClient client;
+            using (client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("GetFilePathFromName?fileName=" + fileName);
+                //string jsonStr = Task.Run(async () => await response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    string filePath = await response.Content.ReadAsAsync<string>();
+                    return filePath;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+
     }
         
 
