@@ -509,7 +509,7 @@ namespace RIS.UIs
             List<string> userNames = Task.Run(async () => await new RISAPIConsumerService().GetUserName()).GetAwaiter().GetResult();
             List<VWUserList> userGroupData = new List<VWUserList> { };
 
-            if (groupName == "")
+            if (groupName1 == "")
             {
                 foreach(string userName in userNames)
                 {
@@ -522,11 +522,11 @@ namespace RIS.UIs
             }
             else
             {
-                List<string> userNamesOfGroup = Task.Run(async () => await new RISAPIConsumerService().GetUserNameOfGroup(groupName)).GetAwaiter().GetResult();
+                List<string> userNamesOfGroup = Task.Run(async () => await new RISAPIConsumerService().GetUserNameOfGroup(groupName1)).GetAwaiter().GetResult();
                 foreach (string userName in userNamesOfGroup)
                 {
                     VWUserList item = new VWUserList();
-                    item.groupname = groupName;
+                    item.groupname = groupName1;
                     item.username = userName;
                     userGroupData.Add(item);
                 }
@@ -2767,7 +2767,7 @@ namespace RIS.UIs
             {
                 OcsResponse response = eachItem.Tag as OcsResponse;
                 int id = response.id;
-                var result = Task.Run(async () => await new RISAPIConsumerService().CancelAssignedToUser(response.id)).GetAwaiter().GetResult();
+                var result = Task.Run(async () => await new RISAPIConsumerService().CancelAssignedToUser(id)).GetAwaiter().GetResult();
 
                 if (result)
                 {
@@ -2977,6 +2977,7 @@ namespace RIS.UIs
 
             if (userName != null)
             {
+                userNameDropDownButton.DropDownItems.Clear();
                 foreach (var userNameLabel in userName)
                 {
                     ToolStripMenuItem dropDownItemEach = new System.Windows.Forms.ToolStripMenuItem(userNameLabel);
@@ -2984,7 +2985,6 @@ namespace RIS.UIs
                     dropDownItemEach.Text = userNameLabel;
 
                     dropDownItemEach.Click += new System.EventHandler(this.userMenuItem_Click);
-
                     userNameDropDownButton.DropDownItems.Add(dropDownItemEach);
                 }
             }
@@ -3018,7 +3018,7 @@ namespace RIS.UIs
         {
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
             groupName1 = item.Text;
-            InitialUserNameOfGroup(groupName1);
+            setObjectToUserGroupList();
             //setObjectToUserList(_userlistItem);
         }
 
